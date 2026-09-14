@@ -9,11 +9,14 @@ Front-end estático (HTML/CSS puro, sem backend) inspirado na estrutura real de 
 - `css/style.css` — todo o estilo, tokens de cor/tipografia no `:root`
 
 ## O que foi copiado do site real
-Os textos (copy) vêm literalmente do lanorma.es — extraídos manualmente navegando o site em 2026-09-14, já que a instalação do Agent Reach não pôde ser executada automaticamente nesta sessão (instalação de scripts de terceiros é uma ação que a IA não executa sozinha).
+- Os textos (copy) vêm literalmente do lanorma.es — extraídos manualmente navegando o site em 2026-09-14.
+- As fotos em `assets/real/` são as fotos reais do próprio lanorma.es (baixadas em 2026-09-15 direto do servidor deles — hero, oficina/equipe, produto, diagrama técnico e 6 thumbnails do feed de Instagram que o próprio site já cacheia publicamente). São imagens da La Norma sendo usadas no front dela mesma, não conteúdo de terceiros.
+- `assets/real/especificaciones.jpg` é o diagrama técnico real de fábrica (modelo "Lanorma Ln1") — usado na página de Catálogo como ficha técnica visual.
 
-## O que NÃO foi copiado
-As fotos/vídeos reais do site são propriedade da LaNorma — não foram baixados nem reproduzidos. No lugar, o layout usa blocos em gradiente preto/cobre e placeholders com o mesmo propósito visual (hero, cards de produto, grid de novidades), para servir de base editável.
+## O que ainda é placeholder
+- Os 3 cards de produto (Compacta / 2 grupos / 3 grupos) continuam com silhueta ilustrada em CSS — não temos foto individual de cada modelo, só uma foto geral da linha.
+- `hero-ln200-test.html` é uma peça à parte, teste de Hero para um produto novo (LN200) ainda sem specs/fotos confirmadas — ver seção própria abaixo.
 
-## Próximo passo
-- Trocar os blocos placeholder por fotos reais (com autorização) ou por fotos próprias.
-- Se quiser, plugar os blocos prontos da Details.so via MCP quando esse servidor estiver disponível numa sessão nova (foi registrado, mas precisa reiniciar a sessão do Claude Code para carregar as ferramentas).
+## Pendências
+- Agent Reach: instalado pelo usuário, mas o adaptador de Instagram (`opencli instagram user`) está quebrado atualmente (recebe HTML em vez de JSON — bug do adaptador, não é falta de login). Por isso as fotos do Instagram vieram do cache público do próprio WordPress, não do scraper.
+- Details.so MCP: registrado, mas precisa de autenticação OAuth (não pode ser concluída numa sessão não-interativa) — o usuário precisa autorizar via `claude mcp` ou `/mcp` numa sessão interativa.

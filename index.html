@@ -4,9 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Norma — Fabricante de Máquinas de Café</title>
+<meta name="description" content="Máquinas de café profesionales ensambladas a mano en Valencia. Durabilidad, soporte directo con el fabricante y diseño pensado para baristas.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<div class="intro-gate" id="introGate">
+  <button class="intro-skip" id="introSkip">Saltar</button>
+  <div class="intro-stage">
+    <p class="intro-q" data-step="0">¿Té?</p>
+    <p class="intro-q" data-step="1">¿Jugo?</p>
+    <p class="intro-q" data-step="2">¿Agua con gas?</p>
+    <p class="intro-q" data-step="3">¿Un batido, tal vez?</p>
+    <div class="intro-final" data-step="4">
+      <span class="intro-final-label">No.</span>
+      <button class="intro-final-choice" id="introChoice">
+        <span class="intro-final-word">Café.</span>
+        <span class="intro-final-brand">La Norma</span>
+      </button>
+    </div>
+  </div>
+</div>
 
 <header class="site-header" id="siteHeader">
   <a href="index.html" class="logo"><span class="mark">Ln</span> La Norma</a>
@@ -25,7 +43,10 @@
   <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
 </header>
 
-<section class="hero">
+<section class="hero hero-photo" style="background-image:url('assets/real/hero-bg.jpg');">
+  <video class="bg-video" autoplay muted loop playsinline poster="assets/real/hero-bg.jpg">
+    <source src="assets/real/hero-home.mp4" type="video/mp4">
+  </video>
   <div class="hero-rings"></div>
   <div class="container hero-content">
     <div class="hero-kicker"><span class="rule"></span><span class="eyebrow">Coffee Machine Manufacturer · Valencia</span></div>
@@ -47,6 +68,7 @@
 
 <section class="section-dark">
   <div class="container">
+    <h2 class="sr-only">Por qué elegir La Norma</h2>
     <div class="pillars">
       <div class="pillar">
         <span class="num">01</span>
@@ -67,21 +89,27 @@
   </div>
 </section>
 
-<section class="section-light">
+<section class="section-light pcarousel-section">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">@lanorma.coffee</span>
       <h2>Lo último de La Norma</h2>
-      <p>Un vistazo al taller, a las máquinas y a la vida detrás de la barra.</p>
+      <p>Un vistazo al taller, a las máquinas y a la vida detrás de la barra. Arrastra para ver más.</p>
     </div>
-    <div class="novedades-grid">
-      <div class="novedad-card"><span class="play">▶</span><p>Compras la herramienta. Obtienes el resultado perfecto ✨🫰🏼</p></div>
-      <div class="novedad-card"><span class="play">▶</span><p>Detrás de una taza perfecta no hay prisa, hay precisión. 👌🏼⚙️</p></div>
-      <div class="novedad-card"><span class="play">▶</span><p>El nuevo centro de atención de tu cafetería ✨🫰🏼</p></div>
-      <div class="novedad-card"><span class="play">▶</span><p>Problemas que el café soluciona: un mal día, los lunes, el sueño… ✅</p></div>
-      <div class="novedad-card"><p>¿Qué ves en este mosaico? 👀 Nosotros solo vemos café ☕️</p></div>
-      <div class="novedad-card"><span class="play">▶</span><p>Tal vez hoy no necesitabas otra cosa que un buen café 🙄☕️</p></div>
+  </div>
+  <div class="pcarousel" id="pcarousel">
+    <div class="pcarousel-track">
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-1.jpg')"></div><p>Compras la herramienta. Obtienes el resultado perfecto ✨🫰🏼</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-2.jpg')"></div><p>¿Qué ves en este mosaico? 👀 Nosotros solo vemos café ☕️</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-3.jpg')"></div><p>El nuevo centro de atención de tu cafetería ✨🫰🏼</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-4.jpg')"></div><p>Problemas que el café soluciona: un mal día, los lunes, el sueño… ✅</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-5.jpg')"></div><p>Detrás de una taza perfecta no hay prisa, hay precisión. 👌🏼⚙️</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-6.jpg')"></div><p>Tal vez hoy no necesitabas otra cosa que un buen café 🙄☕️</p></div>
     </div>
+  </div>
+  <div class="container pcarousel-nav">
+    <button class="pcarousel-btn" id="pcarPrev" aria-label="Anterior">←</button>
+    <button class="pcarousel-btn" id="pcarNext" aria-label="Siguiente">→</button>
   </div>
 </section>
 
@@ -93,13 +121,13 @@
         <p>«La Norma», una forma distinta de preparar un café. Máquinas de café donde la practicidad del sector y la calidad se dan la mano.</p>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <h3>Contacto</h3>
         <p>+34 960 64 00 72</p>
         <p>Pol. Ind., C. Garbí, 1, SECTOR 3<br>46724 Palma de Gandia, Valencia</p>
         <p><a class="email" href="mailto:info@lanorma.es">info@lanorma.es</a></p>
       </div>
       <div>
-        <h4>Síguenos</h4>
+        <h3>Síguenos</h3>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
@@ -118,6 +146,92 @@
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<script>
+(function(){
+  const car = document.getElementById('pcarousel');
+  if (!car) return;
+  const track = car.querySelector('.pcarousel-track');
+  const slides = Array.from(car.querySelectorAll('.pcarousel-slide'));
+  const imgs = slides.map(s => s.querySelector('.pcarousel-img'));
+
+  function updateParallax(){
+    const carRect = car.getBoundingClientRect();
+    const carCenter = carRect.left + carRect.width / 2;
+    slides.forEach((slide, i) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.left + r.width / 2;
+      const offset = (carCenter - slideCenter) / carRect.width;
+      imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.18)`;
+    });
+  }
+
+  updateParallax();
+  car.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive: true });
+  window.addEventListener('resize', updateParallax);
+
+  const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 20;
+  document.getElementById('pcarPrev').addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
+  document.getElementById('pcarNext').addEventListener('click', () => car.scrollBy({ left: step(), behavior: 'smooth' }));
+
+  let isDown = false, startX = 0, startScroll = 0;
+  car.addEventListener('pointerdown', (e) => {
+    isDown = true; startX = e.clientX; startScroll = car.scrollLeft; car.setPointerCapture(e.pointerId);
+  });
+  car.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    car.scrollLeft = startScroll - (e.clientX - startX);
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev =>
+    car.addEventListener(ev, () => { isDown = false; })
+  );
+})();
+</script>
+
+<script>
+(function(){
+  const gate = document.getElementById('introGate');
+  if (!gate) return;
+
+  if (sessionStorage.getItem('ln_intro_seen')) {
+    gate.remove();
+    document.documentElement.classList.add('intro-done');
+    return;
+  }
+
+  document.documentElement.classList.add('intro-active');
+  const steps = gate.querySelectorAll('[data-step]');
+  let i = 0;
+
+  function showStep(n){
+    steps.forEach(el => el.classList.remove('is-active'));
+    if (steps[n]) steps[n].classList.add('is-active');
+  }
+
+  function closeGate(){
+    sessionStorage.setItem('ln_intro_seen', '1');
+    gate.classList.add('is-closing');
+    document.documentElement.classList.remove('intro-active');
+    document.documentElement.classList.add('intro-done');
+    setTimeout(() => gate.remove(), 700);
+  }
+
+  showStep(0);
+  const timer = setInterval(() => {
+    i++;
+    if (i >= steps.length - 1) { clearInterval(timer); }
+    showStep(Math.min(i, steps.length - 1));
+  }, 900);
+
+  document.getElementById('introChoice').addEventListener('click', closeGate);
+  document.getElementById('introSkip').addEventListener('click', () => { clearInterval(timer); closeGate(); });
+})();
 </script>
 </body>
 </html>

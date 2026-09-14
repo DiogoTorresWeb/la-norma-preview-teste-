@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nosotros — La Norma</title>
+<meta name="description" content="Nacimos en Valencia con una idea clara: combinar precisión, diseño y durabilidad. Conoce al equipo de ingenieros y técnicos detrás de cada máquina La Norma.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,6 +27,7 @@
 </header>
 
 <section class="about-hero">
+  <img class="bg-video" src="assets/real/nosotros-cabecera.jpg" alt="" style="object-fit:cover;">
   <div class="container">
     <span class="eyebrow">Nosotros</span>
     <h1>En La Norma diseñamos máquinas de café que entienden a quienes están detrás de la barra.</h1>
@@ -35,16 +37,17 @@
 
 <section class="section-dark" style="padding-top:0;">
   <div class="container about-strip">
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <div class="cell" style="background-image:url('assets/real/nosotros-02.jpg')"></div>
+    <div class="cell" style="background-image:url('assets/real/nosotros-30.jpg')"></div>
+    <div class="cell" style="background-image:url('assets/real/nosotros-50.jpg')"></div>
+    <div class="cell" style="background-image:url('assets/real/nosotros-82.jpg')"></div>
+    <div class="cell" style="background-image:url('assets/real/nosotros-87.jpg')"></div>
   </div>
 </section>
 
 <section class="section-dark" style="padding-top:0;">
   <div class="container">
+    <h2 class="sr-only">Nuestros pilares</h2>
     <div class="pillars">
       <div class="pillar">
         <span class="num">Diseñado</span>
@@ -68,7 +71,9 @@
 <section class="section-light">
   <div class="container">
     <div class="video-panel">
-      <div class="play-btn">▶</div>
+      <video class="bg-video" autoplay muted loop playsinline poster="assets/real/nosotros-30.jpg">
+        <source src="assets/real/hero-nosotros.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -95,13 +100,13 @@
         <p>«La Norma», una forma distinta de preparar un café. Máquinas de café donde la practicidad del sector y la calidad se dan la mano.</p>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <h3>Contacto</h3>
         <p>+34 960 64 00 72</p>
         <p>Pol. Ind., C. Garbí, 1, SECTOR 3<br>46724 Palma de Gandia, Valencia</p>
         <p><a class="email" href="mailto:info@lanorma.es">info@lanorma.es</a></p>
       </div>
       <div>
-        <h4>Síguenos</h4>
+        <h3>Síguenos</h3>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
@@ -120,6 +125,11 @@
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 </body>
 </html>
