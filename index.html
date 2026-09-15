@@ -5,9 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Norma — Fabricante de Máquinas de Café</title>
 <meta name="description" content="Máquinas de café profesionales ensambladas a mano en Valencia. Durabilidad, soporte directo con el fabricante y diseño pensado para baristas.">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
+
+<div class="header-stack" id="headerStack">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-note"><span class="dot"></span> Fabricado a mano en Valencia</span>
+      <a href="tel:+34960640072">Llamar: +34 960 64 00 72</a>
+    </div>
+  </div>
+  <header class="site-header" id="siteHeader">
+    <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="productos.html">Catálogo</a></li>
+        <li><a href="productos.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
+      <a href="https://www.linkedin.com/company/lanorma-coffee-machine" aria-label="LinkedIn">in</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </header>
+</div>
+
+<main id="swup" class="transition-swup">
 
 <div class="intro-gate" id="introGate">
   <button class="intro-skip" id="introSkip">Saltar</button>
@@ -26,30 +54,13 @@
   </div>
 </div>
 
-<header class="site-header" id="siteHeader">
-  <a href="index.html" class="logo"><span class="mark">Ln</span> La Norma</a>
-  <nav class="main-nav" id="mainNav">
-    <ul>
-      <li><a href="index.html" class="active">Inicio</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li><a href="productos.html">Catálogo</a></li>
-    </ul>
-  </nav>
-  <div class="header-social">
-    <a href="#" aria-label="Facebook">f</a>
-    <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
-    <a href="https://www.linkedin.com/company/lanorma-coffee-machine" aria-label="LinkedIn">in</a>
-  </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
-</header>
-
 <section class="hero hero-photo" style="background-image:url('assets/real/hero-bg.jpg');">
   <video class="bg-video" autoplay muted loop playsinline poster="assets/real/hero-bg.jpg">
     <source src="assets/real/hero-home.mp4" type="video/mp4">
   </video>
   <div class="hero-rings"></div>
   <div class="container hero-content">
-    <div class="hero-kicker"><span class="rule"></span><span class="eyebrow">Coffee Machine Manufacturer · Valencia</span></div>
+    <div class="hero-kicker"><span class="rule"></span><span class="eyebrow">Fabricante de máquinas de café en Valencia</span></div>
     <h1>Para negocios que quieren ir <em>un paso más allá</em></h1>
     <p class="lede">Nuestras máquinas de café combinan durabilidad, eficiencia y un rendimiento constante, incluso en los momentos de mayor demanda. Porque superar las expectativas empieza por servir un café impecable, una y otra vez.</p>
     <div class="hero-cta">
@@ -71,17 +82,14 @@
     <h2 class="sr-only">Por qué elegir La Norma</h2>
     <div class="pillars">
       <div class="pillar">
-        <span class="num">01</span>
         <h3>Calidad<span>garantizada</span></h3>
         <p>En La Norma no dejamos nada al azar. Cada máquina de café se ensambla y prueba a mano en nuestro taller de Valencia para asegurar un rendimiento impecable desde el primer café… y durante muchos años.</p>
       </div>
       <div class="pillar">
-        <span class="num">02</span>
         <h3>Soporte directo<span>con el fabricante</span></h3>
         <p>Hablas con quienes la diseñan y construyen. Sin intermediarios, sin rodeos. Te asesoramos antes, durante y después, porque en La Norma el servicio es tan importante como el café.</p>
       </div>
       <div class="pillar">
-        <span class="num">03</span>
         <h3>Compromiso<span>ambiental</span></h3>
         <p>Creemos en fabricar menos, pero mejor. Diseñamos máquinas duraderas, reparables y eficientes, que minimizan el desperdicio y alargan su vida útil. Buen café, con impacto positivo.</p>
       </div>
@@ -99,12 +107,12 @@
   </div>
   <div class="pcarousel" id="pcarousel">
     <div class="pcarousel-track">
-      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-1.jpg')"></div><p>Compras la herramienta. Obtienes el resultado perfecto ✨🫰🏼</p></div>
-      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-2.jpg')"></div><p>¿Qué ves en este mosaico? 👀 Nosotros solo vemos café ☕️</p></div>
-      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-3.jpg')"></div><p>El nuevo centro de atención de tu cafetería ✨🫰🏼</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-1.jpg')"></div><p>Compras la herramienta. Obtienes el resultado perfecto ✨</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-2.jpg')"></div><p>¿Qué ves en este mosaico? 👀 Nosotros solo vemos café ☕</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-3.jpg')"></div><p>El nuevo centro de atención de tu cafetería ✨</p></div>
       <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-4.jpg')"></div><p>Problemas que el café soluciona: un mal día, los lunes, el sueño… ✅</p></div>
-      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-5.jpg')"></div><p>Detrás de una taza perfecta no hay prisa, hay precisión. 👌🏼⚙️</p></div>
-      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-6.jpg')"></div><p>Tal vez hoy no necesitabas otra cosa que un buen café 🙄☕️</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-5.jpg')"></div><p>Detrás de una taza perfecta no hay prisa, hay precisión. ⚙️</p></div>
+      <div class="pcarousel-slide"><div class="pcarousel-img" style="background-image:url('assets/real/ig-6.jpg')"></div><p>Tal vez hoy no necesitabas otra cosa que un buen café ☕</p></div>
     </div>
   </div>
   <div class="container pcarousel-nav">
@@ -117,7 +125,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="index.html" class="logo"><span class="mark">Ln</span> La Norma</a>
+        <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
         <p>«La Norma», una forma distinta de preparar un café. Máquinas de café donde la practicidad del sector y la calidad se dan la mano.</p>
       </div>
       <div>
@@ -142,96 +150,124 @@
   </div>
 </footer>
 
-<script>
+</main>
+
+<script type="module">
+  import Swup from 'https://unpkg.com/swup@4?module';
+  import SwupHeadPlugin from 'https://unpkg.com/@swup/head-plugin@2?module';
+
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
-  const header = document.getElementById('siteHeader');
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  const headerStack = document.getElementById('headerStack');
+  const onScroll = () => headerStack.classList.toggle('is-scrolled', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-</script>
 
-<script>
-(function(){
-  const car = document.getElementById('pcarousel');
-  if (!car) return;
-  const track = car.querySelector('.pcarousel-track');
-  const slides = Array.from(car.querySelectorAll('.pcarousel-slide'));
-  const imgs = slides.map(s => s.querySelector('.pcarousel-img'));
-
-  function updateParallax(){
-    const carRect = car.getBoundingClientRect();
-    const carCenter = carRect.left + carRect.width / 2;
-    slides.forEach((slide, i) => {
-      const r = slide.getBoundingClientRect();
-      const slideCenter = r.left + r.width / 2;
-      const offset = (carCenter - slideCenter) / carRect.width;
-      imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.18)`;
+  function updateActiveNav(){
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const links = Array.from(document.querySelectorAll('#mainNav a[href]'));
+    const hashLink = location.hash ? links.find(a => a.getAttribute('href') === path + location.hash) : null;
+    links.forEach(a => {
+      const href = a.getAttribute('href');
+      const isActive = hashLink ? a === hashLink : (href.split('#')[0] === path && !href.includes('#'));
+      a.classList.toggle('active', isActive);
     });
   }
 
-  updateParallax();
-  car.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive: true });
-  window.addEventListener('resize', updateParallax);
+  function initCarousel(){
+    const car = document.getElementById('pcarousel');
+    if (!car || car.dataset.bound) return;
+    car.dataset.bound = '1';
+    const slides = Array.from(car.querySelectorAll('.pcarousel-slide'));
+    const imgs = slides.map(s => s.querySelector('.pcarousel-img'));
 
-  const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 20;
-  document.getElementById('pcarPrev').addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
-  document.getElementById('pcarNext').addEventListener('click', () => car.scrollBy({ left: step(), behavior: 'smooth' }));
+    function updateParallax(){
+      const carRect = car.getBoundingClientRect();
+      const carCenter = carRect.left + carRect.width / 2;
+      slides.forEach((slide, i) => {
+        const r = slide.getBoundingClientRect();
+        const slideCenter = r.left + r.width / 2;
+        const offset = (carCenter - slideCenter) / carRect.width;
+        imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.18)`;
+      });
+    }
 
-  let isDown = false, startX = 0, startScroll = 0;
-  car.addEventListener('pointerdown', (e) => {
-    isDown = true; startX = e.clientX; startScroll = car.scrollLeft; car.setPointerCapture(e.pointerId);
+    updateParallax();
+    car.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive: true });
+    window.addEventListener('resize', updateParallax);
+
+    const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 20;
+    document.getElementById('pcarPrev')?.addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
+    document.getElementById('pcarNext')?.addEventListener('click', () => car.scrollBy({ left: step(), behavior: 'smooth' }));
+
+    let isDown = false, startX = 0, startScroll = 0;
+    car.addEventListener('pointerdown', (e) => {
+      isDown = true; startX = e.clientX; startScroll = car.scrollLeft; car.setPointerCapture(e.pointerId);
+    });
+    car.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      car.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev =>
+      car.addEventListener(ev, () => { isDown = false; })
+    );
+  }
+
+  function initIntroGate(){
+    const gate = document.getElementById('introGate');
+    if (!gate || gate.dataset.bound) return;
+    gate.dataset.bound = '1';
+
+    if (sessionStorage.getItem('ln_intro_seen')) {
+      gate.remove();
+      document.documentElement.classList.add('intro-done');
+      return;
+    }
+
+    document.documentElement.classList.add('intro-active');
+    const steps = gate.querySelectorAll('[data-step]');
+    let i = 0;
+
+    function showStep(n){
+      steps.forEach(el => el.classList.remove('is-active'));
+      if (steps[n]) steps[n].classList.add('is-active');
+    }
+
+    function closeGate(){
+      sessionStorage.setItem('ln_intro_seen', '1');
+      gate.classList.add('is-closing');
+      document.documentElement.classList.remove('intro-active');
+      document.documentElement.classList.add('intro-done');
+      setTimeout(() => gate.remove(), 700);
+    }
+
+    showStep(0);
+    const timer = setInterval(() => {
+      i++;
+      if (i >= steps.length - 1) { clearInterval(timer); }
+      showStep(Math.min(i, steps.length - 1));
+    }, 900);
+
+    document.getElementById('introChoice').addEventListener('click', closeGate);
+    document.getElementById('introSkip').addEventListener('click', () => { clearInterval(timer); closeGate(); });
+  }
+
+  function initPage(){
+    updateActiveNav();
+    initCarousel();
+    initIntroGate();
+    nav.classList.remove('open');
+  }
+
+  initPage();
+
+  const swup = new Swup({
+    containers: ['#swup'],
+    plugins: [new SwupHeadPlugin({ persistAssets: true })]
   });
-  car.addEventListener('pointermove', (e) => {
-    if (!isDown) return;
-    car.scrollLeft = startScroll - (e.clientX - startX);
-  });
-  ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev =>
-    car.addEventListener(ev, () => { isDown = false; })
-  );
-})();
-</script>
-
-<script>
-(function(){
-  const gate = document.getElementById('introGate');
-  if (!gate) return;
-
-  if (sessionStorage.getItem('ln_intro_seen')) {
-    gate.remove();
-    document.documentElement.classList.add('intro-done');
-    return;
-  }
-
-  document.documentElement.classList.add('intro-active');
-  const steps = gate.querySelectorAll('[data-step]');
-  let i = 0;
-
-  function showStep(n){
-    steps.forEach(el => el.classList.remove('is-active'));
-    if (steps[n]) steps[n].classList.add('is-active');
-  }
-
-  function closeGate(){
-    sessionStorage.setItem('ln_intro_seen', '1');
-    gate.classList.add('is-closing');
-    document.documentElement.classList.remove('intro-active');
-    document.documentElement.classList.add('intro-done');
-    setTimeout(() => gate.remove(), 700);
-  }
-
-  showStep(0);
-  const timer = setInterval(() => {
-    i++;
-    if (i >= steps.length - 1) { clearInterval(timer); }
-    showStep(Math.min(i, steps.length - 1));
-  }, 900);
-
-  document.getElementById('introChoice').addEventListener('click', closeGate);
-  document.getElementById('introSkip').addEventListener('click', () => { clearInterval(timer); closeGate(); });
-})();
+  swup.hooks.on('content:replace', initPage);
 </script>
 </body>
 </html>

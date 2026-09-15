@@ -5,26 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo — La Norma</title>
 <meta name="description" content="Compacta, 2 grupos y 3 grupos: máquinas de café profesionales fabricadas a mano en Valencia, con ficha técnica completa y especificaciones reales.">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
-<header class="site-header is-light">
-  <a href="index.html" class="logo"><span class="mark">Ln</span> La Norma</a>
-  <nav class="main-nav" id="mainNav">
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li><a href="productos.html" class="active">Catálogo</a></li>
-    </ul>
-  </nav>
-  <div class="header-social">
-    <a href="#" aria-label="Facebook">f</a>
-    <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
-    <a href="https://www.linkedin.com/company/lanorma-coffee-machine" aria-label="LinkedIn">in</a>
+<div class="header-stack" id="headerStack">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-note"><span class="dot"></span> Fabricado a mano en Valencia</span>
+      <a href="tel:+34960640072">Llamar: +34 960 64 00 72</a>
+    </div>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
-</header>
+  <header class="site-header is-light" id="siteHeader">
+    <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="productos.html" class="active">Catálogo</a></li>
+        <li><a href="productos.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-social">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="https://www.instagram.com/lanorma.coffee/" aria-label="Instagram">ig</a>
+      <a href="https://www.linkedin.com/company/lanorma-coffee-machine" aria-label="LinkedIn">in</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </header>
+</div>
+
+<main id="swup" class="transition-swup">
 
 <section class="page-hero">
   <div class="container">
@@ -37,14 +48,13 @@
 <section class="section-light">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Especificaciones</span>
       <h2>Elige tu grupo</h2>
       <p>Porque no hay dos cafeterías iguales, pero sí un mismo principio: cada taza merece la mejor base posible.</p>
     </div>
     <div class="product-grid">
 
       <article class="product-card">
-        <div class="art"><div class="silhouette"></div></div>
+        <div class="art"><img src="assets/real/spec-compacta.jpg" alt="Máquina de café La Norma, modelo Compacta"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
           <h3>Compacta</h3>
@@ -60,7 +70,7 @@
       </article>
 
       <article class="product-card">
-        <div class="art"><div class="silhouette grp2"></div></div>
+        <div class="art"><img src="assets/real/spec-2-grupos.jpg" alt="Máquina de café La Norma, modelo 2 grupos"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
           <h3>2 grupos</h3>
@@ -76,7 +86,7 @@
       </article>
 
       <article class="product-card">
-        <div class="art"><div class="silhouette grp3"></div></div>
+        <div class="art"><img src="assets/real/spec-3-grupos.jpg" alt="Máquina de café La Norma, modelo 3 grupos"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
           <h3>3 grupos</h3>
@@ -98,7 +108,6 @@
 <section class="section-dark">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Tecnología</span>
       <h2>Pensada al detalle</h2>
     </div>
     <div class="feature-grid">
@@ -117,7 +126,6 @@
 <section class="section-light">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Ficha técnica</span>
       <h2>Cada detalle, explicado</h2>
       <p>Diagrama real de fábrica de una de nuestras máquinas, punto por punto.</p>
     </div>
@@ -128,7 +136,6 @@
 <section class="section-light">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Preguntas frecuentes</span>
       <h2>Antes de escribirnos</h2>
     </div>
     <div class="faq-list">
@@ -166,16 +173,30 @@
   </div>
 </section>
 
-<section class="cta-band">
+<section class="cta-band" id="contacto">
   <div class="container cta-band-inner">
     <div>
       <span class="eyebrow">¿Ya sabes cuál necesitas?</span>
       <h2>Hablemos de tu máquina</h2>
       <p>Sin intermediarios: escribes directo a quienes la diseñan y construyen en Valencia.</p>
     </div>
-    <div class="cta-band-actions">
-      <a href="mailto:info@lanorma.es?subject=Presupuesto%20m%C3%A1quina%20La%20Norma" class="btn btn-primary">Solicitar presupuesto</a>
-      <a href="tel:+34960640072" class="btn btn-ghost-dark">+34 960 64 00 72</a>
+    <div class="channels">
+      <a class="channel" href="tel:+34960640072">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.6 3.5h3l1.5 3.8-2 1.4a12 12 0 0 0 5.2 5.2l1.4-2 3.8 1.5v3a1.8 1.8 0 0 1-2 1.8A16.2 16.2 0 0 1 4.8 5.5a1.8 1.8 0 0 1 1.8-2z"></path></svg>
+        <span><small>Llamar</small><strong>+34 960 64 00 72</strong></span>
+      </a>
+      <a class="channel" href="mailto:info@lanorma.es?subject=Presupuesto%20m%C3%A1quina%20La%20Norma">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+        <span><small>Email</small><strong>info@lanorma.es</strong></span>
+      </a>
+      <a class="channel" href="https://www.instagram.com/lanorma.coffee/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+        <span><small>Instagram</small><strong>@lanorma.coffee</strong></span>
+      </a>
+      <a class="channel" href="https://www.linkedin.com/company/lanorma-coffee-machine" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.1 1.43-2.1 2.9V21h-4V9z"></path></svg>
+        <span><small>LinkedIn</small><strong>La Norma Coffee Machine</strong></span>
+      </a>
     </div>
   </div>
 </section>
@@ -184,7 +205,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="index.html" class="logo"><span class="mark">Ln</span> La Norma</a>
+        <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
         <p>«La Norma», una forma distinta de preparar un café. Máquinas de café donde la practicidad del sector y la calidad se dan la mano.</p>
       </div>
       <div>
@@ -209,15 +230,124 @@
   </div>
 </footer>
 
-<script>
+</main>
+
+<script type="module">
+  import Swup from 'https://unpkg.com/swup@4?module';
+  import SwupHeadPlugin from 'https://unpkg.com/@swup/head-plugin@2?module';
+
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
-  const header = document.querySelector('.site-header');
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  const headerStack = document.getElementById('headerStack');
+  const onScroll = () => headerStack.classList.toggle('is-scrolled', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  function updateActiveNav(){
+    const path = location.pathname.split('/').pop() || 'index.html';
+    const links = Array.from(document.querySelectorAll('#mainNav a[href]'));
+    const hashLink = location.hash ? links.find(a => a.getAttribute('href') === path + location.hash) : null;
+    links.forEach(a => {
+      const href = a.getAttribute('href');
+      const isActive = hashLink ? a === hashLink : (href.split('#')[0] === path && !href.includes('#'));
+      a.classList.toggle('active', isActive);
+    });
+  }
+
+  function initCarousel(){
+    const car = document.getElementById('pcarousel');
+    if (!car || car.dataset.bound) return;
+    car.dataset.bound = '1';
+    const slides = Array.from(car.querySelectorAll('.pcarousel-slide'));
+    const imgs = slides.map(s => s.querySelector('.pcarousel-img'));
+
+    function updateParallax(){
+      const carRect = car.getBoundingClientRect();
+      const carCenter = carRect.left + carRect.width / 2;
+      slides.forEach((slide, i) => {
+        const r = slide.getBoundingClientRect();
+        const slideCenter = r.left + r.width / 2;
+        const offset = (carCenter - slideCenter) / carRect.width;
+        imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.18)`;
+      });
+    }
+
+    updateParallax();
+    car.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive: true });
+    window.addEventListener('resize', updateParallax);
+
+    const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 20;
+    document.getElementById('pcarPrev')?.addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
+    document.getElementById('pcarNext')?.addEventListener('click', () => car.scrollBy({ left: step(), behavior: 'smooth' }));
+
+    let isDown = false, startX = 0, startScroll = 0;
+    car.addEventListener('pointerdown', (e) => {
+      isDown = true; startX = e.clientX; startScroll = car.scrollLeft; car.setPointerCapture(e.pointerId);
+    });
+    car.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      car.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev =>
+      car.addEventListener(ev, () => { isDown = false; })
+    );
+  }
+
+  function initIntroGate(){
+    const gate = document.getElementById('introGate');
+    if (!gate || gate.dataset.bound) return;
+    gate.dataset.bound = '1';
+
+    if (sessionStorage.getItem('ln_intro_seen')) {
+      gate.remove();
+      document.documentElement.classList.add('intro-done');
+      return;
+    }
+
+    document.documentElement.classList.add('intro-active');
+    const steps = gate.querySelectorAll('[data-step]');
+    let i = 0;
+
+    function showStep(n){
+      steps.forEach(el => el.classList.remove('is-active'));
+      if (steps[n]) steps[n].classList.add('is-active');
+    }
+
+    function closeGate(){
+      sessionStorage.setItem('ln_intro_seen', '1');
+      gate.classList.add('is-closing');
+      document.documentElement.classList.remove('intro-active');
+      document.documentElement.classList.add('intro-done');
+      setTimeout(() => gate.remove(), 700);
+    }
+
+    showStep(0);
+    const timer = setInterval(() => {
+      i++;
+      if (i >= steps.length - 1) { clearInterval(timer); }
+      showStep(Math.min(i, steps.length - 1));
+    }, 900);
+
+    document.getElementById('introChoice').addEventListener('click', closeGate);
+    document.getElementById('introSkip').addEventListener('click', () => { clearInterval(timer); closeGate(); });
+  }
+
+  function initPage(){
+    updateActiveNav();
+    initCarousel();
+    initIntroGate();
+    nav.classList.remove('open');
+  }
+
+  initPage();
+
+  const swup = new Swup({
+    containers: ['#swup'],
+    plugins: [new SwupHeadPlugin({ persistAssets: true })]
+  });
+  swup.hooks.on('content:replace', initPage);
 </script>
 </body>
 </html>
