@@ -32,13 +32,26 @@ O projeto não trava por falta de código, assets ou pesquisa. Trava porque **a 
 
 ## 6. Direção visual — ainda NÃO decidida
 
-Hipóteses A (Instrumento de Precisão), B (Oficina, não catálogo), C (Editorial de Padrão) existem só como texto — nenhuma foi escolhida.
+Hipóteses A (Instrumento de Precisão), B (Oficina, não catálogo), C (Editorial de Padrão) foram descartadas como estilos completos — o Diogo rejeitou os três na rodada de comparação visual. Uma rodada seguinte (9 referências "cinematográficas com fotografia estática") também não gerou escolha.
 
-**Regra:** não decidir só lendo descrição A/B/C. Primeiro precisamos **enxergar possibilidades visualmente**, com referências reais e exemplos concretos — depois comparar e decidir. Não implementar redesign antes dessa decisão.
+**O que gerou reação real:** 4 referências que o próprio Diogo encontrou (ver seção 7). É a partir delas que a direção está sendo construída agora — não a partir de A/B/C.
+
+**Regra:** não decidir só lendo descrição. Ver seção 7 para a hipótese de estrutura já montada em cima dessas referências — ainda não é decisão fechada, falta reação/confirmação do Diogo.
 
 ## 7. Referências visuais
 
-- Pesquisar referências externas reais só quando servir para destravar uma decisão concreta da seção 6 — não pesquisar por pesquisar.
+- **Referências que geraram reação positiva real** (achadas pelo Diogo, não substituir sem pedido explícito):
+  1. [Coffee Shop Website — Mulliri Mayfair](https://dribbble.com/shots/27640542-Coffee-Shop-Website-E-commerce-Experience) — hero em 3 colunas (texto / foto vertical central / texto+CTA); menu como lista elegante sobre foto.
+  2. [Premium Café Shop — Elevated Coffee](https://dribbble.com/shots/27490733-Premium-Caf-Shop-Landing-Page) — tipografia gigante sobre foto macro. Importante para a composição da hero, junto com a Mulliri.
+  3. [Business Website Concept — BeanCrafters](https://dribbble.com/shots/21480764-Business-Website-Concept) — **a referência estrutural que mais chamou atenção do Diogo.** Ritmo de seções alternando fundo claro/escuro é a ideia estrutural mais forte encontrada até agora.
+  4. [Luxury Café Restaurant — Kosmos](https://dribbble.com/shots/27489018-Luxury-Caf-Restaurant-Landing-Page) — hero claro, xícara isolada com halo de luz, barra de números logo abaixo do hero, menu em zig-zag.
+- **Restrição fixada:** a direção precisa funcionar principalmente com **fotografia estática real que a La Norma já possui** (produto, detalhe, oficina, pessoas, diagramas). Não depender de vídeo — vídeo é possibilidade futura, não requisito.
+- **Hipótese de estrutura de página** (montada em cima das 4 referências acima — **ainda é hipótese de implementação, não decisão visual fechada**):
+  ```
+  HERO → barra de números (specs reais) → "mais que uma máquina" (foto real da oficina/fábrica + texto)
+  → PRODUTOS (lista zig-zag, specs reais) → diferenciais (ícone + texto) → fabricação/processo (foto real)
+  → depoimento (cliente real) → contato / onde encontrar (Palma de Gandia) → rodapé
+  ```
 - Extrair princípios (composição, tratamento de foto, hierarquia tipográfica), nunca copiar um site inteiro.
 
 ## 8. Skills
@@ -80,7 +93,7 @@ Se uma ferramenta, skill ou processo produzir um resultado claramente útil, **r
 
 ## 13. Próximo passo exato
 
-A próxima grande decisão é a **direção visual do 4174**. Buscar referências visuais reais e exemplos concretos (seção 7) que materializem as hipóteses A, B e C — decidir **vendo**, não só lendo descrição. Só depois disso resolver as pendências restantes (cor de marca definitiva, uso de foto humana, nível de fidelidade ao site oficial) e abrir sessão de implementação.
+Reagir à hipótese de estrutura da seção 7 (confirmar, ajustar ou descartar partes) — nenhuma implementação começa antes disso. Só depois resolver as pendências restantes (cor de marca definitiva, uso de foto humana, nível de fidelidade ao site oficial) e abrir sessão de implementação. **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
 
 ---
 
