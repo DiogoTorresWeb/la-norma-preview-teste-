@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo — La Norma</title>
 <meta name="description" content="Compacta, 2 grupos y 3 grupos: máquinas de café profesionales fabricadas a mano en Valencia, con ficha técnica completa y especificaciones reales.">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -232,10 +232,7 @@
 
 </main>
 
-<script type="module">
-  import Swup from 'https://unpkg.com/swup@4?module';
-  import SwupHeadPlugin from 'https://unpkg.com/@swup/head-plugin@2?module';
-
+<script>
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
@@ -270,7 +267,7 @@
         const r = slide.getBoundingClientRect();
         const slideCenter = r.left + r.width / 2;
         const offset = (carCenter - slideCenter) / carRect.width;
-        imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.18)`;
+        imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.06)`;
       });
     }
 
@@ -343,11 +340,18 @@
 
   initPage();
 
-  const swup = new Swup({
-    containers: ['#swup'],
-    plugins: [new SwupHeadPlugin({ persistAssets: true })]
-  });
-  swup.hooks.on('content:replace', initPage);
+  // Transições de página via Swup são um extra — o site tem que funcionar por completo
+  // sem internet (offline, arquivo local). Carrega via import dinâmico e falha em silêncio.
+  Promise.all([
+    import('https://unpkg.com/swup@4?module'),
+    import('https://unpkg.com/@swup/head-plugin@2?module')
+  ]).then(([{ default: Swup }, { default: SwupHeadPlugin }]) => {
+    const swup = new Swup({
+      containers: ['#swup'],
+      plugins: [new SwupHeadPlugin({ persistAssets: true })]
+    });
+    swup.hooks.on('content:replace', initPage);
+  }).catch(() => { /* offline ou CDN inacessível: navegação normal por link continua funcionando */ });
 </script>
 </body>
 </html>
