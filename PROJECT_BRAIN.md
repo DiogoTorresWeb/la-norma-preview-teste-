@@ -10,7 +10,7 @@ Site institucional para a Lanorma Coffee Machine Manufacturer S.L. (Palma de Gan
 
 ## 2. Estado atual
 
-~40% do projeto. Implementação **pausada** por decisão do Diogo — bloqueio de direção visual e de processo, não técnico.
+**Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Objetivo desta rodada era virar um **protótipo visual apresentável ao Daniel**, não um acabamento 100%. Falta a reação do Diogo ao resultado real (seção 13).
 
 ## 3. Decisão já fechada
 
@@ -30,13 +30,27 @@ O projeto não trava por falta de código, assets ou pesquisa. Trava porque **a 
 - **4176 não é fonte de referência para a nova direção visual.** Está fora de cena (seção 3) e não deve ser revisitado. Qualquer aprendizado útil que ele já rendeu (elemento de assinatura visual, registro tipográfico mono, arco narrativo) já está absorvido como conhecimento neste Brain — não exige voltar ao código do 4176 para consultá-lo de novo.
 - A nova direção visual se constrói a partir de: **4174 + assets reais do projeto + referências externas reais** (quando necessário, ver seção 7).
 
-## 6. Direção visual — ainda NÃO decidida
+## 6. Direção visual — primeira versão de identidade implementada
 
 Hipóteses A (Instrumento de Precisão), B (Oficina, não catálogo), C (Editorial de Padrão) foram descartadas como estilos completos — o Diogo rejeitou os três na rodada de comparação visual. Uma rodada seguinte (9 referências "cinematográficas com fotografia estática") também não gerou escolha.
 
-**O que gerou reação real:** 4 referências que o próprio Diogo encontrou (ver seção 7). É a partir delas que a direção está sendo construída agora — não a partir de A/B/C.
+**O que gerou reação real:** 4 referências que o próprio Diogo encontrou (ver seção 7). A partir delas foi montada uma hipótese de estrutura, confirmada pelo Diogo em 18/09 e depois estendida para uma reconstrução completa do sistema visual ("transformar o 4174 em protótipo visual convincente para apresentar ao responsável da empresa").
 
-**Regra:** não decidir só lendo descrição. Ver seção 7 para a hipótese de estrutura já montada em cima dessas referências — ainda não é decisão fechada, falta reação/confirmação do Diogo.
+**Sistema de cor** — saiu de preto/branco puro para uma paleta quente ligada ao universo do café, sem virar "bege":
+- `--espresso` `#241c15` (base escura, substitui o preto puro `#141414`) e `--espresso-deep` `#170f0a` (rodapé).
+- `--cream` `#f3ecdd` (base clara) e `--sand` `#e7d9be` (superfície clara secundária, usada em `.audience`/`.cta-band` para variar o ritmo sem virar full-brass).
+- `--brass` `#b8843c` / `--brass-light` `#e4c48c` — acento único e controlado (evitado propositalmente o terracota `#D97757`-like por ser um "tell" reconhecível de design gerado por IA). Usado só em: botão primário, hover de link/ícone, sublinhado de nav ativo, linha divisória dos "principles", estrelas do depoimento — nunca como fundo de seção inteira.
+
+**Sistema de tipografia** — trocado Bricolage Grotesque + Inter por três famílias com papel claro:
+- **Fraunces** (serif) para headlines/H1-H3 — sentence case, sem uppercase (títulos grandes em uppercase foram removidos: eram genéricos demais). Dá o lado "café/humano".
+- **Archivo** (sans) para nav, botões, corpo de texto, labels pequenas.
+- **IBM Plex Mono** para números: specs técnicas (`spec-list`, `zig-specs`), barra de números (`stat-strip`), telefone. Dá o lado "engenharia/precisão".
+
+**Hero (index.html) redesenhada** — era foto de fundo cobrindo a seção inteira (crop pesado, vídeo autoplay por cima, anéis decorativos sem função). Virou grid editorial de 2 colunas (texto à esquerda em fundo escuro sólido / foto real à direita em painel vertical, proporção fiel ao enquadramento original da `hero-bg.jpg`). O vídeo (`hero-home.mp4`) foi tirado da hero porque mostrava um enquadramento diferente (uma placa da máquina) do que a foto estática (barista + vapor) — manter a foto estática garante a composição pretendida; vídeo continua não sendo requisito.
+
+**Reduzido conscientemente:** anéis decorativos da hero (`.hero-rings`), eyebrows redundantes (~7 removidos: "Más que una máquina", "Precisión", "Lo dicen nuestros clientes" ×2, "¿Hablamos?", "¿Quieres conocernos en persona?", "¿Para quién trabajamos?" — mantidos só os que carregam informação real: "Modelo", "Catálogo", "Nosotros"). `.pillars`/`.pillar` (grid de 3 cards com borda) virou `.principles`/`.principle` (lista editorial sem card, com régua superior em brass) — o padrão de "3 cards iguais" é o layout mais genérico de IA segundo a skill `redesign-existing-projects`. Removida função JS `initCarousel` morta dos 3 HTMLs (o carrossel de Instagram já tinha saído do HTML numa rodada anterior, a função ficou órfã).
+
+**O que ainda está aberto:** isto é uma primeira versão para aprovação, não acabamento final. Cor de marca definitiva, uso de foto humana e nível de fidelidade ao site oficial continuam pendentes (seção 13). Copy não foi reescrito em profundidade — só os labels/eyebrows removidos; parágrafos maiores não foram tocados por já terem sido validados como reais em rodadas anteriores.
 
 ## 7. Referências visuais
 
@@ -53,15 +67,19 @@ Hipóteses A (Instrumento de Precisão), B (Oficina, não catálogo), C (Editori
   → depoimento (cliente real) → contato / onde encontrar (Palma de Gandia) → rodapé
   ```
 - Extrair princípios (composição, tratamento de foto, hierarquia tipográfica), nunca copiar um site inteiro.
+- **Implementado em 18/09** (commit a seguir): `index.html` reordenado seguindo o esqueleto acima (hero → barra de números → "más que una máquina" com `nosotros-cabecera.jpg` (foto real do time no mostrador) → produtos em zig-zag → diferenciais (pillars já existentes) → macro de extração (`nosotros-02.jpg`) com legenda sobre controle de temperatura/presión → depoimento → contato → rodapé). Carrossel de Instagram saiu do fluxo principal do index por não estar no esqueleto. `productos.html` ganhou a mesma barra de números após a hero e IDs de âncora por modelo (`#modelo-compacta`, `#modelo-2-grupos`, `#modelo-3-grupos`) para os links do zig-zag. `nosotros.html` ganhou depoimento + faixa de contato antes do rodapé (não tinha nenhuma chamada de contato antes).
+- **Descoberta ao implementar:** as fotos de `assets/real/` (`nosotros-02/30/50/82/87.jpg`) são todas macro de extração/latte art, não fotos de fábrica/montagem — não existe nenhuma foto real de "linha de produção" no acervo hoje. Nenhuma seção nova afirma "ensamblaje" ou "taller" apoiada nessas fotos; onde o esqueleto pedia isso, foi ajustado para o que as fotos realmente mostram (ver seção "Pontos a confirmar").
+- **Depoimentos reais usados** (avaliações públicas do Google, print enviado pelo Diogo — não inventados): Manuel Juan Rodríguez ("café fáciles de mantener y bonitas, servicio de 10") no index, focado em produto; Borja Reina Romero ("cracks, profesionales y serios") no nosotros, focado em pessoas. Um terceiro (berto fuster) ficou disponível e não usado ainda.
 
 ## 8. Skills
 
 - Skills instaladas são **ferramentas disponíveis, não instruções permanentes**. Usar uma skill numa tarefa não significa que ela continua ativa nas próximas.
 - Escolher a skill pela tarefa atual, não por hábito. Não empilhar skills sem necessidade.
 - Não remover/desinstalar uma skill só por não ter sido usada recentemente.
-- **Usar agora** (só depois que a seção 6 tiver decisão fechada): `redesign-existing-projects`, `impeccable` ou `example-skills:frontend-design`, `professor`, `humanizer`.
-- **Usar depois** (na execução, não na decisão): `industrial-brutalist-ui` (só se caminho A vencer), `animate`/`animation-vocabulary`, `improve-animations`, `code-review`/`simplify`.
-- **Ignorar por enquanto:** `10k-websites`, `high-end-visual-design`, `gpt-taste`, `stitch-design-taste`, `minimalist-ui`, `design-taste-frontend` (v1/v2) — sobreposição entre si e/ou já embutem resposta à pergunta ainda aberta da seção 6.
+- **Usadas em 18/09** para a implementação da seção 6: `redesign-existing-projects` (checklist de diagnóstico — apontou o padrão de "3 cards genéricos" e o cliché de cor terracota `#D97757`-like, evitado de propósito) e `example-skills:frontend-design` (processo de plano de design: paleta nomeada, papel de cada fonte, princípio de "gastar o efeito especial em um lugar só"). `simplify` rodou depois da implementação (4 subagentes em paralelo: reuse/simplificação/eficiência/altitude) — ver resultado no diff commitado.
+- **Não usadas nesta rodada:** `humanizer` (copy grande não foi reescrito, só labels removidos) e `professor` (registro de decisão foi direto neste Brain, sem precisar da skill).
+- **Usar depois** (fase de execução mais fina, não nesta rodada): `industrial-brutalist-ui` (só se um caminho mais industrial vencer), `animate`/`animation-vocabulary`, `improve-animations` (cine-scroll é fase futura, seção 13).
+- **Ignorar por enquanto:** `10k-websites`, `high-end-visual-design`, `gpt-taste`, `stitch-design-taste`, `minimalist-ui`, `design-taste-frontend` (v1/v2) — sobreposição entre si e/ou já embutem resposta à pergunta da seção 6, que agora já tem uma primeira resposta implementada.
 
 ## 9. Caveman
 
@@ -93,12 +111,13 @@ Se uma ferramenta, skill ou processo produzir um resultado claramente útil, **r
 
 ## 13. Próximo passo exato
 
-Reagir à hipótese de estrutura da seção 7 (confirmar, ajustar ou descartar partes) — nenhuma implementação começa antes disso. Só depois resolver as pendências restantes (cor de marca definitiva, uso de foto humana, nível de fidelidade ao site oficial) e abrir sessão de implementação. **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
+A identidade visual (estrutura + cor + tipografia + hero) já foi implementada nas 3 páginas do 4174 (seção 6), como protótipo para apresentação — não é acabamento final. Próximo passo: o Diogo ver o resultado real e reagir (aprovar para levar ao Daniel, pedir ajuste pontual, ou apontar o que não funcionou). Só depois resolver as pendências restantes (cor de marca definitiva vs. esta primeira proposta, uso de foto humana, nível de fidelidade ao site oficial, se cine-scroll entra numa fase futura). **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
 
 ---
 
 ## Pontos a confirmar
 
 - `README.md` e `contexto/CONTEXTO-SESSAO-2026-09-17.md` citam `hero-ln200-test.html`, que não existe mais na working tree (substituído por `ln200-site/`).
-- `apresentacao-daniel/README.md` ainda descreve o 4174 como "preto+cobre"; o código já removeu o cobre. Material de apresentação desatualizado frente ao código.
+- `apresentacao-daniel/README.md` ainda descreve o 4174 como "preto+cobre"; o código já removeu o cobre antes, e agora (18/09) mudou pra paleta quente café/creme/brass — material de apresentação está ainda mais desatualizado frente ao código.
 - `assets/real/diagrama-2-grupos.png`, `diagrama-3-grupos.png`, `diagrama-compacta.png` e `assets/real/logo.png` não são referenciados em nenhum HTML — sobra de iteração anterior, uso futuro não confirmado.
+- Não existe no acervo nenhuma foto real de fábrica/linha de montagem (só macro de extração e uma foto de mostrador). Se o Diogo quiser uma seção de "processo de fabricación" mais literal no futuro, precisa de fotos novas — não dá pra forçar com o que já existe sem legendar errado.

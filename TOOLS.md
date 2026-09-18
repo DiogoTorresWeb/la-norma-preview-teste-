@@ -9,10 +9,22 @@ Só entra aqui o que já tem evidência no projeto. Não classificar skill por e
 ---
 
 ### example-skills:frontend-design
-- **Função:** revisão/correção de composição visual e "tells de IA" em UI existente.
-- **Resultado observado:** rodada em 16/09 sobre `index.html`/`productos.html` — removeu números de sequência falsos, eyebrows redundantes, seta solta, meta-string estranha (ver `contexto/HANDOFF-frontend-cleanup.md`). Corrigiu sintomas pontuais; feedback do Diogo no mesmo dia foi que o site "ainda parece cara de IA" — não resolveu a composição de fundo (cards genéricos, hierarquia tipográfica fraca).
-- **Estado:** 🟡 TESTAR — útil para limpeza pontual, não validado ainda para decisão de composição/direção visual.
-- **Quando usar:** depois que a direção visual (seção 6 do `PROJECT_BRAIN.md`) estiver decidida, para polimento de detalhe — não para decidir direção.
+- **Função:** revisão/correção de composição visual e "tells de IA" em UI existente. Também serve como guia de PROCESSO de design (plano em duas passadas: tokens nomeados → revisão contra o brief → código).
+- **Resultado observado:** rodada em 16/09 sobre `index.html`/`productos.html` — removeu números de sequência falsos, eyebrows redundantes, seta solta, meta-string estranha. Corrigiu sintomas pontuais, mas não resolveu composição de fundo. Rodada em 18/09 usada de verdade como guia de processo para o redesign completo (sistema de cor, tipografia, hero) — explicitamente listou o acento terracota `#D97757`-like como "tell" reconhecível de IA, o que ajudou a escolher um acento diferente (brass/latão).
+- **Estado:** ⭐ APROVADO — bom tanto para limpeza pontual quanto como processo de decisão de direção visual, desde que combinado com brief específico do Diogo (não decide sozinho).
+- **Quando usar:** em qualquer rodada de decisão ou polimento visual — ler o guia de processo antes de montar paleta/tipografia do zero.
+
+### redesign-existing-projects
+- **Função:** checklist de auditoria de padrões genéricos de IA em projeto existente (tipografia, cor, layout, componentes, iconografia, conteúdo) + ordem de prioridade de correção.
+- **Resultado observado:** rodada em 18/09 — apontou "3 cards iguais" (`.pillars`) como o layout mais genérico de IA (virou `.principles`, lista editorial sem card) e confirmou a prioridade fonte→cor→estados→layout→componentes usada na execução.
+- **Estado:** ⭐ APROVADO — bom como checklist de diagnóstico rápido antes de uma rodada de redesign.
+- **Quando usar:** no início de qualquer rodada de redesign visual, antes de decidir o que mudar.
+
+### simplify
+- **Função:** revisão pós-implementação focada em reuso/simplificação/eficiência/altitude (não correção de bugs) — roda 4 subagentes em paralelo, um por ângulo, e aplica os achados.
+- **Resultado observado:** rodada em 18/09 sobre o diff do redesign (index/nosotros/productos/style.css) — os 4 agentes juntos acharam 2 blocos de CSS inteiramente mortos (override de `.btn-primary` em seções que não têm esse botão), 3 duplicações reais de valor (filtro de foto, tipografia de eyebrow/hero-kicker, span de spec-list/zig-specs) e um `@import` de fonte com peso nunca usado — todos corrigidos. Também apontou duplicação estrutural (catálogo repetido entre index/productos, JS de página repetido 3x) que foi conscientemente mantida por ser decisão de produto ou exigir mudança de arquitetura fora do escopo da noite.
+- **Estado:** ⭐ APROVADO — achou problema real sem inventar refactor desnecessário; vale rodar depois de qualquer implementação grande.
+- **Quando usar:** depois de qualquer implementação grande, antes do commit.
 
 ### 10k-websites
 - **Função:** build de site cinematográfico com scroll (vídeo scrub, elemento de assinatura animado).

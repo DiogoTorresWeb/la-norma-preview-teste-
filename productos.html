@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catálogo — La Norma</title>
 <meta name="description" content="Compacta, 2 grupos y 3 grupos: máquinas de café profesionales fabricadas a mano en Valencia, con ficha técnica completa y especificaciones reales.">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -45,6 +48,27 @@
   </div>
 </section>
 
+<section class="stat-strip">
+  <div class="container">
+    <div class="stat-item">
+      <span class="value">3</span>
+      <span class="label">Modelos en la gama</span>
+    </div>
+    <div class="stat-item">
+      <span class="value">8 – 20,5 L</span>
+      <span class="label">Caldera</span>
+    </div>
+    <div class="stat-item">
+      <span class="value">2200 – 6200 W</span>
+      <span class="label">Potencia</span>
+    </div>
+    <div class="stat-item">
+      <span class="value">100%</span>
+      <span class="label">Ensamblado a mano en Valencia</span>
+    </div>
+  </div>
+</section>
+
 <section class="section-light">
   <div class="container">
     <div class="section-head">
@@ -53,7 +77,7 @@
     </div>
     <div class="product-grid">
 
-      <article class="product-card">
+      <article class="product-card" id="modelo-compacta">
         <div class="art"><img src="assets/real/spec-compacta.jpg" alt="Máquina de café La Norma, modelo Compacta"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
@@ -69,7 +93,7 @@
         </div>
       </article>
 
-      <article class="product-card">
+      <article class="product-card" id="modelo-2-grupos">
         <div class="art"><img src="assets/real/spec-2-grupos.jpg" alt="Máquina de café La Norma, modelo 2 grupos"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
@@ -85,7 +109,7 @@
         </div>
       </article>
 
-      <article class="product-card">
+      <article class="product-card" id="modelo-3-grupos">
         <div class="art"><img src="assets/real/spec-3-grupos.jpg" alt="Máquina de café La Norma, modelo 3 grupos"></div>
         <div class="body">
           <span class="eyebrow">Modelo</span>
@@ -253,45 +277,6 @@
     });
   }
 
-  function initCarousel(){
-    const car = document.getElementById('pcarousel');
-    if (!car || car.dataset.bound) return;
-    car.dataset.bound = '1';
-    const slides = Array.from(car.querySelectorAll('.pcarousel-slide'));
-    const imgs = slides.map(s => s.querySelector('.pcarousel-img'));
-
-    function updateParallax(){
-      const carRect = car.getBoundingClientRect();
-      const carCenter = carRect.left + carRect.width / 2;
-      slides.forEach((slide, i) => {
-        const r = slide.getBoundingClientRect();
-        const slideCenter = r.left + r.width / 2;
-        const offset = (carCenter - slideCenter) / carRect.width;
-        imgs[i].style.transform = `translateX(${offset * 26}px) scale(1.06)`;
-      });
-    }
-
-    updateParallax();
-    car.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive: true });
-    window.addEventListener('resize', updateParallax);
-
-    const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 20;
-    document.getElementById('pcarPrev')?.addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
-    document.getElementById('pcarNext')?.addEventListener('click', () => car.scrollBy({ left: step(), behavior: 'smooth' }));
-
-    let isDown = false, startX = 0, startScroll = 0;
-    car.addEventListener('pointerdown', (e) => {
-      isDown = true; startX = e.clientX; startScroll = car.scrollLeft; car.setPointerCapture(e.pointerId);
-    });
-    car.addEventListener('pointermove', (e) => {
-      if (!isDown) return;
-      car.scrollLeft = startScroll - (e.clientX - startX);
-    });
-    ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev =>
-      car.addEventListener(ev, () => { isDown = false; })
-    );
-  }
-
   function initIntroGate(){
     const gate = document.getElementById('introGate');
     if (!gate || gate.dataset.bound) return;
@@ -333,7 +318,6 @@
 
   function initPage(){
     updateActiveNav();
-    initCarousel();
     initIntroGate();
     nav.classList.remove('open');
   }
