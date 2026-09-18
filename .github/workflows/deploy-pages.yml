@@ -23,10 +23,10 @@ jobs:
       - name: Montar pasta pública (só o site, sem docs internos)
         run: |
           set -e
-          mkdir -p _site/css
+          mkdir -p _site/css _site/assets
           cp index.html nosotros.html productos.html _site/
           cp css/style.css _site/css/
-          cp -r assets/real _site/assets
+          cp -r assets/real _site/assets/real
 
       - uses: actions/upload-pages-artifact@v3
         with:
