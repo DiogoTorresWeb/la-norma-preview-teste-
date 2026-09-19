@@ -10,7 +10,9 @@ Site institucional para a Lanorma Coffee Machine Manufacturer S.L. (Palma de Gan
 
 ## 2. Estado atual
 
-**Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Objetivo desta rodada era virar um **protótipo visual apresentável ao Daniel**, não um acabamento 100%. Falta a reação do Diogo ao resultado real (seção 13).
+**Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Publicada como preview remoto no GitHub Pages em 19–20/09 (`https://diogotorresweb.github.io/la-norma-preview-teste-/`).
+
+**20/09 — auditoria completa sem redesign.** Antes de abrir a próxima rodada visual, o projeto ganhou memória de processo dedicada: `EVOLUTION_LOG.md` (histórico de decisão + aprendizado por rodada) e `DESIGN_SYSTEM.md` (o que já está aprovado, em forma prática). Essa rodada auditou header, intro-gate, ícones, produtos (inventário real de modelos/fotos) e fotografia, e fechou uma fila de priorização P0–P3. Nenhuma linha de design foi alterada nela.
 
 ## 3. Decisão já fechada
 
@@ -111,7 +113,7 @@ Se uma ferramenta, skill ou processo produzir um resultado claramente útil, **r
 
 ## 13. Próximo passo exato
 
-A identidade visual (estrutura + cor + tipografia + hero) já foi implementada nas 3 páginas do 4174 (seção 6), como protótipo para apresentação — não é acabamento final. Próximo passo: o Diogo ver o resultado real e reagir (aprovar para levar ao Daniel, pedir ajuste pontual, ou apontar o que não funcionou). Só depois resolver as pendências restantes (cor de marca definitiva vs. esta primeira proposta, uso de foto humana, nível de fidelidade ao site oficial, se cine-scroll entra numa fase futura). **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
+A identidade visual (estrutura + cor + tipografia + hero) está implementada e publicada como preview (seção 2). A auditoria de 20/09 (`EVOLUTION_LOG.md`, Rodada 3) já fechou uma fila de priorização — **próximo passo é atacar o P0 inteiro** (separar label/número da topbar, trocar ícones sociais por glifos de marca reais, confirmar a foto do modelo Compacta, corrigir o link morto do Facebook) antes de abrir qualquer decisão visual maior de P1 (fundo de foto de produto, execução do intro-gate, `.product-card`). Pendências estratégicas maiores (personalização de frontal inox, posicionamento B2B-first, Formación, conteúdo/notícias) estão registradas no `EVOLUTION_LOG.md` como P2/P3 — não implementar sem confirmação prévia do Daniel/Diogo. **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
 
 ---
 
