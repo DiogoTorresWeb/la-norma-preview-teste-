@@ -233,3 +233,45 @@ Nenhuma imagem externa foi copiada pro projeto — todas as opções acima já e
 **O que não repetir:** deixar `sessionStorage` (ou qualquer API que pode lançar) sem try/catch dentro de algo que cobre a tela inteira. Um erro silencioso ali derruba o site inteiro pro visitante, e isso ficou no ar sem ninguém notar desde a Rodada 1.
 
 **Próxima hipótese:** os dois pontos que mais devem pesar agora são o item 8 do P1 (padronizar a ordem palavra/span dos `.principle`) e o P2 comercial — confirmar com o Daniel os detalhes da personalização de frontal inox e a medida da Compacta. Do lado visual, a hero é o maior bloco ainda intocado desde a Rodada 2.
+
+---
+
+## Rodada 5 — 20/09, hero full-bleed e intro final (via `/grill-with-docs`)
+
+**Problema:** dois itens específicos apontados pelo Diogo depois de ver a Rodada 4 no ar — a hero, mesmo aprovada estruturalmente na Rodada 2, "continua sem cara de hero"; e a intro (já refeita na Rodada 4) tinha uma frase e uma fonte que ele não gostou ao ver de verdade.
+
+**Processo:** sessão de grilling (`mattpocock-skills:grilling` + `domain-modeling`) em vez de implementar direto — perguntas em rodadas, com opções, até fechar decisão. Cross-referenciado contra o código antes de perguntar (ex.: o Diogo achava que faltava "o logo oficial" na intro; o código já usava o arquivo oficial, só filtrado de branco — a percepção era sobre o tratamento, não sobre faltar o arquivo).
+
+### Hero — decisão final: full-bleed com foto nova, fornecida pelo Diogo nesta sessão
+
+**Hipótese testada e descartada, com motivo registrado:** full-bleed com `hero-bg.jpg` (o barista com vapor, já aprovado na Rodada 2 para o painel contido) não funciona em tela cheia — o título cobria o rosto da pessoa. Testado também full-bleed com `nosotros-cabecera.jpg` (foto real do mostrador, dois homens) com um scrim reforçado em duas direções (vertical + diagonal); mesmo assim o texto cruzava o rosto do segundo homem. **Decisão de princípio que fica registrada:** não cobrir rosto de pessoa real com texto, mesmo que o scrim resolva o contraste — decidido incorreto pra uma marca que quer mostrar "pessoas de verdade".
+
+**Resolvido com fotos novas do Diogo:** duas fotos macro do próprio display digital da máquina (temperatura + hora + **a palavra "Lanorma" acesa no visor**), sem nenhuma pessoa no quadro, com grande área negra real (não é vinheta CSS — é o fundo real da foto). Usada a mais forte das duas (`assets/real/hero-display.jpg`, salva a partir do arquivo que o Diogo mandou, redimensionada pra 2400px). Resolve os 3 problemas relatados de uma vez: domina a tela (full-bleed de verdade), não repete nenhum padrão de outra seção do site, e tem assinatura visual própria (a marca já está literalmente escrita na cena, não precisa ser adicionada).
+
+**Implementação:** `.hero` deixou de ser grid de 2 colunas — virou `<img class="hero-bg">` em `position:absolute` cobrindo a seção, com dois gradientes sobrepostos (vertical de baixo + diagonal da esquerda) em vez de um só, porque um gradiente só não dava contraste suficiente pro texto em cima da foto. `object-position` diferente por breakpoint: `48% 48%` no desktop (mostra "115°C" e o início de "Lanorma" no visor), `62% 40%` em ≤600px (testado de verdade em viewport 375×812 — sem corte, CTA visível sem rolar). `.hero-panel`/`.hero-grid`/`.hero-copy` removidos do CSS (confirmado por grep que nenhuma página ainda referenciava).
+
+**Fotos descartadas nesta rodada, registradas pra não serem retestadas à toa:** `LaNorma_Alta-69` (ambiente real de torrefação, boa foto mas maria confusa pra hero — guardada como candidata pra seção de processo/fabricação); `ig-1.jpg` (na real é a mesma foto/estilo de `LaNorma_Alta-01`, macro de extração — redundante com o que já existe, não é achado novo).
+
+### Intro — decisão final: sem linha de assinatura embaixo, só eyebrow + wordmark
+
+**O que mudou desde a Rodada 4:** a Rodada 4 tinha adicionado uma linha (`Una forma distinta de preparar un café`, cópia real do rodapé) embaixo da wordmark, em itálico Fraunces. O Diogo não gostou nem da frase nem da fonte ao ver publicado.
+
+**Testado ao vivo, 4 tratamentos de fonte pra essa linha** (mantendo a frase trocada por outra também real, da meta description: `Máquinas de café profesionales, ensambladas a mano en Valencia`): itálico Fraunces (original, rejeitado), Fraunces reto, Archivo em caixa alta (rejeitado por repetir exatamente o tratamento do eyebrow acima — redundante), IBM Plex Mono em brass (o preferido, mas não fechado). **Decisão final do Diogo: tirar a linha inteira.** A estrutura final é eyebrow (`Fabricante de máquinas de café · Valencia`) + wordmark grande — mais seca, sem "poema".
+
+**Também fechado nesta rodada:** a wordmark passa a ser preenchida em `--brass-light` via `mask-image` (technique igual ao logo do header, mas recolorida) em vez de branca — usa a cor de marca em vez de um branco genérico, seguindo a mesma regra de "um único acento controlado" que já rege o resto do sistema. E foi adicionada uma textura de fundo (`assets/real/intro-texture.jpg`, um crop desfocado e escurecido do próprio `hero-bg.jpg`, focado na área do vapor) atrás do texto — sutil, real, sem competir com a leitura.
+
+**Pesquisa pequena feita:** 4 galerias reais do Awwwards (site-intro, intro-transition, preloader-animation, branded-counter-preloader) já registradas na Rodada 3 — usadas de novo aqui pra confirmar o princípio "tracking largo + caixa alta + restrição" (fonte: comparação de wordmarks de marca, ver referência no texto da pergunta ao Diogo) em vez de repetir a mesma pesquisa.
+
+### Bug real achado e corrigido nesta rodada
+
+Depois de editar o CSS, o navegador continuou servindo a versão antiga por cache (`style.css?v=10` não tinha mudado) — as mudanças não apareciam mesmo com o arquivo correto no disco. **Corrigido subindo pra `?v=11`** nas 3 páginas. Registrar como hábito: **sempre subir o `?v=` do CSS depois de editar, antes de testar** — já tinha acontecido antes (`TOOLS.md`/handoffs mencionam isso), mas vale repetir aqui porque quase gerou um relatório errado ("a mudança não funcionou" quando na verdade era cache).
+
+**Resultado:** testado em desktop (1280) e mobile (375×812) — 0 erro de console, 0 overflow, hero e intro corretos nos dois, CTA sempre visível sem rolar no mobile.
+
+**O que funcionou:** grillar com perguntas de múltipla escolha antes de implementar economizou pelo menos 2 rodadas de "implementei, você não gostou, refaço" — o Diogo conseguiu reagir rápido a opções concretas em vez de descrever o que queria em texto (mesmo padrão já registrado como aprendizado na Rodada 2). Também funcionou pedir foto nova quando as duas opções existentes falharam no mesmo teste (cobrir rosto) — em vez de forçar uma das duas ruins, voltar e perguntar "tem outra?" trouxe a melhor foto da rodada inteira.
+
+**O que não funcionou tão bem:** gastei 3 tentativas de crop tentando fazer `hero-bg.jpg` e depois `nosotros-cabecera.jpg` funcionarem em full-bleed antes de admitir que nenhuma das duas tinha espaço negativo real — deveria ter testado a hipótese "essa foto tem espaço vazio suficiente?" antes de escrever o CSS de scrim, não depois.
+
+**O que não repetir:** editar CSS/HTML e testar sem subir o cache-bust — quase levou a diagnosticar errado uma mudança que na verdade tinha funcionado.
+
+**Próxima hipótese:** os itens novos que o Diogo trouxe no fim desta rodada (paleta de cor questionada — o brass não existe nas máquinas reais; possível redesenho do material de apresentação/slides pra vender junto; e uma menção não confirmada sobre "curso no cabeçalho") ficam registrados como abertos, não decididos — precisam de uma rodada de grilling própria antes de qualquer implementação, porque cada um sozinho já é uma mudança grande.

@@ -118,12 +118,18 @@ A exceção que restou é o `.channel` do `.cta-band` (bloco pequeno de contato,
 
 ---
 
+## 10.5 Hero (atualizado na Rodada 5)
+
+- **Full-bleed, não mais grid de 2 colunas.** `.hero` é `<img class="hero-bg">` em `position:absolute` cobrindo a seção + conteúdo por cima com dois gradientes sobrepostos (vertical de baixo + diagonal da esquerda — um só gradiente não dá contraste suficiente pra título grande sobre foto real).
+- **Regra fixada: nunca cobrir rosto de pessoa real com texto**, mesmo que o scrim resolva o contraste técnico — decidido incorreto pra uma marca que quer mostrar "pessoas de verdade" (ver `EVOLUTION_LOG.md` Rodada 5). Fotos com gente só entram em full-bleed se sobrar espaço negativo real fora do rosto.
+- Foto atual: macro do display digital da máquina (`hero-display.jpg`) — sem gente, com a palavra "Lanorma" literalmente acesa na cena. `object-position` muda por breakpoint (testar sempre em mobile real, não só desktop).
+
 ## 11. Animações
 
 O que existe hoje (tudo microinteração pontual, sem scroll-driven):
 - Hover de botão (preenchimento `scaleX`), sublinhado de nav, hover de ícone/canal (`translateY` leve), hover de máquina (`translateY(-8px)`, 550ms).
 - Accordion de FAQ (`faq-open` keyframe, translateY+opacity).
-- **Intro-gate (Rodada 4), ~2,1s no total:** wordmark revelado por `clip-path` (720ms) → linha da marca entra (500ms, atraso 380ms) → cortina sobe (`translateY(-101%)`, 620ms) enquanto o wordmark **desliza até a posição exata do logo no header**, calculada em runtime. Regras que isso fixou: a intro nunca exige clique, some sozinha, tem Saltar e Esc, roda uma vez por sessão, vira estática com `prefers-reduced-motion`, e **só existe se o JS rodar** (`html.js` no CSS) — sem JS o site abre direto.
+- **Intro-gate, ~1,5s de espera + 620ms de saída:** eyebrow entra (Rodada 5) → wordmark revelado por `clip-path` em brass (720ms) → cortina sobe (`translateY(-101%)`, 620ms) enquanto o wordmark **desliza até a posição exata do logo no header**, calculada em runtime. **Sem linha de assinatura embaixo** — testado com 4 tratamentos de fonte na Rodada 5 e nenhum convenceu; a estrutura final é só eyebrow + wordmark. Regras que isso fixou: a intro nunca exige clique, some sozinha, tem Saltar e Esc, roda uma vez por sessão, vira estática com `prefers-reduced-motion`, e **só existe se o JS rodar** (`html.js` no CSS) — sem JS o site abre direto. Fundo com textura real (crop desfocado/escurecido de uma foto real, nunca gerado) atrás do texto, bem sutil.
 - Transição de página via Swup (fade+translateY, `html.is-changing`/`is-animating`) — via CDN, falha em silêncio se offline (o site precisa funcionar 100% sem internet).
 
 **Regra fixada:** sem cine-scroll ou animação de página inteira nesta fase — isso é fase futura (seção 13 do `PROJECT_BRAIN.md`). Microinteração pontual pode continuar sendo refinada.
