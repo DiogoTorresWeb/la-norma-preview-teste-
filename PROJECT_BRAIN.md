@@ -12,6 +12,8 @@ Site institucional para a Lanorma Coffee Machine Manufacturer S.L. (Palma de Gan
 
 **Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Publicada como preview remoto no GitHub Pages em 19–20/09 (`https://diogotorresweb.github.io/la-norma-preview-teste-/`).
 
+**20/09 — Rodada 4, acabamento executado.** Intro-gate refeita como abertura de marca (sem clique, ~2,1s, wordmark migra pro header), fotos de produto trocadas por recortes em alta dos renders reais, card eliminado do catálogo, topbar e ícones sociais corrigidos. Detalhe importante: a intro antiga travava o site inteiro em contexto onde `sessionStorage` lança — corrigido. Ver `EVOLUTION_LOG.md`, Rodada 4.
+
 **20/09 — auditoria completa sem redesign.** Antes de abrir a próxima rodada visual, o projeto ganhou memória de processo dedicada: `EVOLUTION_LOG.md` (histórico de decisão + aprendizado por rodada) e `DESIGN_SYSTEM.md` (o que já está aprovado, em forma prática). Essa rodada auditou header, intro-gate, ícones, produtos (inventário real de modelos/fotos) e fotografia, e fechou uma fila de priorização P0–P3. Nenhuma linha de design foi alterada nela.
 
 ## 3. Decisão já fechada
@@ -113,7 +115,7 @@ Se uma ferramenta, skill ou processo produzir um resultado claramente útil, **r
 
 ## 13. Próximo passo exato
 
-A identidade visual (estrutura + cor + tipografia + hero) está implementada e publicada como preview (seção 2). A auditoria de 20/09 (`EVOLUTION_LOG.md`, Rodada 3) já fechou uma fila de priorização — **próximo passo é atacar o P0 inteiro** (separar label/número da topbar, trocar ícones sociais por glifos de marca reais, confirmar a foto do modelo Compacta, corrigir o link morto do Facebook) antes de abrir qualquer decisão visual maior de P1 (fundo de foto de produto, execução do intro-gate, `.product-card`). Pendências estratégicas maiores (personalização de frontal inox, posicionamento B2B-first, Formación, conteúdo/notícias) estão registradas no `EVOLUTION_LOG.md` como P2/P3 — não implementar sem confirmação prévia do Daniel/Diogo. **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
+O P0 inteiro e a maior parte do P1 foram executados na Rodada 4 (`EVOLUTION_LOG.md`). **Próximo passo: o Diogo abrir o preview e reagir** — a rodada foi feita pra ser perceptível na entrada do site e na apresentação das máquinas. Depois disso, as duas frentes abertas são: (a) visual — a hero é o maior bloco ainda intocado desde a Rodada 2, e falta padronizar a ordem palavra/span dos `.principle`; (b) comercial/P2 — confirmar com o Daniel os detalhes da personalização de frontal inox e a medida publicada da Compacta (485 × 564 × 530 mm parece estreita demais para uma máquina de 2 porta-filtros, que é o que o Diogo confirmou que ela é). Formación e conteúdo/notícias seguem como P3, não implementar sem confirmação. **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
 
 ---
 

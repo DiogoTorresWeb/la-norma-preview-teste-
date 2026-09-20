@@ -133,6 +133,8 @@ Achado de código: os únicos ícones "desenhados à mão" que já existem (tele
 
 **Achado de possível inconsistência visual, a confirmar antes da próxima rodada:** `assets/real/spec-compacta.jpg` e `assets/real/spec-2-grupos.jpg` foram comparadas lado a lado e mostram um render com a mesma configuração de 2 grupos de extração — visualmente muito parecidas ou idênticas. `assets/real/spec-3-grupos.jpg` está correta (mostra claramente 3 grupos). **Não dá pra confirmar com certeza, só olhando a imagem, que o modelo Compacta tem uma foto errada** (pode ser um render genérico de divulgação reaproveitado) — mas é uma bandeira real que vale checar contra `assets/biblioteca-wp-completa/MAQUINA FUNDO BRANCO/MINI BRANCA.png` (que também mostra a mesma configuração de 2 grupos, apesar do nome "MINI") antes de publicar qualquer coisa nova com essas imagens.
 
+> **RESOLVIDO na Rodada 4 (20/09):** o Diogo, que monta as máquinas, confirmou que **a Mini/Compacta tem 2 porta-filtros**, igual à 2 grupos — a diferença entre os dois modelos é o corpo e a caldeira (8 L vs 13 L), não o número de grupos. **Não havia erro de foto.** Fica aberto só um detalhe secundário: a medida publicada da Compacta (485 × 564 × **530** mm) parece estreita demais pra uma máquina de 2 grupos. Esse dado é real, veio do site oficial, e **foi mantido como está** — corrigir por dedução seria inventar. Confirmar com o Daniel/no taller.
+
 **Fundo branco/cinza das fotos de produto** apontado como fraco: o acervo tem pelo menos 3 tratamentos diferentes ainda não comparados com critério — fundo transparente/branco liso (`MAQUINA FUNDO BRANCO/`), fundo cinza de estúdio com sombra suave (`FUNDO CINZA/`, 6 fotos "lanorma-ln1-coffee-machine-0X.jpg") e os renders atuais em uso (`assets/real/spec-*.jpg`, fundo com gradiente CSS por cima). Nenhuma comparação de escala/recorte/sombra foi feita ainda — fica pra próxima rodada de execução, não decidir aqui.
 
 ### Personalização
@@ -165,6 +167,8 @@ Nenhuma imagem externa foi copiada pro projeto — todas as opções acima já e
 
 ### Fila de priorização — próxima rodada
 
+> Status depois da Rodada 4: **P0 fechado por inteiro** (itens 1–4), mais os itens 5, 6 e 7 do P1. Resta o item 8 do P1 e todo o P2/P3.
+
 **P0 — obrigatório pra próxima apresentação**
 1. Separar label "Llamar:" do número na topbar (mono só no número).
 2. Trocar os 3 ícones sociais de texto (`f`/`ig`/`in`) por glifos reais de marca (Simple Icons) no header e no footer.
@@ -195,3 +199,37 @@ Nenhuma imagem externa foi copiada pro projeto — todas as opções acima já e
 **O que não repetir:** already covered — não abrir uma rodada de implementação visual nova sem primeiro checar se a pergunta já tem resposta no material existente (regra futura, seção acima).
 
 **Próxima hipótese:** com a fila de priorização acima, a próxima rodada de execução deveria atacar o P0 inteiro primeiro (é pequeno e mecânico) antes de abrir qualquer decisão visual maior de P1.
+
+---
+
+## Rodada 4 — 20/09, acabamento perceptível (intro, produto, topbar, ícones)
+
+**Problema:** o site já tinha estrutura e identidade, mas quatro pontos pequenos derrubavam a percepção de acabamento: a intro parecia feita do zero, as fotos de produto eram as piores imagens do acervo dentro de cards genéricos, o telefone da topbar tinha tipografia errada e os ícones sociais eram letras (`f`, `ig`, `in`) em vez de ícones.
+
+**Hipótese:** dá pra mudar a percepção sem redesign — trocando a matéria-prima (imagem melhor), tirando a moldura (card) e corrigindo os detalhes que o olho registra como "amador".
+
+**Referências e princípios aplicados:** as galerias de intro/preloader registradas na Rodada 3. Princípios extraídos, não copiados: reveal tipográfico em vez de fade de bloco; saída desenhada (cortina) em vez de sumir; marca carregando o peso visual em vez de imagem.
+
+### O que mudou
+
+**1. Intro-gate — conceito trocado, a pedido do Diogo.** A sequência "¿Té? ¿Jugo? … Café." saiu. Motivo concreto: **obrigava a clicar em "Café." pra entrar** e levava ~4,5s. Entrou uma abertura de marca: wordmark real revelado por máscara → a linha real da marca (*«Una forma distinta de preparar un café»*, copy que já existia no rodapé) → cortina sobe e **o wordmark desliza até a posição exata do logo no header**, calculada em runtime com `getBoundingClientRect`. Total ~2,1s, sem clique. Mantidos: Saltar, Esc, sessionStorage (chave nova `ln_intro_v2`), offline. Adicionado `prefers-reduced-motion` (estático, 0,6s).
+
+**2. Bug real corrigido de quebra:** a intro antiga chamava `sessionStorage.getItem` sem proteção. Em contexto de origem opaca (arquivo local/aba privada) isso **lança SecurityError**, o script morria antes de fechar o portão e **o site ficava coberto pra sempre**. Agora está em try/catch, e a intro só existe se o JS rodar (`html.js` no CSS) — sem JS, o site abre direto. Testado num contexto onde o `sessionStorage` realmente lança: a intro abre, fecha e libera a página.
+
+**3. Fotos de produto refeitas a partir do acervo.** As `spec-*.jpg` em uso eram frames de GIF de 1080×1080 com 46–71 KB. Foram substituídas por recortes gerados dos renders originais de 1920×1080 (`MAQUINA FUNDO BRANCO/`), com fundo removido por *flood fill* a partir das bordas — algoritmo escolhido de propósito porque o corpo da máquina é branco e uma remoção por limiar global comeria a própria máquina. Feather de 1px nas bordas, corte na bounding box e saída em WebP: **de ~620 KB para 62–94 KB por imagem**, com o dobro da resolução. Nenhuma imagem externa, nenhuma imagem gerada, nenhum fundo inventado — só o branco chapado removido.
+
+**4. Apresentação de produto: card → composição.** No catálogo, os 3 `.product-card` viraram `.machine`: máquina grande sobre o fundo claro, sem moldura, posição alternando lado a lado, sombra elíptica suave no chão pra dar contato, specs em lista com régua e valores em mono alinhados à direita, e um hover discreto de 8px. Mesmo tratamento no zig-zag da home (saiu o painel com gradiente e borda).
+
+**5. Topbar.** `Llamar: +34 960…` estava inteiro em mono. Agora "Llamar" é label em Archivo, micro e mutado, e só o número é mono, em brass, com sublinhado no hover. Em telas ≤600px o label some e fica só o número.
+
+**6. Ícones sociais.** As letras viraram os glifos oficiais de marca do **Simple Icons** (CC0), buscados da fonte e embutidos num sprite SVG por página (`<symbol>` + `<use>`), o que funciona offline e não repete o path 6 vezes. Os círculos do header foram mantidos — o header estava ~80% aprovado e não era pra redesenhar. O Facebook, que apontava pra `#`, agora aponta pra página real que o Diogo passou.
+
+**Resultado:** testado no navegador em desktop (1280) e mobile (375), nas 3 páginas: 0 imagem quebrada, 0 erro de console, sem overflow horizontal real (os 4px acusados no mobile são a barra de rolagem emulada afetando o header fixo, não conteúdo), layout alternado funcionando, lazy-load carregando ao rolar, e o site abrindo normalmente como arquivo local.
+
+**O que funcionou:** trocar a matéria-prima antes de mexer no layout — metade do ganho de percepção veio só da imagem melhor. E usar biblioteca real de ícone de marca em vez de desenhar: resolveu em minutos um item que vinha arrastando há rodadas.
+
+**O que não funcionou tão bem:** a captura de tela do navegador embutido compõe errado quando o viewport emulado é maior que o painel — várias fotos saíram com só um pedaço da tela renderizado. A medição por JS (`getBoundingClientRect`, `getComputedStyle`) foi o que deu confiança de verdade. Vale lembrar disso na próxima rodada: **conferir layout por medida, usar screenshot só como ilustração.**
+
+**O que não repetir:** deixar `sessionStorage` (ou qualquer API que pode lançar) sem try/catch dentro de algo que cobre a tela inteira. Um erro silencioso ali derruba o site inteiro pro visitante, e isso ficou no ar sem ninguém notar desde a Rodada 1.
+
+**Próxima hipótese:** os dois pontos que mais devem pesar agora são o item 8 do P1 (padronizar a ordem palavra/span dos `.principle`) e o P2 comercial — confirmar com o Daniel os detalhes da personalização de frontal inox e a medida da Compacta. Do lado visual, a hero é o maior bloco ainda intocado desde a Rodada 2.

@@ -69,24 +69,24 @@ Três famílias, cada uma com um papel fixo — não usar fora do papel sem moti
 - Nav com sublinhado brass animado no ativo/hover.
 - Comportamento mobile (drawer lateral, `.nav-toggle`) — funcional, sem bug relatado.
 
-**Não está bom, registrado para próxima rodada (ver `EVOLUTION_LOG.md` Rodada 3):**
-- Ícones sociais são caracteres de texto (`f`, `ig`, `in`) dentro de círculo — não são ícones reais, parecem placeholder.
-- Tipografia do telefone na topbar: o link inteiro (`Llamar: +34 960 64 00 72`) está em `--ff-mono`, incluindo a palavra "Llamar" — deveria ser só o número em mono, o label em `--ff-body`.
+**Topbar (resolvido na Rodada 4):** o label e o número têm papéis tipográficos separados — `Llamar` em `--ff-body`, `.64rem`, peso 600, `letter-spacing:.18em`, cor `--muted`; o número em `--ff-mono`, `.78rem`, `tabular-nums`, cor `--brass-light`, com sublinhado só no hover. Em ≤600px o label some e fica só o número. **Regra geral que sai daqui: mono é para o dado, nunca para a palavra que rotula o dado.**
 
 ---
 
 ## 6. Footer
 
-Estrutura de 3 colunas (`logo+bio` / `contato` / `social`), mesma paleta escura do header (`--espresso-deep`). Telefone do footer **já** está isolado corretamente em `<p>` próprio com mono só no número (`.footer-grid a[href^="tel:"]`) — não repete o problema da topbar. Mesmo problema de ícones sociais genéricos do header se repete aqui (mesmo mercado, mesma solução).
+Estrutura de 3 colunas (`logo+bio` / `contato` / `social`), mesma paleta escura do header (`--espresso-deep`). Telefone do footer isolado em `<p>` próprio com mono só no número (`.footer-grid a[href^="tel:"]`). Ícones sociais usam o mesmo sprite do header (seção 7), com o mesmo hover de preenchimento em brass.
 
 ---
 
 ## 7. Ícones
 
-- **Ícones funcionais** (telefone, email, Instagram, mapa no `.cta-band`) já são SVG inline desenhados à mão, estilo linha fina (`stroke-width:1.7`, viewBox 24×24) — visualmente já parecido com bibliotecas tipo Lucide/Feather. Padrão bom, manter.
-- **Ícones sociais do header/footer** (`f`, `ig`, `in` em texto) são o problema — não usam essa mesma linguagem.
-- **Padrão recomendado para a próxima rodada:** ícones de marca (Facebook/Instagram/LinkedIn) vêm de uma biblioteca real de logos de marca — ex. **Simple Icons** (MIT, glifos de marca), não de um set de ícones de UI genérico (Lucide/Phosphor/Heroicons não têm logos de marca, são pra ações de interface). Ícones funcionais continuam no padrão SVG inline linha-fina já em uso — não precisa trocar o que já funciona.
-- Não desenhar ícone novo à mão se uma biblioteca real já resolver.
+Duas famílias, com origens diferentes de propósito:
+
+- **Ícones de marca** (Facebook/Instagram/LinkedIn, no header e no footer): glifos oficiais do **Simple Icons** (CC0), sólidos, embutidos num sprite SVG no topo de cada página (`<symbol id="ic-*">` + `<use href="#ic-*">`). Sprite em vez de SVG repetido: funciona offline, não duplica o path em 6 lugares. Tamanho 14px dentro dos círculos de 34/36px, `fill:currentColor`, hover preenche o círculo em brass.
+- **Ícones funcionais** (telefone, email, mapa no `.cta-band`): SVG inline linha fina (`stroke-width:1.7`, viewBox 24×24). Padrão que já funcionava, mantido.
+
+Regra: **não desenhar ícone à mão quando existe biblioteca real** — e escolher a biblioteca pelo tipo: set de UI (Lucide/Phosphor) não tem logo de marca, set de marca (Simple Icons) não tem ícone de ação.
 
 ---
 
@@ -94,7 +94,9 @@ Estrutura de 3 colunas (`logo+bio` / `contato` / `social`), mesma paleta escura 
 
 - Filtro compartilhado para dar unidade de cor às fotos reais: `filter: saturate(0.88) sepia(0.14) hue-rotate(-8deg) contrast(1.03)` — aplicado em hero panel, about-strip, video-panel, workshop photo, process-panel. Não duplicar essa regra em lugares novos — adicionar o seletor à lista existente.
 - `aspect-ratio` fixo + `object-fit:cover` em todo container de foto real (evita layout shift, preserva enquadramento original).
-- Fotos de produto (render de estúdio) usam fundo com gradiente radial suave (`radial-gradient` branco + `linear-gradient` bege) em vez de fundo liso — mas o resultado ainda foi apontado como "fundo branco/cinza ruim" (ver Rodada 3). Existem alternativas no acervo (`assets/biblioteca-wp-completa/FUNDO CINZA/`, `MAQUINA FUNDO BRANCO/`) ainda não comparadas a fundo com critério.
+- **Foto de produto: recorte, não painel** (Rodada 4). A máquina aparece sem fundo próprio, direto sobre o fundo da seção, com `drop-shadow` discreto e uma sombra elíptica no chão (`::after` com radial-gradient) pra dar contato. Nada de moldura, gradiente de painel ou borda em volta.
+- **Como os recortes são feitos:** a partir dos renders originais de 1920×1080 em `assets/biblioteca-wp-completa/MAQUINA FUNDO BRANCO/`, com remoção de fundo por *flood fill* a partir das bordas — nunca por limiar global, porque o corpo da máquina é branco e um limiar comeria a própria máquina. Saída em **WebP** (62–94 KB contra ~620 KB em PNG). Script em `EVOLUTION_LOG.md`, Rodada 4.
+- Regra: só remover fundo chapado. Não inventar fundo, não gerar imagem, não alterar a máquina.
 
 ---
 
@@ -107,17 +109,21 @@ Estrutura de 3 colunas (`logo+bio` / `contato` / `social`), mesma paleta escura 
 
 ## 10. Cards
 
-- **Rejeitado e já corrigido:** grid de 3 cards iguais com borda fina (`.pillars`) — era o padrão mais genérico de IA identificado pela skill `redesign-existing-projects`. Virou `.principles`: lista editorial sem card, com régua superior em brass.
-- **Ainda em uso, não revisado:** `.product-card` em `productos.html` (grid de 3, com borda, fundo `--espresso`, arte com fundo gradiente) — mesma família visual de "card com borda fina" que os `.pillars` tinham. O `index.html` já resolveu isso pro teaser de produto (zig-zag sem card, seção 4 do `EVOLUTION_LOG.md`); `productos.html` mantém o card por ser a página de ficha técnica completa (decisão consciente da Rodada 2 — não duplicar o zig-zag), mas vale reavaliar se o card ainda parece genérico numa próxima rodada de produtos.
+**O card foi eliminado do site.** Nenhum conteúdo principal mora dentro de caixa com borda hoje:
+
+- `.pillars` → `.principles` (Rodada 2): lista editorial com régua superior em brass.
+- `.product-card` → `.machine` (Rodada 4): no catálogo, a máquina ocupa ~1,18fr contra ~0,82fr das specs, alternando de lado a cada modelo, sem moldura. Specs em lista com régua (`.spec-list`), valores em mono alinhados à direita. Hover: `translateY(-8px)` na máquina em 550ms — único movimento, sem escala nem sombra crescendo.
+
+A exceção que restou é o `.channel` do `.cta-band` (bloco pequeno de contato, onde a caixa tem função de área clicável).
 
 ---
 
 ## 11. Animações
 
 O que existe hoje (tudo microinteração pontual, sem scroll-driven):
-- Hover de botão (preenchimento `scaleX`), sublinhado de nav, hover de ícone/canal (`translateY` leve).
+- Hover de botão (preenchimento `scaleX`), sublinhado de nav, hover de ícone/canal (`translateY` leve), hover de máquina (`translateY(-8px)`, 550ms).
 - Accordion de FAQ (`faq-open` keyframe, translateY+opacity).
-- Intro-gate: fade+translateY por step (`intro-fade`, 500ms).
+- **Intro-gate (Rodada 4), ~2,1s no total:** wordmark revelado por `clip-path` (720ms) → linha da marca entra (500ms, atraso 380ms) → cortina sobe (`translateY(-101%)`, 620ms) enquanto o wordmark **desliza até a posição exata do logo no header**, calculada em runtime. Regras que isso fixou: a intro nunca exige clique, some sozinha, tem Saltar e Esc, roda uma vez por sessão, vira estática com `prefers-reduced-motion`, e **só existe se o JS rodar** (`html.js` no CSS) — sem JS o site abre direto.
 - Transição de página via Swup (fade+translateY, `html.is-changing`/`is-animating`) — via CDN, falha em silêncio se offline (o site precisa funcionar 100% sem internet).
 
 **Regra fixada:** sem cine-scroll ou animação de página inteira nesta fase — isso é fase futura (seção 13 do `PROJECT_BRAIN.md`). Microinteração pontual pode continuar sendo refinada.
@@ -135,14 +141,19 @@ Breakpoints únicos: `900px` (grids colapsam pra 1–2 colunas, nav vira drawer)
 - Paleta quente com 1 acento único controlado.
 - 3 famílias tipográficas com papel fixo (display / corpo / mono-número).
 - Filtro de foto compartilhado pra unidade visual entre fotos reais de origens diferentes.
-- Lista editorial sem card (`.principles`, zig-zag de produto no index) em vez de grid de cards iguais.
+- Lista editorial sem card (`.principles`, `.machine`, zig-zag de produto) em vez de grid de cards iguais.
 - `--radius:2px` (quase reto) em vez de cantos arredondados genéricos.
-- Ícone funcional = SVG inline linha-fina desenhado à mão, consistente entre si.
+- Ícone de marca vem de biblioteca real (Simple Icons, via sprite); ícone funcional é SVG linha-fina inline.
+- Produto recortado sobre o fundo da seção, com sombra de contato — nunca dentro de painel.
+- Mono para o dado, sans para o rótulo do dado.
+- Qualquer coisa que cubra a tela inteira (intro) tem que falhar aberto: sem JS ou com API bloqueada, o site abre.
 
 ## 14. Padrões rejeitados (resumo)
 
-- Grid de 3 cards idênticos com borda fina → tell de IA (corrigido nos `.pillars`, pendente revisão em `.product-card`).
+- Grid de cards idênticos com borda fina → tell de IA (corrigido em `.pillars` na Rodada 2 e em `.product-card` na Rodada 4).
 - Cor de acento terracota (~`#D97757`) → tell de IA reconhecível, evitado de propósito.
-- Ícone social como texto/abreviação (`f`, `ig`, `in`) em vez de glifo de marca real → pendente de correção (seção 7).
-- Fonte mono aplicada a frase inteira (label + número) em vez de só o número → pendente de correção na topbar (seção 5).
+- Ícone social como texto/abreviação (`f`, `ig`, `in`) → corrigido na Rodada 4 com glifos reais.
+- Fonte mono aplicada a frase inteira (label + número) → corrigido na Rodada 4 na topbar.
+- Intro que exige clique pra entrar no site → removida na Rodada 4; a entrada não pode depender de interação.
 - Vídeo como base da hero → trocado por foto estática pra garantir a composição pretendida (Rodada 2); vídeo continua não sendo requisito.
+- Frame de GIF comprimido como foto de produto → substituído por recorte de render em alta (Rodada 4).
