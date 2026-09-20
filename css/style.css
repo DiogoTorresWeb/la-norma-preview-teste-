@@ -1086,4 +1086,32 @@ html.intro-active{ overflow:hidden; height:100%; }
   .hero-content{padding:0 24px 56px;}
   .topbar-phone .label{display:none;}
   .machine-list{gap:60px;}
+  .whatsapp-fab{ width:52px; height:52px; right:16px; bottom:16px; }
+  .whatsapp-fab svg{ width:26px; height:26px; }
+}
+
+/* ---------- whatsapp fab ---------- */
+.whatsapp-fab{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:500;
+  width:58px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#25d366;
+  border-radius:50%;
+  box-shadow:0 6px 18px rgba(23,15,10,0.35);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.whatsapp-fab:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(23,15,10,0.4);
+}
+.whatsapp-fab svg{
+  width:30px;
+  height:30px;
+  fill:#fff;
 }
