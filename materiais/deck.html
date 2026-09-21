@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Norma — Propuesta digital · Diogo Torres</title>
+<meta name="description" content="Propuesta directa para acelerar la web de La Norma, hecha por quien monta las máquinas en el taller.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --espresso:#241c15;
+  --espresso-deep:#170f0a;
+  --cream:#f3ecdd;
+  --sand:#e7d9be;
+  --brass:#b8843c;
+  --brass-light:#e4c48c;
+  --muted:#b7a489;
+  --muted-dark:#6b5b45;
+  --line:rgba(243,236,221,0.16);
+  --line-dark:rgba(36,28,21,0.16);
+  --radius:2px;
+  --ff-display:'Fraunces','Georgia',serif;
+  --ff-body:'Archivo','Helvetica Neue',sans-serif;
+  --ff-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+body{
+  margin:0;
+  font-family:var(--ff-body);
+  background:var(--espresso-deep);
+  color:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- estrutura de slide ---------- */
+.slide{
+  position:relative;
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:clamp(28px,4vh,56px) clamp(28px,5vw,88px);
+  overflow:hidden;
+}
+.slide.is-dark{ background:var(--espresso-deep); color:var(--cream); }
+.slide.is-light{ background:var(--cream); color:var(--espresso); }
+.slide.is-sand{ background:var(--sand); color:var(--espresso); }
+
+.slide-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.is-light .slide-head,.is-sand .slide-head{ border-bottom-color:var(--line-dark); }
+.mark{
+  display:block;
+  width:112px;
+  height:20px;
+  background:var(--brass-light);
+  -webkit-mask-image:url('../assets/real/logo-lanorma.png');
+  -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:left center;
+  mask-image:url('../assets/real/logo-lanorma.png');
+  mask-size:contain;mask-repeat:no-repeat;mask-position:left center;
+}
+.is-light .mark,.is-sand .mark{ background:var(--espresso); }
+.slide-num{
+  font-family:var(--ff-mono);
+  font-size:.74rem;
+  letter-spacing:.06em;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.is-light .slide-num,.is-sand .slide-num{ color:var(--muted-dark); }
+
+.slide-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(16px,3.2vh,48px) 0;
+  max-width:1180px;
+  width:100%;
+}
+
+.eyebrow{
+  display:block;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--brass);
+}
+.is-light .eyebrow,.is-sand .eyebrow{ color:var(--muted-dark); }
+
+h1,h2{
+  font-family:var(--ff-display);
+  font-weight:600;
+  line-height:1.06;
+  letter-spacing:-0.015em;
+  margin:20px 0 0;
+  text-wrap:balance;
+}
+h1{ font-size:clamp(2.1rem,4.4vw,3.9rem); max-width:19ch; }
+h2{ font-size:clamp(1.7rem,3.3vw,2.9rem); max-width:22ch; }
+.lede{
+  margin:18px 0 0;
+  max-width:56ch;
+  font-size:clamp(.95rem,1.15vw,1.08rem);
+  line-height:1.6;
+  color:var(--muted);
+}
+.is-light .lede,.is-sand .lede{ color:var(--muted-dark); }
+
+.slide-foot{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:.8rem;
+  line-height:1.5;
+  color:var(--muted);
+}
+.is-light .slide-foot,.is-sand .slide-foot{ border-top-color:var(--line-dark); color:var(--muted-dark); }
+.slide-foot strong{ color:var(--cream); font-weight:600; }
+.is-light .slide-foot strong,.is-sand .slide-foot strong{ color:var(--espresso); }
+.foot-note{ font-family:var(--ff-mono); font-size:.72rem; letter-spacing:.03em; }
+
+/* ---------- capa ---------- */
+.cover-mark{
+  display:block;
+  width:clamp(200px,26vw,330px);
+  height:clamp(36px,4.8vw,58px);
+  background:var(--brass-light);
+  -webkit-mask-image:url('../assets/real/logo-lanorma.png');
+  -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:left center;
+  mask-image:url('../assets/real/logo-lanorma.png');
+  mask-size:contain;mask-repeat:no-repeat;mask-position:left center;
+  margin-bottom:34px;
+}
+.cover-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:62% 50%;
+  filter:saturate(0.88) sepia(0.14) hue-rotate(-8deg) contrast(1.03);
+  opacity:.5;
+}
+.cover-scrim{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(95deg, rgba(23,15,10,.97) 0%, rgba(23,15,10,.86) 42%, rgba(23,15,10,.45) 78%, rgba(23,15,10,.3) 100%);
+}
+#slide-1 .slide-head,#slide-1 .slide-body,#slide-1 .slide-foot{ position:relative; z-index:1; }
+#slide-1 .slide-head .mark{ visibility:hidden; } /* a capa já traz o wordmark grande */
+.author{ font-size:.95rem; }
+.author strong{ display:block; font-size:1.05rem; color:var(--cream); font-weight:600; margin-bottom:2px; }
+
+/* ---------- linha de dados (mono para o dado, sans para o rótulo) ---------- */
+.datarow{
+  margin-top:clamp(20px,3.4vh,48px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line-dark);
+  border-top:1px solid var(--line-dark);
+  border-bottom:1px solid var(--line-dark);
+}
+.is-dark .datarow{ background:var(--line); border-color:var(--line); }
+.datacell{
+  background:var(--cream);
+  padding:26px 28px 24px;
+}
+.is-dark .datacell{ background:var(--espresso-deep); }
+.is-sand .datacell{ background:var(--sand); }
+.datacell .value{
+  display:block;
+  font-family:var(--ff-mono);
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:500;
+  letter-spacing:-0.02em;
+  font-variant-numeric:tabular-nums;
+  color:var(--espresso);
+}
+.is-dark .datacell .value{ color:var(--cream); }
+.datacell .value .unit{ font-size:.5em; color:var(--muted-dark); margin-left:2px; }
+.is-dark .datacell .value .unit{ color:var(--muted); }
+.datacell .value.is-bad{ color:#a8392f; }
+.is-dark .datacell .value.is-bad{ color:#e08074; }
+.datacell .value.is-good{ color:#3f6b46; }
+.is-dark .datacell .value.is-good{ color:var(--brass-light); }
+.datacell .label{
+  display:block;
+  margin-top:10px;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted-dark);
+}
+.is-dark .datacell .label{ color:var(--muted); }
+.datacell .note{
+  display:block;
+  margin-top:12px;
+  font-size:.85rem;
+  line-height:1.5;
+  color:var(--muted-dark);
+  max-width:34ch;
+}
+.is-dark .datacell .note{ color:var(--muted); }
+
+/* ---------- lista editorial (régua brass no topo, sem card) ---------- */
+.points{
+  margin-top:clamp(20px,3.4vh,48px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(28px,3.4vw,52px);
+}
+.points.is-two{ grid-template-columns:repeat(2,1fr); }
+.point{ padding-top:20px; border-top:2px solid var(--brass); }
+.point .step{
+  display:block;
+  font-family:var(--ff-mono);
+  font-size:.78rem;
+  letter-spacing:.1em;
+  color:var(--brass);
+  margin-bottom:12px;
+  font-variant-numeric:tabular-nums;
+}
+.point h3{
+  font-family:var(--ff-display);
+  font-size:clamp(1.05rem,1.55vw,1.3rem);
+  font-weight:600;
+  line-height:1.2;
+  margin:0 0 12px;
+  letter-spacing:-0.01em;
+}
+.point p{
+  margin:0;
+  font-size:.92rem;
+  line-height:1.6;
+  color:var(--muted-dark);
+  max-width:38ch;
+}
+.is-dark .point p{ color:var(--muted); }
+.point p em{ color:var(--espresso); font-style:italic; }
+.is-dark .point p em{ color:var(--brass-light); }
+
+/* comparativo: specs em régua, número à direita */
+.speclist{ list-style:none; margin:20px 0 0; padding:0; }
+.speclist li{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+  font-size:.9rem;
+}
+.is-light .speclist li,.is-sand .speclist li{ border-bottom-color:var(--line-dark); }
+.speclist span{
+  font-family:var(--ff-mono);
+  font-size:.86rem;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.speclist .bad{ color:#e08074; }
+.speclist .good{ color:var(--brass-light); }
+.is-light .speclist .bad,.is-sand .speclist .bad{ color:#a8392f; }
+.is-light .speclist .good,.is-sand .speclist .good{ color:#3f6b46; }
+
+/* citação de fechamento */
+.pullquote{
+  margin-top:clamp(18px,2.6vh,36px);
+  padding:18px 0 0;
+  border-top:1px solid var(--line-dark);
+  font-family:var(--ff-display);
+  font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.25rem);
+  line-height:1.5;
+  max-width:62ch;
+}
+.is-dark .pullquote{ border-top-color:var(--line); }
+
+/* bloco de fechamento do último slide */
+.closing{
+  margin-top:clamp(20px,3.2vh,44px);
+  padding-top:22px;
+  border-top:2px solid var(--brass);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.closing h3{
+  font-family:var(--ff-display);
+  font-size:clamp(1.3rem,2.2vw,1.9rem);
+  font-weight:600;
+  margin:0 0 8px;
+  letter-spacing:-0.01em;
+}
+.closing p{ margin:0; font-size:.92rem; color:var(--muted); max-width:46ch; line-height:1.55; }
+.contact-chip{
+  font-family:var(--ff-mono);
+  font-size:.82rem;
+  letter-spacing:.04em;
+  color:var(--brass-light);
+  border:1px solid var(--brass);
+  border-radius:var(--radius);
+  padding:12px 20px;
+  white-space:nowrap;
+}
+
+/* ---------- navegação ---------- */
+.deck-nav{
+  position:fixed;
+  right:clamp(14px,2vw,26px);
+  bottom:clamp(14px,2vh,26px);
+  z-index:20;
+  display:flex;
+  gap:6px;
+  background:rgba(23,15,10,.72);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:7px 9px;
+}
+.deck-nav a{
+  display:block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--muted);
+  opacity:.45;
+  transition:opacity .2s ease, background .2s ease, transform .2s ease;
+}
+.deck-nav a:hover{ opacity:1; background:var(--brass-light); transform:scale(1.25); }
+.deck-nav a.is-on{ opacity:1; background:var(--brass); }
+
+/* portátil de tela baixa (720–800px): aperta o ritmo pro slide caber inteiro */
+@media (min-width:901px) and (max-height:820px){
+  h2{ font-size:clamp(1.5rem,2.6vw,2.2rem); }
+  .lede{ font-size:.92rem; margin-top:14px; }
+  .point p,.datacell .note{ font-size:.85rem; }
+  .datacell{ padding:20px 22px 18px; }
+  .speclist li{ padding:8px 0; }
+  .pullquote{ font-size:1rem; }
+  .closing p{ font-size:.86rem; }
+}
+
+@media (max-width:900px){
+  .datarow,.points,.points.is-two{ grid-template-columns:1fr; }
+  .datarow{ gap:1px; }
+  .slide{ min-height:auto; padding:32px 24px 40px; }
+  html{ scroll-snap-type:none; }
+  .deck-nav{ display:none; }
+}
+
+@media print{
+  html{ scroll-snap-type:none; }
+  .deck-nav{ display:none; }
+  .slide{ min-height:auto; height:100vh; page-break-after:always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · PORTADA ============ -->
+<section class="slide is-dark" id="slide-1">
+  <img class="cover-bg" src="../assets/real/hero-display.jpg" alt="">
+  <div class="cover-scrim"></div>
+
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">01 / 05</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="cover-mark" role="img" aria-label="La Norma"></span>
+    <span class="eyebrow">Propuesta interna · Septiembre 2026</span>
+    <h1>Puedo acelerar la web para que venda al ritmo del taller.</h1>
+    <p class="lede">Una propuesta directa y concreta para resolver el principal cuello de botella digital de La Norma hoy — hecha por quien monta las máquinas desde dentro.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div class="author">
+      <strong>Diogo Torres</strong>
+      Montaje en taller &amp; desarrollo web
+    </div>
+    <div class="foot-note">Palma de Gandia, Valencia</div>
+  </div>
+</section>
+
+<!-- ============ 02 · DIAGNÓSTICO ============ -->
+<section class="slide is-light" id="slide-2">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">02 / 05</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Diagnóstico</span>
+    <h2>La máquina es excelente en la barra. La web frena en el móvil.</h2>
+    <p class="lede">Comprobado con las herramientas oficiales de auditoría. La mayoría de hosteleros y distribuidores entra desde el teléfono.</p>
+
+    <div class="datarow">
+      <div class="datacell">
+        <span class="value is-bad">35<span class="unit">/100</span></span>
+        <span class="label">PageSpeed en móvil</span>
+        <span class="note">64 sobre 100 en ordenador. El catálogo tarda demasiado en mostrar fotos y vídeos sin comprimir.</span>
+      </div>
+      <div class="datacell">
+        <span class="value">0</span>
+        <span class="label">Formularios de contacto</span>
+        <span class="note">Quien quiere cotizar tiene que buscar el teléfono o abrir su propio correo. Cada clic extra enfría la venta.</span>
+      </div>
+      <div class="datacell">
+        <span class="value is-bad">4,1<span class="unit">/5</span></span>
+        <span class="label">Google Business · 8 reseñas</span>
+        <span class="note">La más reciente es de 1 estrella: pidió información y no tuvo respuesta clara ni rápida.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <div>La Norma no tiene un problema de producto. <strong>Tiene un problema de fricción en la entrada.</strong></div>
+    <div class="foot-note">Fuente: PageSpeed Insights y Google Maps · sept. 2026</div>
+  </div>
+</section>
+
+<!-- ============ 03 · PRUEBA TÉCNICA ============ -->
+<section class="slide is-dark" id="slide-3">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">03 / 05</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Prueba técnica</span>
+    <h2>De 35 a 99 sobre 100. Sé exactamente cómo se hace.</h2>
+    <p class="lede">No es teoría de agencia: son dos sitios que ya existen y se pueden abrir en directo, ahora mismo, en este portátil.</p>
+
+    <div class="points is-two">
+      <div class="point">
+        <span class="step">HOY</span>
+        <h3>lanorma.es — WordPress con sobrecarga</h3>
+        <ul class="speclist">
+          <li>Rendimiento móvil <span class="bad">35 / 100</span></li>
+          <li>Rendimiento ordenador <span class="bad">64 / 100</span></li>
+          <li>Carga del catálogo <span class="bad">lenta</span></li>
+        </ul>
+      </div>
+      <div class="point">
+        <span class="step">HECHO POR MÍ</span>
+        <h3>oliveirafotos.es y el prototipo Ln 200</h3>
+        <ul class="speclist">
+          <li>Rendimiento móvil <span class="good">99 / 100</span></li>
+          <li>Rendimiento ordenador <span class="good">100 / 100</span></li>
+          <li>Carga en teléfono <span class="good">&lt; 0,6 s</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="pullquote">Una agencia externa cobraría entre 2.500 € y 4.000 €, y tardaría dos meses solo en entender qué máquina vendemos y qué componentes lleva.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Prueba en vivo: <strong>podemos abrir la comparativa en el navegador cuando quieras.</strong></div>
+    <div class="foot-note">Google Lighthouse · Core Web Vitals</div>
+  </div>
+</section>
+
+<!-- ============ 04 · PROPUESTA ============ -->
+<section class="slide is-sand" id="slide-4">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">04 / 05</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Propuesta</span>
+    <h2>Dejar la web impecable y lista para vender.</h2>
+    <p class="lede">Un trabajo quirúrgico y directo, empezando por lo que genera impacto inmediato en la venta.</p>
+
+    <div class="points">
+      <div class="point">
+        <span class="step">01</span>
+        <h3>Aligerar el catálogo</h3>
+        <p>Que el cliente vea la gama Ln1 —Compacta, 2 y 3 grupos— y el lanzamiento Ln 200 sin esperar un solo segundo en el móvil.</p>
+      </div>
+      <div class="point">
+        <span class="step">02</span>
+        <h3>Canal directo al taller</h3>
+        <p><em>«Dinos cuántos cafés sirves al día y te decimos qué máquina necesitas.»</em> Contacto en un clic, sin buscar el teléfono.</p>
+      </div>
+      <div class="point">
+        <span class="step">03</span>
+        <h3>Ya estoy dentro</h3>
+        <p>Monto las máquinas con mis propias manos. Sé qué es el grupo erogador, el PID y la caldera: cero tiempo de adaptación.</p>
+      </div>
+    </div>
+
+    <p class="pullquote">Si una sola máquina se vende porque un distribuidor navegó cómodo en el móvil y dejó sus datos, la web queda amortizada varias veces.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Ejecución rápida: <strong>prototipo listo para integrar en días</strong>, sin interrumpir la operativa del taller.</div>
+    <div class="foot-note">Cero riesgo · retorno inmediato</div>
+  </div>
+</section>
+
+<!-- ============ 05 · SIGUIENTE PASO ============ -->
+<section class="slide is-dark" id="slide-5">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">05 / 05</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Siguiente paso</span>
+    <h2>Primero la web. Después, lo que La Norma vaya necesitando.</h2>
+    <p class="lede">No hace falta comprometer todo a la vez. Cuando el sitio esté funcionando, podemos abrir frentes poco a poco.</p>
+
+    <div class="points">
+      <div class="point">
+        <span class="step">PASO 1 · AHORA</span>
+        <h3>La web y el catálogo</h3>
+        <p>Resolver la velocidad en móvil, publicar la ficha de la Ln 200 y abrir el canal de contacto para cotizaciones directas.</p>
+      </div>
+      <div class="point">
+        <span class="step">PASO 2</span>
+        <h3>Redes con cara y ojos</h3>
+        <p>Alimentar LinkedIn e Instagram con el taller real: la ingeniería y el montaje que la competencia no puede enseñar.</p>
+      </div>
+      <div class="point">
+        <span class="step">PASO 3</span>
+        <h3>Seguimiento de ventas</h3>
+        <p>Que ningún presupuesto enviado se quede sin respuesta, y que los avisos no desborden la bandeja de entrada.</p>
+      </div>
+    </div>
+
+    <div class="closing">
+      <div>
+        <h3>Hablamos 10 minutos cuando te venga bien.</h3>
+        <p>Te enseño el prototipo en el móvil o en el portátil, en un descanso del taller. Sin compromiso alguno.</p>
+      </div>
+      <div class="contact-chip">Diogo Torres · Taller de Valencia</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <div>Propuesta interna: <strong>hecha para sumar a La Norma.</strong></div>
+    <div class="foot-note">La Norma Coffee Machine Manufacturer S.L.</div>
+  </div>
+</section>
+
+<nav class="deck-nav" aria-label="Navegación del deck">
+  <a href="#slide-1" aria-label="Slide 1"></a>
+  <a href="#slide-2" aria-label="Slide 2"></a>
+  <a href="#slide-3" aria-label="Slide 3"></a>
+  <a href="#slide-4" aria-label="Slide 4"></a>
+  <a href="#slide-5" aria-label="Slide 5"></a>
+</nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.deck-nav a'));
+
+  // marca o slide visível no indicador
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const i = slides.indexOf(e.target);
+      dots.forEach((d, n) => d.classList.toggle('is-on', n === i));
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => io.observe(s));
+
+  // setas / espaço / PageUp-PageDown navegam entre slides
+  function current(){
+    const mid = window.scrollY + window.innerHeight / 2;
+    return slides.findIndex(s => s.offsetTop <= mid && s.offsetTop + s.offsetHeight > mid);
+  }
+  document.addEventListener('keydown', (e) => {
+    const next = ['ArrowRight','ArrowDown','PageDown',' '].includes(e.key);
+    const prev = ['ArrowLeft','ArrowUp','PageUp'].includes(e.key);
+    if (!next && !prev) return;
+    e.preventDefault();
+    const i = current();
+    const target = slides[Math.min(slides.length - 1, Math.max(0, i + (next ? 1 : -1)))];
+    if (target) target.scrollIntoView({ behavior:'smooth' });
+  });
+</script>
+</body>
+</html>

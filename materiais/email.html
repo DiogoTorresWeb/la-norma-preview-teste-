@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter — La Norma</title>
+<meta name="description" content="Plantilla de correo de La Norma: HTML de tablas con estilos en línea, compatible con Gmail, Outlook y Apple Mail.">
+<!--
+  PLANTILLA DE CORREO REAL
+  ------------------------
+  Construida con tablas y estilos en linea a proposito: es lo unico que Gmail,
+  Outlook y Apple Mail renderizan de forma fiable. No usa Google Fonts (Gmail
+  las ignora), asi que las familias del sitio se sustituyen por equivalentes
+  seguras: Georgia por Fraunces, Arial por Archivo, Courier por IBM Plex Mono.
+  El logo va como PNG ya tenido de color porque el mask-image del sitio no
+  funciona en correo.
+-->
+<style>
+  /* fundo da "janela" — não faz parte do e-mail em si */
+  body{ margin:0; padding:0; background:#e9e2d4; }
+  .preview-wrap{ padding:40px 16px 72px; font-family:Arial,Helvetica,sans-serif; }
+  .preview-head{ max-width:600px; margin:0 auto 24px; }
+  .preview-head a{
+    display:inline-block; margin-bottom:22px;
+    font-size:12px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase;
+    color:#6b5b45; text-decoration:none; border-bottom:1px solid #b8843c; padding-bottom:3px;
+  }
+  .preview-head a:hover{ color:#241c15; }
+  .preview-note{
+    background:#b8843c; color:#170f0a;
+    font-family:'Courier New',monospace; font-size:12px; line-height:1.5;
+    padding:12px 16px; border-radius:2px;
+  }
+  @media (max-width:620px){ .preview-wrap{ padding:24px 12px 48px; } }
+
+  /* responsivo do próprio e-mail */
+  @media (max-width:620px){
+    .em-table{ width:100% !important; }
+    .em-pad{ padding-left:24px !important; padding-right:24px !important; }
+    .em-h1{ font-size:26px !important; line-height:32px !important; }
+    .em-col{ display:block !important; width:100% !important; padding-right:0 !important; padding-bottom:28px !important; }
+  }
+</style>
+</head>
+<body>
+<div class="preview-wrap">
+
+  <div class="preview-head">
+    <a href="index.html">← Volver a los materiales</a>
+    <div class="preview-note">
+      <strong>EJEMPLO</strong> · Plantilla de boletín mensual. Datos de contacto y especificaciones reales; el contenido editorial es de muestra.
+    </div>
+  </div>
+
+  <!-- ================= INICIO DEL CORREO (600px) ================= -->
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#e9e2d4;">
+    <tr>
+      <td align="center" style="padding:0;">
+
+        <table class="em-table" role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:100%;max-width:600px;background:#f3ecdd;border-radius:2px;overflow:hidden;">
+
+          <!-- cabecera -->
+          <tr>
+            <td class="em-pad" style="background:#170f0a;padding:28px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td align="left" style="vertical-align:middle;">
+                    <img src="assets/logo-lanorma-cream.png" alt="La Norma" width="128" style="display:block;width:128px;height:auto;border:0;">
+                  </td>
+                  <td align="right" style="vertical-align:middle;font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#b7a489;">
+                    SEPT. 2026
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- imagen principal -->
+          <tr>
+            <td style="padding:0;">
+              <img src="../assets/real/hero-display.jpg" alt="Display digital de una máquina La Norma" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;">
+            </td>
+          </tr>
+
+          <!-- titular -->
+          <tr>
+            <td class="em-pad" style="padding:40px 40px 0;">
+              <p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:#b8843c;">
+                Desde el taller
+              </p>
+              <h1 class="em-h1" style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:32px;line-height:38px;font-weight:600;color:#241c15;letter-spacing:-0.3px;">
+                Cómo se elige de verdad entre Compacta, 2 y 3 grupos
+              </h1>
+              <p style="margin:18px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;color:#6b5b45;">
+                No es una cuestión de tamaño de local, sino de cuántos cafés seguidos hay que servir sin que la caldera se quede corta. Te contamos el criterio que usamos aquí cuando nos llaman para decidir.
+              </p>
+            </td>
+          </tr>
+
+          <!-- botón -->
+          <tr>
+            <td class="em-pad" style="padding:28px 40px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background:#b8843c;border-radius:2px;">
+                    <a href="https://lanorma.es" style="display:inline-block;padding:15px 30px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#170f0a;text-decoration:none;">
+                      Leer el artículo
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- separador -->
+          <tr>
+            <td class="em-pad" style="padding:40px 40px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr><td style="border-top:1px solid rgba(36,28,21,0.16);font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- dos columnas: dato + recordatorio -->
+          <tr>
+            <td class="em-pad" style="padding:32px 40px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td class="em-col" width="50%" style="vertical-align:top;padding-right:20px;">
+                    <p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b5b45;">
+                      El dato del mes
+                    </p>
+                    <p style="margin:0 0 10px;font-family:'Courier New',monospace;font-size:34px;line-height:36px;color:#b8843c;">
+                      20,5<span style="font-size:16px;"> L</span>
+                    </p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#6b5b45;">
+                      La caldera del modelo de 3 grupos: la reserva térmica que aguanta una punta de trabajo sin caídas de temperatura.
+                    </p>
+                  </td>
+                  <td class="em-col" width="50%" style="vertical-align:top;">
+                    <p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b5b45;">
+                      Recordatorio
+                    </p>
+                    <p style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:19px;line-height:26px;color:#241c15;">
+                      La versión vaso alto se elige al comprar
+                    </p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#6b5b45;">
+                      Disponible en los tres modelos. No es un accesorio que se cambie después: conviene decidirlo junto con la carta.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- bloque de contacto -->
+          <tr>
+            <td class="em-pad" style="padding:36px 40px 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#e7d9be;border-radius:2px;">
+                <tr>
+                  <td style="padding:26px 28px;">
+                    <p style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:26px;color:#241c15;">
+                      ¿Dudas con tu caso concreto?
+                    </p>
+                    <p style="margin:0 0 18px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#6b5b45;">
+                      Te contesta quien monta las máquinas, sin comerciales de por medio.
+                    </p>
+                    <a href="https://wa.me/34960640072" style="font-family:'Courier New',monospace;font-size:14px;color:#241c15;text-decoration:none;border-bottom:1px solid #b8843c;padding-bottom:2px;">
+                      WhatsApp · +34 960 64 00 72
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- pie -->
+          <tr>
+            <td class="em-pad" style="padding:40px 40px 34px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr><td style="border-top:1px solid rgba(36,28,21,0.16);padding-top:22px;">
+                  <p style="margin:0 0 6px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6b5b45;">
+                    <strong style="color:#241c15;">La Norma Coffee Machine Manufacturer S.L.</strong>
+                  </p>
+                  <p style="margin:0 0 6px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6b5b45;">
+                    Pol. Ind., C. Garbí, 1, SECTOR 3 · 46724 Palma de Gandia, Valencia
+                  </p>
+                  <p style="margin:0 0 16px;font-family:'Courier New',monospace;font-size:13px;line-height:20px;color:#6b5b45;">
+                    info@lanorma.es · +34 960 64 00 72
+                  </p>
+                  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#8d7f6b;">
+                    Recibes este correo porque pediste información a La Norma.
+                    <a href="#" style="color:#6b5b45;">Darse de baja</a>
+                  </p>
+                </td></tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+  <!-- ================= FIN DEL CORREO ================= -->
+
+</div>
+</body>
+</html>

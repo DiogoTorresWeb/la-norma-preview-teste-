@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de publicaciones — La Norma</title>
+<meta name="description" content="Seis formatos de publicación para Instagram construidos con la identidad visual de La Norma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --espresso:#241c15;
+  --espresso-deep:#170f0a;
+  --cream:#f3ecdd;
+  --sand:#e7d9be;
+  --brass:#b8843c;
+  --brass-light:#e4c48c;
+  --muted:#b7a489;
+  --muted-dark:#6b5b45;
+  --line:rgba(243,236,221,0.16);
+  --line-dark:rgba(36,28,21,0.16);
+  --radius:2px;
+  --ff-display:'Fraunces','Georgia',serif;
+  --ff-body:'Archivo','Helvetica Neue',sans-serif;
+  --ff-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{
+  margin:0;
+  background:#e9e2d4;
+  color:var(--espresso);
+  font-family:var(--ff-body);
+  -webkit-font-smoothing:antialiased;
+}
+.page{ max-width:1180px; margin:0 auto; padding:64px 32px 96px; }
+
+.page-head{ max-width:760px; margin-bottom:12px; }
+.eyebrow{
+  display:block;
+  font-size:.7rem; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--muted-dark);
+}
+.page-head h1{
+  font-family:var(--ff-display);
+  font-size:clamp(1.9rem,3.4vw,2.7rem);
+  font-weight:600; line-height:1.14; letter-spacing:-0.018em;
+  margin:14px 0 0;
+}
+.page-head p{ font-size:1.02rem; line-height:1.65; color:var(--muted-dark); margin:16px 0 0; max-width:60ch; }
+.back-link{
+  display:inline-block; margin-bottom:28px;
+  font-size:.78rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted-dark); text-decoration:none;
+  border-bottom:1px solid var(--brass); padding-bottom:3px;
+}
+.back-link:hover{ color:var(--espresso); }
+
+.proto-note{
+  margin:28px 0 0;
+  padding:14px 18px;
+  background:var(--brass);
+  color:var(--espresso-deep);
+  font-family:var(--ff-mono);
+  font-size:.72rem; line-height:1.5;
+  border-radius:var(--radius);
+  max-width:760px;
+}
+
+/* ---------- grelha de posts ---------- */
+.ig-grid{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px 32px;
+}
+.ig-item .caption{
+  margin-top:14px;
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  letter-spacing:.03em;
+  color:var(--muted-dark);
+  line-height:1.5;
+}
+.ig-item .caption b{ font-family:var(--ff-body); font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:.68rem; }
+
+/* o post em si: quadrado 1:1, tipografia escalada com o container */
+.ig-post{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  container-type:inline-size;
+  background:var(--espresso-deep);
+  color:var(--cream);
+  border-radius:var(--radius);
+  box-shadow:0 8px 26px rgba(23,15,10,.14);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:7cqw;
+}
+.ig-post.is-cream{ background:var(--cream); color:var(--espresso); }
+.ig-post.is-sand{ background:var(--sand); color:var(--espresso); }
+
+.ig-post .bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:saturate(0.88) sepia(0.14) hue-rotate(-8deg) contrast(1.03);
+}
+.ig-post .scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(23,15,10,.32) 0%, rgba(23,15,10,.55) 52%, rgba(23,15,10,.92) 100%);
+}
+/* o :not() precisa excluir .ig-product também — senão esta regra, de
+   especificidade maior, anula o position:absolute do recorte da máquina
+   e ela entra no fluxo flex, empurrando o wordmark para o meio. */
+.ig-post > *:not(.bg):not(.scrim):not(.ig-product){ position:relative; z-index:1; }
+
+.ig-mark{
+  display:block;
+  width:26cqw; height:4.6cqw;
+  background:var(--brass-light);
+  -webkit-mask-image:url('../assets/real/logo-lanorma.png');
+  -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:left center;
+  mask-image:url('../assets/real/logo-lanorma.png');
+  mask-size:contain;mask-repeat:no-repeat;mask-position:left center;
+}
+.is-cream .ig-mark,.is-sand .ig-mark{ background:var(--espresso); }
+
+.ig-kicker{
+  font-size:2.5cqw; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--brass);
+}
+.is-cream .ig-kicker,.is-sand .ig-kicker{ color:var(--muted-dark); }
+
+.ig-title{
+  font-family:var(--ff-display);
+  font-size:8cqw; font-weight:600;
+  line-height:1.06; letter-spacing:-0.02em;
+  margin:2.5cqw 0 0;
+}
+.ig-title.is-small{ font-size:6.2cqw; }
+.ig-sub{
+  font-size:3.4cqw; line-height:1.5;
+  color:var(--muted); margin:3cqw 0 0; max-width:30ch;
+}
+.is-cream .ig-sub,.is-sand .ig-sub{ color:var(--muted-dark); }
+
+.ig-figure{
+  font-family:var(--ff-mono);
+  font-size:20cqw; font-weight:500;
+  line-height:1; letter-spacing:-0.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--brass-light);
+}
+.is-cream .ig-figure,.is-sand .ig-figure{ color:var(--brass); }
+.ig-figure .unit{ font-size:.42em; }
+
+.ig-product{
+  position:absolute;
+  left:50%; top:40%;
+  transform:translate(-50%,-50%);
+  width:70%;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.42));
+  z-index:0;
+}
+/* scrim sob o texto: mesma lógica da hero do site (foto atrás, texto legível por cima) */
+.ig-post:has(.ig-product)::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:62%;
+  background:linear-gradient(180deg, rgba(23,15,10,0) 0%, rgba(23,15,10,.74) 42%, rgba(23,15,10,.93) 100%);
+  z-index:0;
+}
+.ig-foot{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:3cqw;
+}
+.ig-handle{
+  font-family:var(--ff-mono);
+  font-size:2.5cqw; letter-spacing:.04em;
+  color:var(--muted);
+}
+.is-cream .ig-handle,.is-sand .ig-handle{ color:var(--muted-dark); }
+.ig-rule{ width:14cqw; height:.6cqw; background:var(--brass); }
+
+.ig-quote{
+  font-family:var(--ff-display);
+  font-style:italic;
+  font-size:6.4cqw; line-height:1.28; letter-spacing:-0.01em;
+}
+
+@media (max-width:1000px){ .ig-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:640px){
+  .page{ padding:40px 20px 64px; }
+  .ig-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back-link" href="index.html">← Volver a los materiales</a>
+
+  <div class="page-head">
+    <span class="eyebrow">Redes sociales</span>
+    <h1>Kit de publicaciones para Instagram</h1>
+    <p>Seis formatos construidos con el mismo sistema visual del sitio: la misma paleta, las mismas tres tipografías y la misma regla de producto recortado sobre el fondo. Se repiten cada semana cambiando solo el dato y la foto.</p>
+  </div>
+
+  <div class="proto-note">
+    <strong>EJEMPLO</strong> · Todos los datos y frases salen del catálogo real de La Norma. Las piezas están a escala 1:1 (formato cuadrado 1080 × 1080).
+  </div>
+
+  <div class="ig-grid">
+
+    <!-- 1 · producto -->
+    <div class="ig-item">
+      <div class="ig-post">
+        <img class="ig-product" src="../assets/real/maquina-3-grupos.webp" alt="Máquina La Norma de 3 grupos">
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Catálogo</span>
+          <h2 class="ig-title">3 grupos</h2>
+          <p class="ig-sub">Caldera de 20,5 L para barras que no pueden permitirse un cuello de botella.</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato producto</b><br>Máquina recortada sobre el fondo, sin marco. Se cambia el modelo y el dato de caldera.</p>
+    </div>
+
+    <!-- 2 · dado técnico -->
+    <div class="ig-item">
+      <div class="ig-post is-cream">
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Ficha técnica</span>
+          <div class="ig-figure">6200<span class="unit">W</span></div>
+          <p class="ig-sub">La potencia del modelo de 3 grupos, a 380 – 415 V 3N.</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato dato</b><br>Número enorme en mono, rótulo en sans. Sirve para cualquier spec del catálogo.</p>
+    </div>
+
+    <!-- 3 · frase sobre foto -->
+    <div class="ig-item">
+      <div class="ig-post">
+        <img class="bg" src="../assets/real/nosotros-82.jpg" alt="Extracción de café en una máquina La Norma">
+        <div class="scrim"></div>
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Cómo trabajamos</span>
+          <p class="ig-quote">«Pensadas para durar y repararse. No para reemplazarse.»</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato frase</b><br>Foto real con scrim y cita en Fraunces itálica. Para mensaje de marca, no de producto.</p>
+    </div>
+
+    <!-- 4 · educacional -->
+    <div class="ig-item">
+      <div class="ig-post is-sand">
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Guía · 1 de 4</span>
+          <h2 class="ig-title is-small">¿Compacta o 2 grupos?</h2>
+          <p class="ig-sub">Elige por la punta de trabajo, no por el tamaño del local. Desliza →</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato carrusel</b><br>Portada educativa. Las siguientes tarjetas reutilizan el formato dato.</p>
+    </div>
+
+    <!-- 5 · vaso alto -->
+    <div class="ig-item">
+      <div class="ig-post">
+        <img class="ig-product" src="../assets/real/maquina-compacta.webp" alt="Máquina La Norma Compacta">
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Configuración</span>
+          <h2 class="ig-title is-small">Versión vaso alto</h2>
+          <p class="ig-sub">Más hueco bajo el grupo, para vasos grandes. Se elige al comprar.</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato configuración</b><br>Explica una opción real del catálogo que hoy casi nadie conoce.</p>
+    </div>
+
+    <!-- 6 · taller -->
+    <div class="ig-item">
+      <div class="ig-post">
+        <img class="bg" src="../assets/real/nosotros-30.jpg" alt="Taller de La Norma en Valencia">
+        <div class="scrim"></div>
+        <span class="ig-mark" role="img" aria-label="La Norma"></span>
+        <div>
+          <span class="ig-kicker">Desde el taller</span>
+          <h2 class="ig-title is-small">Ensamblada y probada a mano</h2>
+          <p class="ig-sub">Cada máquina se monta y se prueba en Valencia antes de salir.</p>
+        </div>
+        <div class="ig-foot">
+          <span class="ig-handle">@lanorma.coffee</span>
+          <span class="ig-rule"></span>
+        </div>
+      </div>
+      <p class="caption"><b>Formato taller</b><br>Lo que la competencia no puede enseñar: el montaje real. Foto del archivo propio.</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
