@@ -24,7 +24,7 @@ jobs:
         run: |
           set -e
           mkdir -p _site/css _site/assets
-          cp index.html nosotros.html productos.html _site/
+          cp index.html nosotros.html productos.html formacion.html _site/
           cp css/style.css _site/css/
           cp -r assets/real _site/assets/real
 
