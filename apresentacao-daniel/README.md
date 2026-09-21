@@ -12,10 +12,13 @@ Reunião marcada pra apresentar os problemas do site atual e a solução. Não �
 | Roteiro de fala | `..\contexto\ROTEIRO-CONVERSA-DANIEL.md` | Se travar, relê antes de entrar. |
 
 **Antes de sair de casa:** com o celular/tablet na mesma Wi-Fi deste PC, abre:
-- Site 3 páginas: `http://192.168.1.11:4174`
-- Protótipo Ln 200: `http://192.168.1.11:4176`
+- Materiais (entrada): `http://192.168.1.7:4174/materiais/`
+- Site 4 páginas: `http://192.168.1.7:4174`
+- Protótipo Ln 200: `http://192.168.1.7:4176`
 
-Testado e confirmado funcionando no mobile em 16/09. Esse IP pode mudar se o roteador reatribuir endereço — testar de novo antes de sair de casa. Os servidores só ficam de pé com este PC ligado.
+**O IP mudou de `.11` para `.7` em 21/09** — ele troca quando o roteador reatribui endereço, então confere antes de sair: `Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -eq 'Wi-Fi' }`. Os servidores só ficam de pé com este PC ligado.
+
+**Sem depender do PC:** o site e as peças de portfólio também estão em `https://diogotorresweb.github.io/la-norma-preview-teste-/materiais/`. O deck não está lá de propósito (ver `materiais/README.md`).
 
 ## A ordem da conversa
 

@@ -66,7 +66,7 @@ a{ color:inherit; text-decoration:none; }
 }
 
 /* ---------- lista de peças (editorial, sem card) ---------- */
-.pieces{ padding:64px 0 104px; display:grid; gap:72px; }
+.pieces{ padding:64px 0 104px; display:grid; gap:72px; counter-reset:piece; }
 .piece{
   display:grid;
   grid-template-columns:1.05fr .95fr;
@@ -88,9 +88,14 @@ a{ color:inherit; text-decoration:none; }
   transition:transform .6s cubic-bezier(.22,.61,.36,1);
 }
 .piece:hover .art img{ transform:scale(1.035); }
+/* numeração por contador: se uma peça for retirada no build, o resto renumera sozinho */
 .piece .num{
   display:block; font-family:var(--ff-mono); font-size:.8rem;
   letter-spacing:.1em; color:var(--brass); margin-bottom:14px;
+}
+.piece .num::before{
+  counter-increment:piece;
+  content:counter(piece, decimal-leading-zero);
 }
 .piece h2{
   font-family:var(--ff-display);
@@ -149,7 +154,7 @@ a{ color:inherit; text-decoration:none; }
 <section class="intro">
   <div class="container">
     <span class="eyebrow">Sistema visual aplicado</span>
-    <h1>Una identidad, cinco piezas que ya funcionan</h1>
+    <h1>Una identidad, aplicada pieza por pieza</h1>
     <p>Todo lo que hay aquí sale del mismo sistema del sitio: la misma paleta de café y latón, las mismas tres tipografías con papel fijo, y la misma regla de fotografía real. Ninguna pieza inventa datos: las especificaciones y los contactos son los del catálogo.</p>
   </div>
 </section>
@@ -157,10 +162,15 @@ a{ color:inherit; text-decoration:none; }
 <div class="container">
   <div class="pieces">
 
-    <article class="piece">
+    <!-- LOCAL-ONLY:START
+         O deck traz o diagnóstico interno do site atual (reseña de 1 estrela, custo de
+         uma agência) e não vai pro GitHub Pages. O workflow de deploy apaga tudo entre
+         estes dois marcadores, então a versão pública nunca tem o bloco nem os links.
+         A numeração se ajusta sozinha: vem de um contador CSS, não de número fixo. -->
+    <article class="piece" data-local-only>
       <div class="art"><img src="../assets/real/hero-display.jpg" alt="Display digital de una máquina La Norma"></div>
       <div>
-        <span class="num">01</span>
+        <span class="num"></span>
         <h2>Propuesta en 5 diapositivas</h2>
         <p>El diagnóstico de la web actual, la prueba técnica, la propuesta y el roadmap. Rehecha entera con la identidad del sitio: sin cajas con borde, números en monoespaciada y mucho aire.</p>
         <span class="tag">HTML a pantalla completa + .pptx editable</span>
@@ -170,11 +180,12 @@ a{ color:inherit; text-decoration:none; }
         </div>
       </div>
     </article>
+    <!-- LOCAL-ONLY:END -->
 
     <article class="piece">
       <div class="art"><img src="../assets/real/producto-maquina.jpg" alt="Máquina de café La Norma en una barra"></div>
       <div>
-        <span class="num">02</span>
+        <span class="num"></span>
         <h2>Diario del taller</h2>
         <p>Una sección editorial para el sitio: listado con destacado y categorías, más un artículo completo con tabla de especificaciones reales. Es el formato que convierte conocimiento técnico en argumento de venta.</p>
         <span class="tag">Listado + artículo completo</span>
@@ -188,7 +199,7 @@ a{ color:inherit; text-decoration:none; }
     <article class="piece">
       <div class="art"><img src="../assets/real/nosotros-82.jpg" alt="Extracción de café en una máquina La Norma"></div>
       <div>
-        <span class="num">03</span>
+        <span class="num"></span>
         <h2>Kit de publicaciones</h2>
         <p>Seis formatos cuadrados listos para repetir cada semana: producto recortado, dato técnico, frase de marca, portada de carrusel, configuración y taller. Se cambia la foto y el número, no el diseño.</p>
         <span class="tag">6 formatos · 1080 × 1080</span>
@@ -201,7 +212,7 @@ a{ color:inherit; text-decoration:none; }
     <article class="piece">
       <div class="art"><img src="../assets/real/nosotros-30.jpg" alt="Taller de La Norma en Valencia"></div>
       <div>
-        <span class="num">04</span>
+        <span class="num"></span>
         <h2>Plantilla de correo</h2>
         <p>Boletín mensual construido con tablas y estilos en línea — lo único que Gmail, Outlook y Apple Mail renderizan igual. Con el logo ya teñido en PNG, porque el correo no soporta la técnica del sitio.</p>
         <span class="tag">HTML compatible con clientes de correo</span>
@@ -214,7 +225,7 @@ a{ color:inherit; text-decoration:none; }
     <article class="piece">
       <div class="art"><img src="../assets/real/nosotros-cabecera.jpg" alt="Equipo de La Norma en el taller"></div>
       <div>
-        <span class="num">05</span>
+        <span class="num"></span>
         <h2>El sitio, que es el origen de todo</h2>
         <p>Cuatro páginas con catálogo, especificaciones reales, canal directo de contacto y botón de WhatsApp fijo. Es de donde salen la paleta, la tipografía y las reglas que usan todas las piezas de arriba.</p>
         <span class="tag">4 páginas · funciona sin conexión</span>

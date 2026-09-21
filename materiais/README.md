@@ -13,6 +13,33 @@ python -m http.server 4174
 
 Depois abre `http://localhost:4174/materiais/`.
 
+## Como abrir no celular
+
+`localhost` no celular aponta pro próprio celular — por isso dá "conexão recusada".
+Tem dois caminhos:
+
+**1. Pela rede local (tudo, inclusive o deck).** Celular na mesma Wi-Fi, PC ligado com
+o servidor rodando:
+
+```
+http://192.168.1.7:4174/materiais/
+```
+
+O IP muda quando o roteador reatribui endereço. Pra conferir o atual:
+`Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -eq 'Wi-Fi' }`
+
+**2. Pelo GitHub Pages (sem depender do PC).** Publicado automaticamente a cada push:
+
+```
+https://diogotorresweb.github.io/la-norma-preview-teste-/materiais/
+```
+
+**O deck não vai pro Pages, de propósito.** Ele traz o diagnóstico crítico do site atual
+da La Norma, a reseña de 1 estrela e quanto uma agência cobraria — isso numa URL pública
+e indexável seria ruim. O workflow apaga o bloco do deck do hub publicado (marcadores
+`LOCAL-ONLY:START/END` em `index.html`) e falha o build se algo interno vazar. Pra
+mostrar o deck: rede local, ou o `.pptx` no próprio celular.
+
 ---
 
 ## O que é cada peça

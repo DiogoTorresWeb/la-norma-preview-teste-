@@ -28,6 +28,27 @@ jobs:
           cp css/style.css _site/css/
           cp -r assets/real _site/assets/real
 
+          # Materiais: só as peças de portfólio. O deck (deck.html e o .pptx) fica
+          # de fora de propósito — traz o diagnóstico interno do site atual, a
+          # reseña de 1 estrela e o custo de uma agência. Esse se mostra pelo
+          # servidor local ou pelo .pptx, não numa URL pública indexável.
+          mkdir -p _site/materiais/assets
+          cp materiais/index.html materiais/blog.html materiais/blog-articulo.html \
+             materiais/instagram.html materiais/email.html _site/materiais/
+          cp materiais/assets/*.png _site/materiais/assets/
+
+          # Tira do hub o bloco do deck, junto com os links para ele. A numeração das
+          # peças vem de um contador CSS, então se reajusta sozinha.
+          sed -i '/LOCAL-ONLY:START/,/LOCAL-ONLY:END/d' _site/materiais/index.html
+
+          # Falha o build se algo interno vazar para a pasta pública.
+          for leak in _site/materiais/deck.html _site/materiais/*.pptx _site/materiais/*.py _site/materiais/README.md; do
+            if [ -e "$leak" ]; then echo "ERRO: $leak nao deveria estar publicado"; exit 1; fi
+          done
+          if grep -qE 'deck\.html|\.pptx' _site/materiais/index.html; then
+            echo "ERRO: o hub publico ainda referencia o deck"; exit 1
+          fi
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
