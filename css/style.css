@@ -263,6 +263,28 @@ html.is-animating .transition-swup{
   padding:0 32px 96px;
   max-width:640px;
 }
+/* entrada do texto da hero: sobe e aparece em cascata, mesmo vocabulário da
+   intro-gate (fade + translateY). Roda por baixo da intro quando ela existe;
+   em visitas repetidas (intro pulada por sessionStorage) é o primeiro movimento
+   da página. */
+.hero-kicker,
+.hero h1,
+.hero p.lede,
+.hero-cta{
+  opacity:0;
+  transform:translateY(18px);
+  animation:hero-in .7s cubic-bezier(.22,.8,.2,1) forwards;
+}
+.hero-kicker{ animation-delay:.15s; }
+.hero h1{ animation-delay:.28s; }
+.hero p.lede{ animation-delay:.46s; }
+.hero-cta{ animation-delay:.6s; }
+@keyframes hero-in{
+  to{ opacity:1; transform:translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-kicker,.hero h1,.hero p.lede,.hero-cta{ opacity:1; transform:none; animation:none; }
+}
 .hero-kicker{
   display:block;
   margin-bottom:20px;
