@@ -279,3 +279,17 @@ Depois de editar o CSS, o navegador continuou servindo a versão antiga por cach
 **O que não repetir:** editar CSS/HTML e testar sem subir o cache-bust — quase levou a diagnosticar errado uma mudança que na verdade tinha funcionado.
 
 **Próxima hipótese:** os itens novos que o Diogo trouxe no fim desta rodada (paleta de cor questionada — o brass não existe nas máquinas reais; possível redesenho do material de apresentação/slides pra vender junto; e uma menção não confirmada sobre "curso no cabeçalho") ficam registrados como abertos, não decididos — precisam de uma rodada de grilling própria antes de qualquer implementação, porque cada um sozinho já é uma mudança grande.
+
+## Rodada 7 — 25/09, hero refeita a partir do processo do RC Arcade
+
+**Problema:** no desktop a hero (`hero-display.jpg`, Rodada 5) funcionava; no celular não fazia sentido — foto horizontal com o display à direita, o `object-position` deixava metade da tela preta e o display cortado atravessava o título.
+
+**Processo (trazido do RC Arcade, não copiado):** o que fez a hero de lá "encaixar" foi um método, não o visual: (1) escolher **uma** foto real com **um** sujeito isolado; (2) recorte **dedicado pra retrato** em vez de reaproveitar o 16:9; (3) tratamento de cor/textura em cima de pixel real (tom de marca, grain, vinheta e foco centrados no sujeito) — sem gerar nada; (4) `<picture>` + `srcset` 1280/1920/2560 + LQIP. Aplicado à La Norma com decisões próprias: **sem duotone** (ia matar a única luz real da marca), **sem motion blur** (café não é velocidade).
+
+**Foto escolhida:** `LaNorma_Alta-75` do acervo do WordPress (`assets/biblioteca-wp-completa/`) — painel da Ln1 aceso no meio do vapor, "Lanorma" no display central. Escolhida porque é a única do acervo em que a **máquina** é o sujeito (não xícara, não pessoa), a composição é simétrica (sobrevive ao corte vertical com o display no centro) e o fundo preto é espaço negativo real. LinkedIn/Instagram/lanorma.es estavam bloqueados pela rede do ambiente — mas o acervo local já é a biblioteca completa do site oficial (105 fotos), então nada ficou por ver. Segunda opção, guardada: `LaNorma_Alta-77` (xícara azul + vapor + "Lanorma Ln1" no corpo).
+
+**Tratamento (`assets/hero/treat_hero.py`, Python/PIL, versionado):** rampa tonal espresso→creme em cima da luminância (o vapor vira âmbar e escuro o bastante pra receber texto); **displays e ícones acesos preservados na cor original** por máscara de matiz ciano limitada à faixa do painel (primeira tentativa vazou pro vapor azulado das bordas — corrigido); vinheta e zona nítida elíptica centradas no display; grain leve. Saídas: `hero-1280/1920/2560.jpg` (16:9), `hero-mobile.jpg` (2:3 — as bordas do corte caem nos vãos entre os displays laterais e o central, nada aparece cortado) e `hero-lqip.jpg` (32px, fundo do primeiro paint). Primeiro paint em 1440px: 152 KB.
+
+**Resultado:** testado em 390×844, 820×1180 e 1440×900 — display "Lanorma" visível e inteiro nos três, texto sempre sobre o vapor, CTA visível sem rolar. `hero-display.jpg` continua no acervo (usado nos materiais de apresentação).
+
+**Aberto:** o Diogo citou "scroll conversando" entre hero e seções seguintes como opção a considerar — continua fase futura (regra da seção 11 do `DESIGN_SYSTEM.md`), não foi tocado aqui.

@@ -10,6 +10,8 @@ Site institucional para a Lanorma Coffee Machine Manufacturer S.L. (Palma de Gan
 
 ## 2. Estado atual
 
+**25/09 — Rodada 7, hero refeita com foto nova do acervo e recorte dedicado pro celular.** `LaNorma_Alta-75` (painel da Ln1 aceso no vapor) tratada por script versionado (`assets/hero/treat_hero.py`), `<picture>` com versão 2:3 pro mobile. Método veio do RC Arcade (uma foto, um sujeito, recorte por formato, tratamento sobre pixel real), visual é próprio. Ver `EVOLUTION_LOG.md` Rodada 7.
+
 **Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Publicada como preview remoto no GitHub Pages em 19–20/09 (`https://diogotorresweb.github.io/la-norma-preview-teste-/`).
 
 **20/09 — Rodada 5, hero e intro fechadas via grilling.** Hero virou full-bleed com uma foto nova fornecida pelo Diogo (macro do display da máquina, sem pessoa, com "Lanorma" aceso na tela) — descartadas duas tentativas com fotos de pessoas por cobrirem rosto com texto. Intro perdeu a linha de assinatura (nenhuma das 4 fontes testadas convenceu) e a wordmark passou a ser brass em vez de branca. Ver `EVOLUTION_LOG.md` Rodada 5 para o processo completo e os itens em aberto (paleta de cor, material de apresentação, menção não confirmada de "curso no cabeçalho").
