@@ -27,6 +27,7 @@ jobs:
           cp index.html nosotros.html productos.html formacion.html _site/
           cp css/style.css _site/css/
           cp -r assets/real _site/assets/real
+          cp -r assets/hero _site/assets/hero
 
           # Materiais: só as peças de portfólio. O deck (deck.html e o .pptx) fica
           # de fora de propósito — traz o diagnóstico interno do site atual, a
