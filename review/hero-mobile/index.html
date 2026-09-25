@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero mobile — 3 variantes</title>
+<meta name="description" content="Três variações da hero da La Norma pra comparar no celular.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500&family=Archivo:wght@400;600&display=swap">
+<style>
+:root{--espresso:#241c15;--espresso-deep:#170f0a;--cream:#f3ecdd;--muted:#b7a489;--brass:#b8843c;--brass-light:#e4c48c;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--espresso-deep);color:var(--cream);font-family:Archivo,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+main{max-width:640px;margin:0 auto;padding:40px 16px 64px}
+.eyebrow{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-family:Fraunces,serif;font-weight:500;font-size:1.9rem;line-height:1.15;margin:12px 0 10px;letter-spacing:-.02em}
+p{color:var(--muted);max-width:56ch;margin:0 0 28px}
+.list{display:grid;gap:12px}
+a.card{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;text-decoration:none;color:inherit;
+  border:1px solid rgba(243,236,221,.16);border-radius:2px;padding:18px 18px;background:var(--espresso);transition:border-color .2s}
+a.card:hover{border-color:var(--brass)}
+a.card .n{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--brass-light);letter-spacing:.08em}
+a.card strong{display:block;font-size:1.02rem;margin-bottom:4px}
+a.card small{display:block;color:var(--muted);font-size:.86rem;line-height:1.45}
+a.card .arrow{color:var(--brass)}
+.note{margin-top:32px;font-size:.84rem;border-top:1px solid rgba(243,236,221,.12);padding-top:18px}
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">La Norma · rodada 8</span>
+  <h1>Hero no celular: três caminhos</h1>
+  <p>Abre cada um no celular, rola até a barra de números, e me diz qual conversa melhor. Cada variante muda a composição <em>e</em> testa uma tipografia diferente — dá pra cruzar (composição de uma com tipografia de outra).</p>
+
+  <div class="list">
+    <a class="card" href="v1.html">
+      <span class="n">V1</span>
+      <span><strong>Foto, limpa</strong><small>Mesma hero full-bleed, mas o recorte fecha só no display central (sem ícones cortados nas bordas) e a altura mínima garante vão entre display e título. Tipografia atual: Archivo bold, um ponto menor.</small></span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="card" href="v2.html">
+      <span class="n">V2</span>
+      <span><strong>Editorial empilhada</strong><small>Texto sobre fundo sólido em cima; a foto do painel entra como faixa embaixo. Nunca há texto em cima de foto no celular. Tipografia: Fraunces (serif) peso médio, mais ar.</small></span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="card" href="v3.html">
+      <span class="n">V3</span>
+      <span><strong>Tipográfica</strong><small>A tipografia é a hero. Fundo sólido, foto só como textura quase invisível, e o display da máquina como um detalhe pequeno (faixa fina) acima do título. Archivo peso 500 grande + lede em Fraunces itálico.</small></span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <p class="note">Os links do menu e os botões estão desligados de propósito — é só pra julgar hero + barra de números. No desktop as três também funcionam, mas o foco é o celular.</p>
+</main>
+</body>
+</html>
