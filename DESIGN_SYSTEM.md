@@ -34,7 +34,7 @@ Três famílias, cada uma com um papel fixo — não usar fora do papel sem moti
 | **IBM Plex Mono** (`--ff-mono`) | Números: `spec-list`, `zig-specs`, `stat-strip`, telefone | Lado "engenharia/precisão". Reservada para dado técnico/numérico — não usar em frase corrida (ver achado sobre a topbar no `EVOLUTION_LOG.md`). |
 
 **Escala aproximada (extraída do CSS, não redefinida aqui):**
-- H1 hero: `clamp(2.4rem, 4.6vw, 3.8rem)`, peso 600, `line-height:1.08`
+- H1 hero: Fraunces 500, `clamp(2.3rem, min(4.6vw, 7.4vh), 3.6rem)`, `line-height:1.14` (Rodadas 8–9; o `vh` segura laptops baixos)
 - H1 page-hero: `clamp(2.2rem, 4.4vw, 3.4rem)`
 - H2 de seção: `clamp(1.7rem, 3vw, 2.3rem)`
 - Corpo (`p`): `1rem` base, `line-height:1.6`, lede do hero `1.05rem`
@@ -118,11 +118,15 @@ A exceção que restou é o `.channel` do `.cta-band` (bloco pequeno de contato,
 
 ---
 
-## 10.5 Hero (atualizado na Rodada 5)
+## 10.5 Hero (atualizado na Rodada 9)
 
 - **Full-bleed, não mais grid de 2 colunas.** `.hero` é `<img class="hero-bg">` em `position:absolute` cobrindo a seção + conteúdo por cima com dois gradientes sobrepostos (vertical de baixo + diagonal da esquerda — um só gradiente não dá contraste suficiente pra título grande sobre foto real).
 - **Regra fixada: nunca cobrir rosto de pessoa real com texto**, mesmo que o scrim resolva o contraste técnico — decidido incorreto pra uma marca que quer mostrar "pessoas de verdade" (ver `EVOLUTION_LOG.md` Rodada 5). Fotos com gente só entram em full-bleed se sobrar espaço negativo real fora do rosto.
-- Foto atual: macro do display digital da máquina (`hero-display.jpg`) — sem gente, com a palavra "Lanorma" literalmente acesa na cena. `object-position` muda por breakpoint (testar sempre em mobile real, não só desktop).
+- Foto atual (Rodada 7): painel da Ln1 aceso no vapor (`assets/hero/`, tratada por `treat_hero.py`). `<picture>`: 16:9 (`hero-1280/1920/2560`) em tela larga, recorte 2:3 (`hero-mobile.jpg`) em **qualquer tela mais alta que larga (`max-aspect-ratio: 1/1`)** — entre 3:4 e 1:1 o 16:9 cortava dígitos dos displays laterais ao meio.
+- Texto (Rodada 8): H1 em Fraunces 500 ("Hechas a mano. Pensadas para durar y repararse."), lede pequeno em Archivo.
+- **Regra fixada (Rodada 9): o texto nunca sobe até a fileira de ícones/display.** O respiro de baixo é só do `.hero-content` e escala com a altura (`clamp(48px,10vh,112px)`; 136px no celular, 56px + CTA empilhado em celular ≤760px de altura). A hero não herda o padding de `section`. Testar sempre em altura baixa (1440×760, 1280×720, 375×667, 390×664 = iPhone com barras do Safari), não só nas alturas "de catálogo".
+- Contraste medido (pior 5% dos pixels atrás de cada linha de texto): ≥4.7:1 em 12 viewports. O eyebrow tem um halo escuro só atrás das letras (`text-shadow`) em vez de escurecer mais o scrim.
+- Entrada: cascata `hero-in` (ver seção 11).
 
 ## 11. Animações
 
@@ -130,6 +134,7 @@ O que existe hoje (tudo microinteração pontual, sem scroll-driven):
 - Hover de botão (preenchimento `scaleX`), sublinhado de nav, hover de ícone/canal (`translateY` leve), hover de máquina (`translateY(-8px)`, 550ms).
 - Accordion de FAQ (`faq-open` keyframe, translateY+opacity).
 - **Intro-gate, ~1,5s de espera + 620ms de saída:** eyebrow entra (Rodada 5) → wordmark revelado por `clip-path` em brass (720ms) → cortina sobe (`translateY(-101%)`, 620ms) enquanto o wordmark **desliza até a posição exata do logo no header**, calculada em runtime. **Sem linha de assinatura embaixo** — testado com 4 tratamentos de fonte na Rodada 5 e nenhum convenceu; a estrutura final é só eyebrow + wordmark. Regras que isso fixou: a intro nunca exige clique, some sozinha, tem Saltar e Esc, roda uma vez por sessão, vira estática com `prefers-reduced-motion`, e **só existe se o JS rodar** (`html.js` no CSS) — sem JS o site abre direto. Fundo com textura real (crop desfocado/escurecido de uma foto real, nunca gerado) atrás do texto, bem sutil.
+- **Entrada da hero (Rodadas 8–9):** eyebrow → H1 → lede → CTA, fade + `translateY(18px)`, 700ms, mesma curva da intro (`cubic-bezier(.22,.8,.2,1)`, sem overshoot), delays .12/.24/.40/.52s — termina em ~1,2s, antes da intro começar a sair (1,5s), então a cortina sempre revela o texto pronto. O estado invisível mora só no keyframe (`fill-mode:both`): se a animação não rodar, o texto aparece.
 - Transição de página via Swup (fade+translateY, `html.is-changing`/`is-animating`) — via CDN, falha em silêncio se offline (o site precisa funcionar 100% sem internet).
 
 **Regra fixada:** sem cine-scroll ou animação de página inteira nesta fase — isso é fase futura (seção 13 do `PROJECT_BRAIN.md`). Microinteração pontual pode continuar sendo refinada.

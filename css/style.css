@@ -241,6 +241,10 @@ html.is-animating .transition-swup{
   align-items:flex-end;
   color:var(--cream);
   overflow:hidden;
+  /* o topo segura o conteúdo abaixo do header fixo se ele não couber; embaixo o
+     respiro é só do .hero-content (o padding de section somado deixava o texto
+     alto demais, em cima dos ícones de xícara e do display em telas baixas) */
+  padding:112px 0 0;
   /* LQIP de 32px: primeiro paint já com a cor da cena antes da foto chegar */
   background:var(--espresso-deep) url('../assets/hero/hero-lqip.jpg') center/cover no-repeat;
 }
@@ -260,39 +264,44 @@ html.is-animating .transition-swup{
 .hero-content{
   position:relative;
   z-index:1;
-  padding:0 32px 96px;
+  padding:0 32px clamp(48px, 10vh, 112px);
   max-width:640px;
 }
 /* entrada do texto da hero: sobe e aparece em cascata, mesmo vocabulário da
    intro-gate (fade + translateY). Roda por baixo da intro quando ela existe;
    em visitas repetidas (intro pulada por sessionStorage) é o primeiro movimento
-   da página. */
+   da página. Termina em ~1,2s — antes da intro começar a sair (1,5s).
+   O estado invisível mora só no keyframe (fill "both"): se a animação não
+   rodar, o texto aparece — falha aberto, como a intro. */
 .hero-kicker,
 .hero h1,
 .hero p.lede,
 .hero-cta{
-  opacity:0;
-  transform:translateY(18px);
-  animation:hero-in .7s cubic-bezier(.22,.8,.2,1) forwards;
+  animation:hero-in .7s cubic-bezier(.22,.8,.2,1) both;
 }
-.hero-kicker{ animation-delay:.15s; }
-.hero h1{ animation-delay:.28s; }
-.hero p.lede{ animation-delay:.46s; }
-.hero-cta{ animation-delay:.6s; }
+.hero-kicker{ animation-delay:.12s; }
+.hero h1{ animation-delay:.24s; }
+.hero p.lede{ animation-delay:.4s; }
+.hero-cta{ animation-delay:.52s; }
 @keyframes hero-in{
+  from{ opacity:0; transform:translateY(18px); }
   to{ opacity:1; transform:translateY(0); }
 }
 @media (prefers-reduced-motion: reduce){
-  .hero-kicker,.hero h1,.hero p.lede,.hero-cta{ opacity:1; transform:none; animation:none; }
+  .hero-kicker,.hero h1,.hero p.lede,.hero-cta{ animation:none; }
 }
 .hero-kicker{
   display:block;
   margin-bottom:20px;
+  /* scrim local: texto pequeno em --muted perto da borda iluminada do vapor; um
+     halo só atrás das letras segura o contraste (≥4.5:1) sem escurecer a foto */
+  text-shadow:0 0 14px rgba(23,15,10,.9), 0 0 4px rgba(23,15,10,.6);
 }
 .hero h1{
   font-family:var(--ff-display);
   font-weight:500;
-  font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+  /* vh no meio: em laptop baixo (720–780px) o título de 3 linhas não sobe até as xícaras */
+  font-size:clamp(2.3rem, min(4.6vw, 7.4vh), 3.6rem);
   line-height:1.14;
   letter-spacing:-0.015em;
   text-wrap:balance;
@@ -1031,7 +1040,9 @@ html.intro-active{ overflow:hidden; height:100%; }
   opacity:0;
   animation:intro-line-in .5s ease .12s forwards;
 }
-.intro-gate.is-closing .intro-eyebrow{ opacity:0; }
+/* animation:none é necessário: o fill "forwards" do intro-line-in vence o opacity:0 e o
+   eyebrow ficava parado por cima do texto da hero durante a saída (~720ms) */
+.intro-gate.is-closing .intro-eyebrow{ opacity:0; animation:none; }
 .intro-mark{
   display:block;
   height:clamp(30px, 5.4vw, 52px);
@@ -1097,7 +1108,6 @@ html.intro-active{ overflow:hidden; height:100%; }
   .about-strip{grid-template-columns:repeat(3,1fr);}
   .audience-list{grid-template-columns:1fr;}
   .principles{grid-template-columns:1fr; gap:32px;}
-  .hero-content{padding-bottom:64px;}
   .workshop-block{grid-template-columns:1fr; gap:32px;}
   .zigzag-item{grid-template-columns:1fr;}
   .zigzag-item:nth-child(even) .art{order:initial;}
@@ -1123,11 +1133,21 @@ html.intro-active{ overflow:hidden; height:100%; }
   .about-strip{grid-template-columns:repeat(2,1fr);}
   section{padding:80px 0;}
   .hero-bg{ object-position:center top; }
-  .hero-content{padding:0 24px 56px;}
+  /* 136px = o respiro já validado em 390×844; deixa o CTA longe do botão do WhatsApp */
+  .hero-content{padding:0 24px 136px;}
   .topbar-phone .label{display:none;}
   .machine-list{gap:60px;}
   .whatsapp-fab{ width:52px; height:52px; right:16px; bottom:16px; }
   .whatsapp-fab svg{ width:26px; height:26px; }
+}
+/* celular baixo (iPhone SE, ou qualquer celular com as barras do Safari à mostra):
+   o bloco inteiro precisa caber abaixo do display sem cobrir "Lanorma" */
+@media (max-width:600px) and (max-height:760px){
+  .hero-content{padding-bottom:56px;}
+  .hero-kicker{margin-bottom:14px;}
+  .hero p.lede{margin-top:16px;}
+  /* empilhado: o link fica à esquerda, longe do botão do WhatsApp no canto */
+  .hero-cta{margin-top:26px; flex-direction:column; align-items:flex-start; gap:18px;}
 }
 
 /* ---------- whatsapp fab ---------- */
