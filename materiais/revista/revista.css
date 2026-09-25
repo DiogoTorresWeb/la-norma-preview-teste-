@@ -342,6 +342,20 @@ p{text-wrap:pretty;hyphens:auto;}
 .toolbar a:hover,.toolbar button:hover{border-color:var(--brass);color:var(--brass-light);}
 .toolbar .count{color:var(--muted);font-family:var(--ff-mono);font-weight:500;letter-spacing:.04em;text-transform:none;padding:0 8px;}
 
+/* No celular os spreads ficam colados (12px de vão) — pills flutuantes deixavam o
+   texto do próximo spread passar por entre os vãos. Barra sólida de ponta a ponta
+   em vez de pills soltas, e um respiro embaixo do último spread pra ela nunca
+   ficar sobre conteúdo. */
+@media (max-width:700px){
+  .toolbar{
+    left:0;right:0;bottom:0;justify-content:space-between;
+    background:rgba(20,16,9,.97);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border-top:1px solid rgba(243,236,221,.14);padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+  .toolbar a,.toolbar button{background:none;border:0;padding:8px 4px;}
+  .spread:last-of-type{margin-bottom:64px;}
+}
+
 /* ---------- Impressão ----------------------------------------------------------- */
 @page{size:A4 landscape;margin:0;}
 @media print{
