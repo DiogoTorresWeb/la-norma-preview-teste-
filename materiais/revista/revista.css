@@ -1,0 +1,363 @@
+/* ============================================================================
+   revista.css — sistema compartilhado das "revistas" La Norma
+   ----------------------------------------------------------------------------
+   Formato: cada .spread é uma dupla de páginas com proporção fixa A4 paisagem
+   (297 × 210 mm). Cada metade é, portanto, uma página A5 retrato. Em tela o
+   spread ocupa uma "tela" inteira (scroll vertical); impresso, cada spread vira
+   exatamente uma folha A4 paisagem (@page size A4 landscape, margin 0).
+
+   Escala: toda a tipografia e os espaçamentos usam `cqw` (1 % da largura do
+   spread). Assim a diagramação é idêntica em tela e no PDF, seja qual for o
+   tamanho da janela — 1cqw = 2,97 mm no papel. Referências rápidas:
+     corpo 1.2cqw  ≈ 10 pt   |  legenda .85cqw ≈ 7 pt  |  título 3.6cqw ≈ 30 pt
+
+   Identidade: mesma paleta e mesmas 3 famílias do site (DESIGN_SYSTEM.md).
+   Brass só em filetes, folio, marcas e um destaque por spread. Sem cards com
+   borda. Radius 2px.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --espresso:#241c15;
+  --espresso-deep:#170f0a;
+  --cream:#f3ecdd;
+  --sand:#e7d9be;
+  --brass:#b8843c;
+  --brass-light:#e4c48c;
+  --muted:#b7a489;
+  --muted-dark:#6b5b45;
+  --line:rgba(243,236,221,0.16);
+  --line-dark:rgba(36,28,21,0.16);
+  --radius:2px;
+  --ff-display:'Fraunces','Georgia',serif;
+  --ff-body:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --ff-mono:'IBM Plex Mono','Courier New',monospace;
+  /* margens internas de página, em % da largura do spread */
+  --m-x:5.6cqw;   /* ≈ 16,6 mm */
+  --m-top:6cqw;
+  --m-bot:7.2cqw; /* deixa espaço pro folio */
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:#141009;           /* mesa escura atrás das folhas — só em tela */
+  color:var(--espresso);
+  font-family:var(--ff-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:lining-nums;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul,ol{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4,p{margin:0;}
+h1,h2,h3{font-family:var(--ff-display);font-weight:500;letter-spacing:-0.015em;line-height:1.05;text-wrap:balance;}
+p{text-wrap:pretty;hyphens:auto;}
+
+/* ---------- Spread --------------------------------------------------------- */
+.spread{
+  position:relative;
+  overflow:hidden;
+  width:min(calc(100vw - 48px), calc((100vh - 64px) * 1.41421));
+  aspect-ratio:297/210;
+  margin:32px auto;
+  container-type:inline-size;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:minmax(0,1fr); /* a linha nunca cresce além do spread: conteúdo demais é cortado, não empurra o folio */
+  background:var(--cream);
+  color:var(--espresso);
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  outline:1px solid rgba(243,236,221,.08);
+}
+.spread.dark{background:var(--espresso);color:var(--cream);}
+.spread.deep{background:var(--espresso-deep);color:var(--cream);}
+.spread.sand{background:var(--sand);}
+.spread.single{grid-template-columns:1fr;}
+
+/* dobra: filete quase invisível no meio, só nos spreads de duas páginas */
+.spread:not(.single)::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:var(--line-dark);z-index:2;pointer-events:none;
+}
+.spread.dark:not(.single)::before,.spread.deep:not(.single)::before{background:var(--line);}
+
+/* ---------- Página --------------------------------------------------------- */
+.page{
+  position:relative;
+  padding:var(--m-top) var(--m-x) var(--m-bot);
+  display:flex;flex-direction:column;
+  min-width:0;min-height:0;overflow:hidden;
+}
+.page.bleed{padding:0;}
+.page.center{justify-content:center;}
+.page.end{justify-content:flex-end;}
+.page .fill{flex:1;}
+
+/* foto sangrada: cobre a página inteira, tratamento de cor compartilhado com o site */
+.photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  /* o tratamento de cor do site (saturate/sepia/contrast) já vem aplicado no JPEG por
+     prep-images.py — um filter CSS aqui obrigaria o Chromium a rasterizar a foto no PDF */
+}
+/* foto com margem (não sangrada), dentro do fluxo */
+.figure{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--sand);}
+.figure img{width:100%;height:100%;object-fit:cover;}
+.figure.ratio-3-4{aspect-ratio:3/4;}
+.figure.ratio-4-3{aspect-ratio:4/3;}
+.figure.ratio-1-1{aspect-ratio:1/1;}
+.figure.ratio-3-2{aspect-ratio:3/2;}
+.figure.grow{flex:1;min-height:0;aspect-ratio:auto;}
+.caption{
+  font-size:.82cqw;line-height:1.45;color:var(--muted-dark);margin-top:1cqw;
+}
+.dark .caption,.deep .caption{color:var(--muted);}
+/* legenda sobre foto sangrada */
+.caption.over{
+  position:absolute;left:var(--m-x);right:var(--m-x);bottom:5.6cqw;margin:0;
+  color:var(--cream);opacity:.85;z-index:2;
+}
+/* scrim pra texto sobre foto */
+.scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(23,15,10,.85) 0%, rgba(23,15,10,.35) 40%, rgba(23,15,10,0) 70%),
+    linear-gradient(105deg, rgba(23,15,10,.55) 0%, rgba(23,15,10,0) 55%);
+}
+
+/* ---------- Tipografia editorial -------------------------------------------- */
+.eyebrow{
+  font-family:var(--ff-body);font-size:.78cqw;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dark);
+  margin-bottom:1.6cqw;
+}
+.dark .eyebrow,.deep .eyebrow{color:var(--muted);}
+.eyebrow.brass{color:var(--brass);}
+.dark .eyebrow.brass,.deep .eyebrow.brass{color:var(--brass-light);}
+
+.h-cover{font-size:6.2cqw;font-weight:500;line-height:.98;letter-spacing:-.02em;}
+.h-section{font-size:3.6cqw;margin-bottom:2.2cqw;}
+.h-section.xl{font-size:4.6cqw;}
+.h-sub{font-size:1.9cqw;font-weight:500;margin-bottom:.8cqw;}
+.h-small{font-family:var(--ff-display);font-size:1.45cqw;font-weight:500;line-height:1.2;}
+
+.lede{font-size:1.5cqw;line-height:1.45;font-weight:400;max-width:34ch;}
+.text{font-size:1.2cqw;line-height:1.58;max-width:44ch;}
+.text p + p{margin-top:1.1cqw;}
+.text.wide{max-width:none;}
+.text strong{font-weight:600;}
+.small{font-size:.95cqw;line-height:1.5;color:var(--muted-dark);}
+.dark .small,.deep .small{color:var(--muted);}
+.muted{color:var(--muted-dark);}
+.dark .muted,.deep .muted{color:var(--muted);}
+
+/* mono só pra dado: número, unidade, telefone, código */
+.mono{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;font-weight:500;}
+.num{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;}
+
+.rule{border:0;border-top:1px solid var(--brass);width:6cqw;margin:0 0 2.4cqw;}
+.hairline{border:0;border-top:1px solid var(--line-dark);margin:2cqw 0;}
+.dark .hairline,.deep .hairline{border-top-color:var(--line);}
+
+/* ---------- Marcas de honestidade ------------------------------------------- */
+/* [A CONFIRMAR CON DANIEL] — fato não confirmado. Discreto mas impossível de
+   perder: mono, minúsculo, contorno brass. [PROPUESTA] — hipótese de programa. */
+.tag{
+  display:inline-block;vertical-align:middle;
+  font-family:var(--ff-mono);font-size:.68cqw;font-weight:500;line-height:1;
+  letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  padding:.38cqw .6cqw .32cqw;border-radius:var(--radius);
+  margin:0 .2cqw;position:relative;top:-.12cqw;
+}
+.tag-confirmar{color:var(--brass);border:1px solid var(--brass);}
+.dark .tag-confirmar,.deep .tag-confirmar{color:var(--brass-light);border-color:var(--brass-light);}
+.tag-propuesta{color:var(--muted-dark);border:1px dashed var(--muted-dark);}
+.dark .tag-propuesta,.deep .tag-propuesta{color:var(--muted);border-color:var(--muted);}
+.tag.big{font-size:.86cqw;padding:.55cqw .9cqw .48cqw;}
+
+/* nota de rodapé de honestidade (usada no sumário e na contracapa) */
+.legend{font-size:.85cqw;line-height:1.5;color:var(--muted-dark);max-width:38ch;}
+.dark .legend,.deep .legend{color:var(--muted);}
+.legend .tag{margin-right:.5cqw;}
+
+/* ---------- Folio ----------------------------------------------------------- */
+.folio{
+  position:absolute;bottom:3.1cqw;left:var(--m-x);right:var(--m-x);
+  display:flex;align-items:baseline;gap:1cqw;
+  font-family:var(--ff-body);font-size:.72cqw;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted-dark);z-index:3;
+}
+.folio b{font-family:var(--ff-mono);font-weight:500;font-size:.85cqw;letter-spacing:.04em;color:var(--brass);}
+.page:nth-child(2) .folio{flex-direction:row-reverse;}
+.dark .folio,.deep .folio{color:var(--muted);}
+.dark .folio b,.deep .folio b{color:var(--brass-light);}
+.page.bleed .folio{color:var(--cream);opacity:.85;}
+.page.bleed .folio b{color:var(--brass-light);}
+
+/* ---------- Capa ------------------------------------------------------------ */
+.spread.cover .page{padding:var(--m-top) var(--m-x) 6cqw;z-index:2;}
+.wordmark{width:13cqw;height:auto;}
+.wordmark.sm{width:9cqw;}
+.cover-meta{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2cqw;
+  font-size:.8cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);opacity:.9;
+}
+.cover-meta .mono{font-size:.85cqw;letter-spacing:.06em;text-transform:none;}
+
+/* ---------- Sumário ---------------------------------------------------------- */
+.toc{display:flex;flex-direction:column;}
+.toc li{
+  display:grid;grid-template-columns:4.2cqw 1fr;column-gap:1.2cqw;align-items:baseline;
+  padding:1.35cqw 0;border-top:1px solid var(--line-dark);
+}
+.toc li:first-child{border-top:0;padding-top:0;}
+.dark .toc li,.deep .toc li{border-top-color:var(--line);}
+.toc b{font-family:var(--ff-mono);font-weight:500;font-size:1.05cqw;color:var(--brass);}
+.toc .t{font-family:var(--ff-display);font-size:1.75cqw;font-weight:500;line-height:1.15;}
+.toc .d{grid-column:2;font-size:.9cqw;color:var(--muted-dark);margin-top:.3cqw;}
+.dark .toc .d,.deep .toc .d{color:var(--muted);}
+
+/* ---------- Lista editorial (sem card, com régua brass) ---------------------- */
+.list-rule{display:flex;flex-direction:column;gap:1.8cqw;}
+.list-rule > li{border-top:1px solid var(--brass);padding-top:1.1cqw;}
+.list-rule .h-small{margin-bottom:.4cqw;}
+.list-rule p{font-size:1.02cqw;line-height:1.48;}
+.list-rule.cols{display:grid;grid-template-columns:1fr 1fr;gap:2.2cqw 2.4cqw;}
+.list-rule .n{font-family:var(--ff-mono);font-size:.82cqw;color:var(--brass);letter-spacing:.06em;display:block;margin-bottom:.45cqw;}
+.dark .list-rule .n,.deep .list-rule .n{color:var(--brass-light);}
+
+/* lista simples com filetes finos */
+.list-plain{display:flex;flex-direction:column;}
+.list-plain > li{padding:.9cqw 0;border-top:1px solid var(--line-dark);font-size:1.1cqw;line-height:1.45;}
+.list-plain > li:last-child{border-bottom:1px solid var(--line-dark);}
+.dark .list-plain > li,.deep .list-plain > li{border-color:var(--line);}
+.list-plain.check > li{display:grid;grid-template-columns:1.6cqw 1fr;column-gap:.6cqw;}
+.list-plain.check > li::before{content:"—";color:var(--brass);font-family:var(--ff-mono);}
+
+/* ---------- Specs (dado em mono, rótulo em sans) ------------------------------ */
+.specs{width:100%;border-collapse:collapse;font-size:1cqw;}
+.specs th,.specs td{text-align:left;padding:.85cqw .6cqw .85cqw 0;border-top:1px solid var(--line-dark);vertical-align:baseline;}
+.specs thead th{
+  border-top:0;padding-top:0;padding-bottom:1cqw;
+  font-family:var(--ff-display);font-weight:500;font-size:1.55cqw;letter-spacing:-.01em;
+}
+.specs thead th small{display:block;font-family:var(--ff-body);font-size:.72cqw;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-dark);margin-top:.35cqw;}
+.specs tbody th{font-family:var(--ff-body);font-weight:600;font-size:.74cqw;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-dark);width:22%;}
+.specs td{font-family:var(--ff-mono);font-variant-numeric:tabular-nums;font-size:1.02cqw;white-space:nowrap;}
+.specs tbody tr:last-child td,.specs tbody tr:last-child th{border-bottom:1px solid var(--line-dark);}
+.dark .specs th,.dark .specs td,.deep .specs th,.deep .specs td{border-color:var(--line);}
+.dark .specs tbody th,.dark .specs thead th small{color:var(--muted);}
+
+/* barra de números */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;}
+.stats b{display:block;font-family:var(--ff-mono);font-weight:500;font-size:1.75cqw;line-height:1;letter-spacing:-.02em;white-space:nowrap;}
+.stats span{display:block;font-size:.74cqw;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-dark);margin-top:.7cqw;}
+.dark .stats span,.deep .stats span{color:var(--muted);}
+
+/* ---------- Máquina recortada (sem painel, com sombra de contato) ------------- */
+.machine{position:relative;display:flex;align-items:flex-end;justify-content:center;flex:1;min-height:0;}
+.machine img{
+  width:86%;height:auto;max-height:100%;object-fit:contain;position:relative;z-index:1;
+  filter:drop-shadow(0 2cqw 2.4cqw rgba(23,15,10,.28));
+}
+.machine::after{
+  content:"";position:absolute;left:12%;right:12%;bottom:-.4cqw;height:3cqw;z-index:0;
+  background:radial-gradient(ellipse at center, rgba(23,15,10,.28) 0%, rgba(23,15,10,0) 70%);
+}
+.machine.sm img{width:70%;}
+
+/* ---------- Funções (letra em mono como glifo) --------------------------------- */
+.features{display:grid;grid-template-columns:1fr 1fr;gap:1.9cqw 2.6cqw;}
+.features li{display:grid;grid-template-columns:2.6cqw 1fr;column-gap:.9cqw;align-items:start;}
+.features .g{
+  font-family:var(--ff-mono);font-size:1.5cqw;font-weight:500;line-height:1;color:var(--brass-light);
+  border-top:1px solid var(--brass);padding-top:.6cqw;
+}
+.features .h-small{font-size:1.25cqw;margin-bottom:.3cqw;}
+.features p{font-size:.92cqw;line-height:1.45;color:var(--muted);}
+.spread:not(.dark):not(.deep) .features .g{color:var(--brass);}
+.spread:not(.dark):not(.deep) .features p{color:var(--muted-dark);}
+
+/* ---------- Depoimento -------------------------------------------------------- */
+.stars{color:var(--brass);font-size:1.1cqw;letter-spacing:.14em;margin-bottom:1.6cqw;}
+.quote{font-family:var(--ff-display);font-style:italic;font-weight:400;font-size:2.9cqw;line-height:1.28;letter-spacing:-.01em;text-wrap:pretty;}
+.quote.sm{font-size:2.05cqw;}
+.cite{margin-top:2cqw;font-size:.8cqw;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-dark);}
+.cite span{display:block;font-weight:400;letter-spacing:.08em;margin-top:.4cqw;}
+.dark .cite,.deep .cite{color:var(--muted);}
+
+/* ---------- Contato ----------------------------------------------------------- */
+.contact{display:flex;flex-direction:column;gap:1.5cqw;}
+.contact li{display:grid;grid-template-columns:8cqw 1fr;column-gap:1cqw;align-items:baseline;border-top:1px solid var(--line-dark);padding-top:1cqw;}
+.dark .contact li,.deep .contact li{border-top-color:var(--line);}
+.contact .k{font-size:.74cqw;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-dark);}
+.dark .contact .k,.deep .contact .k{color:var(--muted);}
+.contact .v{font-size:1.15cqw;line-height:1.4;}
+.contact .v.mono{font-size:1.15cqw;}
+
+/* pauta pra anotações à mão */
+.notes{
+  flex:1;min-height:14cqw;margin-top:1.2cqw;
+  /* gradiente simples + background-size em vez de repeating-linear-gradient: o Chromium
+     imprime este como padrão vetorial; o repeating saía com linhas grossas e irregulares no PDF */
+  background-image:linear-gradient(to bottom,var(--line-dark) 0,var(--line-dark) 1px,transparent 1px);
+  background-size:100% 3.1cqw;
+  background-position:0 3cqw;
+  background-repeat:repeat-y;
+}
+
+/* ---------- Passos numerados ---------------------------------------------------- */
+.steps{display:flex;flex-direction:column;gap:1.6cqw;counter-reset:step;}
+.steps li{display:grid;grid-template-columns:3.4cqw 1fr;column-gap:1cqw;border-top:1px solid var(--brass);padding-top:1cqw;}
+.steps li::before{counter-increment:step;content:"0" counter(step);font-family:var(--ff-mono);font-size:1.3cqw;font-weight:500;color:var(--brass);line-height:1.2;}
+.steps .h-small{margin-bottom:.35cqw;}
+.steps p{font-size:1cqw;line-height:1.5;}
+
+/* ---------- Módulos (dossier) -------------------------------------------------- */
+.module{display:grid;grid-template-columns:6cqw 1fr;column-gap:1.6cqw;border-top:1px solid var(--brass);padding-top:1.1cqw;}
+.module + .module{margin-top:1.9cqw;}
+.module .n{font-family:var(--ff-mono);font-size:1.15cqw;font-weight:500;color:var(--brass);line-height:1.25;}
+.dark .module .n,.deep .module .n{color:var(--brass-light);}
+.module .n small{display:block;font-family:var(--ff-body);font-size:.68cqw;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dark);margin-top:.35cqw;}
+.dark .module .n small,.deep .module .n small{color:var(--muted);}
+.module .h-small{font-size:1.45cqw;margin-bottom:.45cqw;}
+.module p{font-size:.98cqw;line-height:1.5;}
+.module ul{margin-top:.6cqw;display:flex;flex-direction:column;gap:.25cqw;}
+.module ul li{font-size:.95cqw;line-height:1.45;padding-left:1.2cqw;position:relative;}
+.module ul li::before{content:"·";position:absolute;left:.2cqw;color:var(--brass);}
+
+/* ---------- Ferramentas de tela (não imprimem) ---------------------------------- */
+.toolbar{
+  position:fixed;right:20px;bottom:18px;z-index:50;
+  display:flex;gap:6px;align-items:center;
+  font-family:var(--ff-body);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+}
+.toolbar a,.toolbar button{
+  appearance:none;cursor:pointer;border:1px solid rgba(243,236,221,.2);background:rgba(36,28,21,.9);
+  color:var(--cream);padding:9px 13px;border-radius:var(--radius);font:inherit;letter-spacing:inherit;text-transform:inherit;
+}
+.toolbar a:hover,.toolbar button:hover{border-color:var(--brass);color:var(--brass-light);}
+.toolbar .count{color:var(--muted);font-family:var(--ff-mono);font-weight:500;letter-spacing:.04em;text-transform:none;padding:0 8px;}
+
+/* ---------- Impressão ----------------------------------------------------------- */
+@page{size:A4 landscape;margin:0;}
+@media print{
+  html,body{margin:0;padding:0;background:#fff;}
+  body{width:297mm;}
+  .spread{
+    width:297mm;height:210mm;aspect-ratio:auto;
+    margin:0;box-shadow:none;outline:0;
+    break-after:page;page-break-after:always;break-inside:avoid;
+  }
+  .spread:last-of-type{break-after:auto;page-break-after:auto;}
+  .screen-only,.toolbar{display:none !important;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+
+/* ---------- Tela pequena (leitura em celular: o spread vira só largura) ---------- */
+@media (max-width:700px){
+  .spread{width:calc(100vw - 16px);margin:12px auto;}
+}

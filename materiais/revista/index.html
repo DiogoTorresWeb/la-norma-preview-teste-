@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revistas — La Norma</title>
+<meta name="description" content="Dos piezas impresas de La Norma: la revista de visita y el dossier de formación técnica.">
+<link rel="stylesheet" href="revista.css">
+<style>
+  /* Hub mínimo: usa os tokens do revista.css, mas não é um spread. */
+  body{background:var(--cream);color:var(--espresso);min-height:100vh;display:grid;place-items:center;padding:48px 24px;}
+  .hub{max-width:760px;width:100%;}
+  .hub .wordmark{width:150px;filter:none;}
+  .hub h1{font-size:clamp(2rem,4.5vw,3rem);margin:28px 0 12px;font-weight:500;}
+  .hub > p{max-width:56ch;font-size:1.02rem;color:var(--muted-dark);}
+  .pieces{margin-top:40px;display:grid;gap:0;}
+  .piece{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--brass);align-items:start;}
+  .piece:last-child{border-bottom:1px solid var(--line-dark);}
+  .piece .n{font-family:var(--ff-mono);font-size:.9rem;color:var(--brass);padding-top:6px;}
+  .piece h2{font-size:1.6rem;font-weight:500;margin-bottom:6px;}
+  .piece p{font-size:.98rem;line-height:1.55;max-width:52ch;}
+  .piece .links{margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+  .piece .links a{border-bottom:1px solid var(--brass);padding-bottom:3px;}
+  .piece .links a:hover{color:var(--brass);}
+  .piece .meta{font-family:var(--ff-mono);font-size:.78rem;color:var(--muted-dark);margin-top:8px;}
+  .foot{margin-top:40px;font-size:.85rem;color:var(--muted-dark);max-width:60ch;}
+  .foot a{border-bottom:1px solid var(--line-dark);}
+  @media (max-width:600px){.piece{grid-template-columns:1fr;gap:6px;}}
+</style>
+</head>
+<body>
+<main class="hub">
+  <img class="wordmark" src="../assets/logo-lanorma-brass.png" alt="La Norma">
+  <h1>Dos piezas para leer en papel</h1>
+  <p>Revistas en formato A4 apaisado, una doble página por hoja. Se leen en pantalla con scroll y se imprimen o exportan a PDF tal cual, sin recomponer nada.</p>
+
+  <div class="pieces">
+    <article class="piece">
+      <span class="n">01</span>
+      <div>
+        <h2>Revista de visita</h2>
+        <p>Se queda en la mesa cuando un cliente visita el taller y se la lleva al irse: quiénes somos, la Ln1 por dentro con sus fichas reales, lo que dicen los clientes, un adelanto del LN200 y cómo seguimos hablando.</p>
+        <p class="meta">10 dobles páginas · 20 páginas A5</p>
+        <div class="links"><a href="visita.html">Abrir en pantalla</a><a href="visita.pdf">PDF</a></div>
+      </div>
+    </article>
+    <article class="piece">
+      <span class="n">02</span>
+      <div>
+        <h2>Dossier de formación técnica</h2>
+        <p>Propuesta de curso sobre la Ln1 para distribuidores y servicios técnicos: instalación, mantenimiento, diagnóstico y repuestos, presencial en el taller de Palma de Gandia. Todo el programa está marcado como propuesta.</p>
+        <p class="meta">9 dobles páginas · 18 páginas A5</p>
+        <div class="links"><a href="formacion.html">Abrir en pantalla</a><a href="formacion.pdf">PDF</a></div>
+      </div>
+    </article>
+  </div>
+
+  <p class="foot">Borradores para revisión interna. Los datos sin confirmar llevan la marca <span class="tag tag-confirmar" style="font-size:.62rem;padding:4px 7px 3px">A confirmar con Daniel</span> dentro de cada página. <a href="../index.html">← Volver a materiales</a></p>
+</main>
+</body>
+</html>
