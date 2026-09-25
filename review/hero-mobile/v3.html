@@ -64,7 +64,9 @@
    invisível; o display da máquina entra como um detalhe pequeno (faixa fina),
    não como cena. Título em Archivo peso 500, maior, e lede em Fraunces itálico. */
 .hero-v3{position:relative;background:var(--espresso-deep);color:var(--cream);min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;}
-.hero-v3 .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 88%;opacity:.22;}
+/* a textura mostra só a metade de baixo da foto (vapor), nunca o display —
+   senão ele aparece como fantasma atrás da faixa */
+.hero-v3 .tex{position:absolute;left:0;right:0;bottom:0;width:100%;height:180%;object-fit:cover;object-position:center bottom;opacity:.22;}
 .hero-v3::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,15,10,.9),rgba(23,15,10,.2) 60%,rgba(23,15,10,.6));}
 .hero-v3 .hero-content{position:relative;z-index:1;padding:150px 32px 88px;max-width:720px;}
 .hero-v3 .readout{display:block;width:min(360px,72%);border-radius:2px;margin:0 0 30px;border:1px solid rgba(243,236,221,.14);}
