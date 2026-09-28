@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=15">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -28,28 +28,36 @@
   <div class="topbar">
     <div class="topbar-inner">
       <span class="topbar-note"><span class="dot"></span> Fabricado a mano en Valencia</span>
-      <a class="topbar-phone" href="tel:+34960640072">
-        <span class="label">Llamar</span>
-        <span class="num">+34 960 64 00 72</span>
-      </a>
+      <div class="topbar-right">
+        <div class="topbar-social">
+          <a href="https://www.facebook.com/p/La-Norma-Coffee-Machine-61575180874785/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#ic-facebook"></use></svg></a>
+          <a href="https://www.instagram.com/lanorma.coffee/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#ic-instagram"></use></svg></a>
+          <a href="https://www.linkedin.com/company/lanorma-coffee-machine" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#ic-linkedin"></use></svg></a>
+        </div>
+        <a class="topbar-phone" href="tel:+34960640072">
+          <span class="label">Llamar</span>
+          <span class="num">+34 960 64 00 72</span>
+        </a>
+      </div>
     </div>
   </div>
   <header class="site-header" id="siteHeader">
-    <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
-    <nav class="main-nav" id="mainNav">
-      <ul>
-        <li><a href="index.html" class="active">Inicio</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="productos.html">Catálogo</a></li>
-        <li><a href="formacion.html">Formación</a></li>
-        <li><a href="productos.html#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-    <div class="header-social">
-      <a href="https://www.facebook.com/p/La-Norma-Coffee-Machine-61575180874785/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#ic-facebook"></use></svg></a>
-      <a href="https://www.instagram.com/lanorma.coffee/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#ic-instagram"></use></svg></a>
-      <a href="https://www.linkedin.com/company/lanorma-coffee-machine" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#ic-linkedin"></use></svg></a>
+    <div class="nav-panel" id="mainNav">
+      <nav class="main-nav nav-left" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="productos.html">Catálogo</a></li>
+        </ul>
+      </nav>
+      <nav class="main-nav nav-right" aria-label="Formación y contacto">
+        <ul>
+          <li><a href="formacion.html">Formación</a></li>
+          <li><a href="productos.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
+    <a href="index.html" class="logo" aria-label="La Norma, inicio"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
   </header>
 </div>
@@ -59,13 +67,14 @@
 <div class="intro-gate" id="introGate" role="dialog" aria-label="La Norma">
   <div class="intro-veil"></div>
   <button class="intro-skip" id="introSkip" type="button">Saltar</button>
+  <span class="intro-rule" id="introRule" aria-hidden="true"></span>
   <div class="intro-core">
     <span class="intro-eyebrow">Fabricante de máquinas de café · Valencia</span>
     <span class="intro-mark" id="introMark" role="img" aria-label="La Norma"></span>
   </div>
 </div>
 
-<section class="hero">
+<section class="hero" id="hero">
   <img class="hero-bg" src="assets/real/hero-display.jpg" alt="Display digital de una máquina La Norma, con la temperatura de la caldera y el nombre de la marca encendidos">
   <div class="hero-content">
     <span class="eyebrow hero-kicker">Fabricante de máquinas de café · Valencia</span>
@@ -73,12 +82,18 @@
     <p class="lede">Fabricadas a mano en Valencia. Pensadas para durar y repararse — no para reemplazarse.</p>
     <div class="hero-cta">
       <a href="productos.html" class="btn btn-primary">Ver catálogo</a>
-      <a href="nosotros.html" class="hero-link">Conocer La Norma →</a>
+      <a href="https://wa.me/34960640072" target="_blank" rel="noopener" class="btn btn-ghost btn-glass">
+        <svg aria-hidden="true" width="15" height="15" fill="currentColor"><use href="#ic-whatsapp"></use></svg>
+        WhatsApp
+      </a>
     </div>
   </div>
+  <button class="hero-scroll" id="heroScroll" type="button" aria-label="Ver las especificaciones">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
+  </button>
 </section>
 
-<section class="stat-strip">
+<section class="stat-strip" id="stat-strip">
   <div class="container">
     <div class="stat-item">
       <span class="value">3</span>
@@ -274,6 +289,14 @@
   const nav = document.getElementById('mainNav');
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
+  const heroScroll = document.getElementById('heroScroll');
+  if (heroScroll) {
+    heroScroll.addEventListener('click', () => {
+      const target = document.getElementById('stat-strip');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
   const headerStack = document.getElementById('headerStack');
   const onScroll = () => headerStack.classList.toggle('is-scrolled', window.scrollY > 40);
   onScroll();
@@ -290,28 +313,40 @@
     });
   }
 
+  // A hero começa escondida (CSS) e só entra quando alguém manda revelar: ou a
+  // intro ao sair, ou esta função direto quando não há intro. Chamada de todo
+  // caminho de saída, inclusive dos de erro — hero presa em opacity:0 seria uma
+  // página em branco.
+  function revealHero(){
+    const hero = document.getElementById('hero');
+    if (hero) hero.classList.add('is-revealed');
+  }
+
   function initIntroGate(){
     const gate = document.getElementById('introGate');
-    if (!gate || gate.dataset.bound) return;
+    if (!gate || gate.dataset.bound) { revealHero(); return; }
     gate.dataset.bound = '1';
 
     // sessionStorage falha em alguns contextos (arquivo local, aba privada) — a intro
     // nunca pode impedir o acesso ao site por causa disso.
     const seen = (() => { try { return sessionStorage.getItem('ln_intro_v2'); } catch (e) { return null; } })();
-    if (seen) { gate.remove(); return; }
+    if (seen) { gate.remove(); revealHero(); return; }
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const HOLD = reduce ? 600 : 1500;
+    const HOLD = reduce ? 600 : 1900;
     const OUT = reduce ? 320 : 640;
     let closed = false;
+    const timers = [];
+    const at = (ms, fn) => timers.push(setTimeout(fn, ms));
 
     document.documentElement.classList.add('intro-active');
 
     function closeGate(){
       if (closed) return;
       closed = true;
-      clearTimeout(timer);
+      timers.forEach(clearTimeout);
       document.removeEventListener('keydown', onKey);
+      gate.removeEventListener('click', onClick);
       try { sessionStorage.setItem('ln_intro_v2', '1'); } catch (e) {}
 
       // o wordmark não some: desliza até a posição exata do logo no header
@@ -330,14 +365,39 @@
 
       gate.classList.add('is-closing');
       document.documentElement.classList.remove('intro-active');
+      // o handoff: a cortina sai e a hero entra em cascata no mesmo movimento
+      revealHero();
       setTimeout(() => gate.remove(), OUT + 80);
     }
 
     function onKey(e){ if (e.key === 'Escape') closeGate(); }
+    function onClick(){ closeGate(); }
 
-    const timer = setTimeout(closeGate, HOLD);
-    document.getElementById('introSkip').addEventListener('click', closeGate);
-    document.addEventListener('keydown', onKey);
+    try {
+      // Segundo gesto: a régua atravessa sob o wordmark quando ele acaba de ser
+      // revelado. Medida aqui porque a largura vem de um clamp() no CSS.
+      const rule = document.getElementById('introRule');
+      const mark = document.getElementById('introMark');
+      if (rule && mark && !reduce) {
+        at(900, () => {
+          const r = mark.getBoundingClientRect();
+          if (!r.width) return;
+          rule.style.width = r.width + 'px';
+          rule.style.left = r.left + 'px';
+          rule.style.top = (r.bottom + 18) + 'px';
+          requestAnimationFrame(() => rule.classList.add('is-drawn'));
+        });
+      }
+
+      at(HOLD, closeGate);
+      // pular por clique em qualquer lugar, não só no botão
+      gate.addEventListener('click', onClick);
+      document.addEventListener('keydown', onKey);
+      // failsafe: aconteça o que acontecer, a cortina sai
+      at(4500, closeGate);
+    } catch (e) {
+      closeGate();
+    }
   }
 
   function initPage(){

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=15">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -28,28 +28,36 @@
   <div class="topbar">
     <div class="topbar-inner">
       <span class="topbar-note"><span class="dot"></span> Fabricado a mano en Valencia</span>
-      <a class="topbar-phone" href="tel:+34960640072">
-        <span class="label">Llamar</span>
-        <span class="num">+34 960 64 00 72</span>
-      </a>
+      <div class="topbar-right">
+        <div class="topbar-social">
+          <a href="https://www.facebook.com/p/La-Norma-Coffee-Machine-61575180874785/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#ic-facebook"></use></svg></a>
+          <a href="https://www.instagram.com/lanorma.coffee/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#ic-instagram"></use></svg></a>
+          <a href="https://www.linkedin.com/company/lanorma-coffee-machine" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#ic-linkedin"></use></svg></a>
+        </div>
+        <a class="topbar-phone" href="tel:+34960640072">
+          <span class="label">Llamar</span>
+          <span class="num">+34 960 64 00 72</span>
+        </a>
+      </div>
     </div>
   </div>
   <header class="site-header is-light" id="siteHeader">
-    <a href="index.html" class="logo"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
-    <nav class="main-nav" id="mainNav">
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="nosotros.html" class="active">Nosotros</a></li>
-        <li><a href="productos.html">Catálogo</a></li>
-        <li><a href="formacion.html">Formación</a></li>
-        <li><a href="productos.html#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-    <div class="header-social">
-      <a href="https://www.facebook.com/p/La-Norma-Coffee-Machine-61575180874785/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#ic-facebook"></use></svg></a>
-      <a href="https://www.instagram.com/lanorma.coffee/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#ic-instagram"></use></svg></a>
-      <a href="https://www.linkedin.com/company/lanorma-coffee-machine" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#ic-linkedin"></use></svg></a>
+    <div class="nav-panel" id="mainNav">
+      <nav class="main-nav nav-left" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html" class="active">Nosotros</a></li>
+          <li><a href="productos.html">Catálogo</a></li>
+        </ul>
+      </nav>
+      <nav class="main-nav nav-right" aria-label="Formación y contacto">
+        <ul>
+          <li><a href="formacion.html">Formación</a></li>
+          <li><a href="productos.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
+    <a href="index.html" class="logo" aria-label="La Norma, inicio"><img src="assets/real/logo-lanorma.png" alt="La Norma" class="logo-img"></a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
   </header>
 </div>
