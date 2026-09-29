@@ -16,6 +16,9 @@ CREAM         = RGBColor(0xF3, 0xEC, 0xDD)
 SAND          = RGBColor(0xE7, 0xD9, 0xBE)
 BRASS         = RGBColor(0xB8, 0x84, 0x3C)
 BRASS_LIGHT   = RGBColor(0xE4, 0xC4, 0x8C)
+# brass escurecido para texto pequeno sobre fundo claro:
+# o brass normal da 2,35:1 sobre sand, abaixo do minimo legivel (ver TOOLS.md)
+BRASS_DARK    = RGBColor(0x7C, 0x56, 0x23)
 MUTED         = RGBColor(0xB7, 0xA4, 0x89)
 MUTED_DARK    = RGBColor(0x6B, 0x5B, 0x45)
 BAD_DARK      = RGBColor(0xE0, 0x80, 0x74)
@@ -113,8 +116,8 @@ def eyebrow(slide, s, y, dark=True):
          bold=True, caps=True, spacing=2.0)
 
 
-def title(slide, s, y, size=34, dark=True, w=None):
-    text(slide, s, MARGIN, y, w or CONTENT_W * 0.72, 1.9, size,
+def title(slide, s, y, size=34, dark=True, w=None, h=1.9):
+    text(slide, s, MARGIN, y, w or CONTENT_W * 0.72, h, size,
          CREAM if dark else ESPRESSO, font=F_DISPLAY, bold=True, line=1.06)
 
 
@@ -126,7 +129,8 @@ def lede(slide, s, y, dark=True, w=None):
 def point(slide, x, y, w, step, h3, body, dark=True):
     """Bloco editorial: regua brass no topo, sem caixa (padrao do site)."""
     rect(slide, x, y, w, 0.028, BRASS)
-    text(slide, step, x, y + 0.22, w, 0.26, 10.5, BRASS, font=F_MONO, spacing=1.0)
+    text(slide, step, x, y + 0.22, w, 0.26, 10.5, BRASS if dark else BRASS_DARK,
+         font=F_MONO, spacing=1.0)
     text(slide, h3, x, y + 0.56, w, 0.6, 16, CREAM if dark else ESPRESSO,
          font=F_DISPLAY, bold=True, line=1.18)
     text(slide, body, x, y + 1.18, w, 1.5, 11.5, MUTED if dark else MUTED_DARK, line=1.5)
@@ -163,10 +167,13 @@ rect(s1, 0, 0, 5.4, H, ESPRESSO_DEEP)
 head(s1, "01 / 05", dark=True, show_logo=False)
 s1.shapes.add_picture(LOGO_CREAM, Inches(MARGIN), Inches(2.15), height=Inches(0.42))
 eyebrow(s1, "Propuesta interna · Septiembre 2026", 2.95)
-title(s1, "Puedo acelerar la web para que venda al ritmo del taller.", 3.35, size=30, w=4.2)
+# 4 linhas a 30pt ocupam ~2,1 pol: caixa de 1,9 deixava a ultima linha
+# encostando no lede (ver TOOLS.md, verificacao do deck)
+title(s1, "Puedo acelerar la web para que venda al ritmo del taller.", 3.35,
+      size=30, w=4.2, h=2.2)
 text(s1, "Una propuesta directa para resolver el principal cuello de botella "
          "digital de La Norma hoy — hecha por quien monta las máquinas desde dentro.",
-     MARGIN, 5.35, 4.1, 1.0, 11.5, MUTED, line=1.5)
+     MARGIN, 5.6, 4.1, 1.0, 11.5, MUTED, line=1.5)
 foot(s1, "", "Diogo Torres", "Palma de Gandia, Valencia", dark=True)
 text(s1, "Montaje en taller & desarrollo web", MARGIN, 7.0, 4, 0.3, 10.5, MUTED)
 
