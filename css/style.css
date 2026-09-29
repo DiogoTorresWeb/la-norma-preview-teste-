@@ -319,6 +319,22 @@ html.js .hero.is-revealed .hero-content > *:nth-child(2){ transition-delay:.12s;
 html.js .hero.is-revealed .hero-content > *:nth-child(3){ transition-delay:.24s; }
 html.js .hero.is-revealed .hero-content > *:nth-child(4){ transition-delay:.36s; }
 
+/* Rede de segurança. Tudo acima depende de uma transição/animação correr até ao
+   fim — e a linha do tempo do browser está parada enquanto o separador está
+   oculto. Abrir um link do WhatsApp carrega a página em segundo plano: a
+   transição nasce em currentTime 0 com fill backwards, segura o valor inicial e
+   a hero fica em branco para sempre (o F5 resolvia porque aí já estava visível).
+   Estas regras dão o estado final por declaração estática, sem depender de nada
+   animar. O JS põe is-settled; a animação passa a ser bónus. */
+html.js .hero.is-settled .hero-content > *{
+  opacity:1; transform:none; transition:none;
+}
+html.js .hero.is-settled .hero-bg{
+  opacity:1; transform:none; animation:none;
+  filter:saturate(0.9) sepia(0.08) hue-rotate(-6deg) contrast(1.05);
+}
+html.js .hero.is-settled .hero-scroll{ opacity:1; transition:none; }
+
 .hero-scroll{
   position:absolute;
   z-index:2;

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/style.css?v=16">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -317,20 +317,49 @@
   // intro ao sair, ou esta função direto quando não há intro. Chamada de todo
   // caminho de saída, inclusive dos de erro — hero presa em opacity:0 seria uma
   // página em branco.
+  //
+  // settleHero() é a rede: põe is-settled, que dá o estado final por CSS estático
+  // sem depender de nenhuma animação correr. Necessário porque com o separador
+  // oculto a linha do tempo do browser está parada, a transição nasce em
+  // currentTime 0 e segura o opacity:0 para sempre — que é o que acontecia ao
+  // abrir o link pelo WhatsApp.
+  function settleHero(){
+    const hero = document.getElementById('hero');
+    if (hero) hero.classList.add('is-settled');
+  }
+
   function revealHero(){
     const hero = document.getElementById('hero');
-    if (hero) hero.classList.add('is-revealed');
+    if (!hero) return;
+    hero.classList.add('is-revealed');
+    // depois da cascata mais lenta (.36s de atraso + .7s), fixa o estado final
+    setTimeout(settleHero, 1400);
   }
+
+  // Se a página se torna visível e a hero ainda não assentou, não se espera pela
+  // animação: mostra-se já. Cobre quem carregou em segundo plano.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') settleHero();
+  });
 
   function initIntroGate(){
     const gate = document.getElementById('introGate');
-    if (!gate || gate.dataset.bound) { revealHero(); return; }
+    if (!gate || gate.dataset.bound) { revealHero(); settleHero(); return; }
     gate.dataset.bound = '1';
+
+    // Carregou em segundo plano: não há ninguém a ver a intro, e é exatamente aqui
+    // que a hero ficava em branco. Salta-se a intro e mostra-se o site feito.
+    if (document.visibilityState === 'hidden') {
+      gate.remove();
+      revealHero();
+      settleHero();
+      return;
+    }
 
     // sessionStorage falha em alguns contextos (arquivo local, aba privada) — a intro
     // nunca pode impedir o acesso ao site por causa disso.
     const seen = (() => { try { return sessionStorage.getItem('ln_intro_v2'); } catch (e) { return null; } })();
-    if (seen) { gate.remove(); revealHero(); return; }
+    if (seen) { gate.remove(); revealHero(); settleHero(); return; }
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const HOLD = reduce ? 600 : 1900;
