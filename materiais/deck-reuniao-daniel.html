@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Norma — Tres actos · Diogo Torres</title>
+<meta name="description" content="Propuesta interna en tres actos: la web, la marca y el taller. Hecha por quien monta las máquinas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --espresso:#241c15;
+  --espresso-deep:#170f0a;
+  --cream:#f3ecdd;
+  --sand:#e7d9be;
+  --brass:#b8843c;
+  --brass-light:#e4c48c;
+  --muted:#b7a489;
+  --muted-dark:#6b5b45;
+  --line:rgba(243,236,221,0.16);
+  --line-dark:rgba(36,28,21,0.16);
+  --radius:2px;
+  --ff-display:'Fraunces','Georgia',serif;
+  --ff-body:'Archivo','Helvetica Neue',sans-serif;
+  --ff-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+body{
+  margin:0;
+  font-family:var(--ff-body);
+  background:var(--espresso-deep);
+  color:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- estrutura de slide ---------- */
+.slide{
+  position:relative;
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:clamp(28px,4vh,56px) clamp(28px,5vw,88px);
+  overflow:hidden;
+}
+.slide.is-dark{ background:var(--espresso-deep); color:var(--cream); }
+.slide.is-light{ background:var(--cream); color:var(--espresso); }
+.slide.is-sand{ background:var(--sand); color:var(--espresso); }
+
+.slide-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.is-light .slide-head,.is-sand .slide-head{ border-bottom-color:var(--line-dark); }
+.mark{
+  display:block;
+  width:112px;
+  height:20px;
+  background:var(--brass-light);
+  -webkit-mask-image:url('../assets/real/logo-lanorma.png');
+  -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:left center;
+  mask-image:url('../assets/real/logo-lanorma.png');
+  mask-size:contain;mask-repeat:no-repeat;mask-position:left center;
+}
+.is-light .mark,.is-sand .mark{ background:var(--espresso); }
+.slide-num{
+  font-family:var(--ff-mono);
+  font-size:.74rem;
+  letter-spacing:.06em;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.is-light .slide-num,.is-sand .slide-num{ color:var(--muted-dark); }
+
+.slide-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(16px,3.2vh,48px) 0;
+  max-width:1180px;
+  width:100%;
+}
+
+.eyebrow{
+  display:block;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--brass);
+}
+.is-light .eyebrow,.is-sand .eyebrow{ color:var(--muted-dark); }
+
+h1,h2{
+  font-family:var(--ff-display);
+  font-weight:600;
+  line-height:1.06;
+  letter-spacing:-0.015em;
+  margin:20px 0 0;
+  text-wrap:balance;
+}
+h1{ font-size:clamp(2.1rem,4.4vw,3.9rem); max-width:19ch; }
+h2{ font-size:clamp(1.7rem,3.3vw,2.9rem); max-width:22ch; }
+.lede{
+  margin:18px 0 0;
+  max-width:56ch;
+  font-size:clamp(.95rem,1.15vw,1.08rem);
+  line-height:1.6;
+  color:var(--muted);
+}
+.is-light .lede,.is-sand .lede{ color:var(--muted-dark); }
+
+.slide-foot{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:.8rem;
+  line-height:1.5;
+  color:var(--muted);
+}
+.is-light .slide-foot,.is-sand .slide-foot{ border-top-color:var(--line-dark); color:var(--muted-dark); }
+.slide-foot strong{ color:var(--cream); font-weight:600; }
+.is-light .slide-foot strong,.is-sand .slide-foot strong{ color:var(--espresso); }
+.foot-note{ font-family:var(--ff-mono); font-size:.72rem; letter-spacing:.03em; }
+
+/* ---------- capa ---------- */
+.cover-mark{
+  display:block;
+  width:clamp(200px,26vw,330px);
+  height:clamp(36px,4.8vw,58px);
+  background:var(--brass-light);
+  -webkit-mask-image:url('../assets/real/logo-lanorma.png');
+  -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:left center;
+  mask-image:url('../assets/real/logo-lanorma.png');
+  mask-size:contain;mask-repeat:no-repeat;mask-position:left center;
+  margin-bottom:34px;
+}
+.cover-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:62% 50%;
+  filter:saturate(0.88) sepia(0.14) hue-rotate(-8deg) contrast(1.03);
+  opacity:.5;
+}
+.cover-scrim{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(95deg, rgba(23,15,10,.97) 0%, rgba(23,15,10,.86) 42%, rgba(23,15,10,.45) 78%, rgba(23,15,10,.3) 100%);
+}
+#slide-1 .slide-head,#slide-1 .slide-body,#slide-1 .slide-foot{ position:relative; z-index:1; }
+#slide-1 .slide-head .mark{ visibility:hidden; } /* a capa já traz o wordmark grande */
+.author{ font-size:.95rem; }
+.author strong{ display:block; font-size:1.05rem; color:var(--cream); font-weight:600; margin-bottom:2px; }
+
+/* ---------- linha de dados (mono para o dado, sans para o rótulo) ---------- */
+.datarow{
+  margin-top:clamp(20px,3.4vh,48px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line-dark);
+  border-top:1px solid var(--line-dark);
+  border-bottom:1px solid var(--line-dark);
+}
+.is-dark .datarow{ background:var(--line); border-color:var(--line); }
+.datacell{
+  background:var(--cream);
+  padding:26px 28px 24px;
+}
+.is-dark .datacell{ background:var(--espresso-deep); }
+.is-sand .datacell{ background:var(--sand); }
+.datacell .value{
+  display:block;
+  font-family:var(--ff-mono);
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:500;
+  letter-spacing:-0.02em;
+  font-variant-numeric:tabular-nums;
+  color:var(--espresso);
+}
+.is-dark .datacell .value{ color:var(--cream); }
+.datacell .value .unit{ font-size:.5em; color:var(--muted-dark); margin-left:2px; }
+.is-dark .datacell .value .unit{ color:var(--muted); }
+.datacell .value.is-bad{ color:#a8392f; }
+.is-dark .datacell .value.is-bad{ color:#e08074; }
+.datacell .value.is-good{ color:#3f6b46; }
+.is-dark .datacell .value.is-good{ color:var(--brass-light); }
+.datacell .label{
+  display:block;
+  margin-top:10px;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted-dark);
+}
+.is-dark .datacell .label{ color:var(--muted); }
+.datacell .note{
+  display:block;
+  margin-top:12px;
+  font-size:.85rem;
+  line-height:1.5;
+  color:var(--muted-dark);
+  max-width:34ch;
+}
+.is-dark .datacell .note{ color:var(--muted); }
+
+/* ---------- lista editorial (régua brass no topo, sem card) ---------- */
+.points{
+  margin-top:clamp(20px,3.4vh,48px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(28px,3.4vw,52px);
+}
+.points.is-two{ grid-template-columns:repeat(2,1fr); }
+.point{ padding-top:20px; border-top:2px solid var(--brass); }
+.point .step{
+  display:block;
+  font-family:var(--ff-mono);
+  font-size:.78rem;
+  letter-spacing:.1em;
+  color:var(--brass);
+  margin-bottom:12px;
+  font-variant-numeric:tabular-nums;
+}
+.point h3{
+  font-family:var(--ff-display);
+  font-size:clamp(1.05rem,1.55vw,1.3rem);
+  font-weight:600;
+  line-height:1.2;
+  margin:0 0 12px;
+  letter-spacing:-0.01em;
+}
+.point p{
+  margin:0;
+  font-size:.92rem;
+  line-height:1.6;
+  color:var(--muted-dark);
+  max-width:38ch;
+}
+.is-dark .point p{ color:var(--muted); }
+.point p em{ color:var(--espresso); font-style:italic; }
+.is-dark .point p em{ color:var(--brass-light); }
+
+/* comparativo: specs em régua, número à direita */
+.speclist{ list-style:none; margin:20px 0 0; padding:0; }
+.speclist li{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+  font-size:.9rem;
+}
+.is-light .speclist li,.is-sand .speclist li{ border-bottom-color:var(--line-dark); }
+.speclist span{
+  font-family:var(--ff-mono);
+  font-size:.86rem;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.speclist .bad{ color:#e08074; }
+.speclist .good{ color:var(--brass-light); }
+.is-light .speclist .bad,.is-sand .speclist .bad{ color:#a8392f; }
+.is-light .speclist .good,.is-sand .speclist .good{ color:#3f6b46; }
+
+/* citação de fechamento */
+.pullquote{
+  margin-top:clamp(18px,2.6vh,36px);
+  padding:18px 0 0;
+  border-top:1px solid var(--line-dark);
+  font-family:var(--ff-display);
+  font-style:italic;
+  font-size:clamp(1rem,1.5vw,1.25rem);
+  line-height:1.5;
+  max-width:62ch;
+}
+.is-dark .pullquote{ border-top-color:var(--line); }
+
+/* bloco de fechamento do último slide */
+.closing{
+  margin-top:clamp(20px,3.2vh,44px);
+  padding-top:22px;
+  border-top:2px solid var(--brass);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.closing h3{
+  font-family:var(--ff-display);
+  font-size:clamp(1.3rem,2.2vw,1.9rem);
+  font-weight:600;
+  margin:0 0 8px;
+  letter-spacing:-0.01em;
+}
+.closing p{ margin:0; font-size:.92rem; color:var(--muted); max-width:46ch; line-height:1.55; }
+.contact-chip{
+  font-family:var(--ff-mono);
+  font-size:.82rem;
+  letter-spacing:.04em;
+  color:var(--brass-light);
+  border:1px solid var(--brass);
+  border-radius:var(--radius);
+  padding:12px 20px;
+  white-space:nowrap;
+}
+
+/* ---------- navegação ---------- */
+.deck-nav{
+  position:fixed;
+  right:clamp(14px,2vw,26px);
+  bottom:clamp(14px,2vh,26px);
+  z-index:20;
+  display:flex;
+  gap:6px;
+  background:rgba(23,15,10,.72);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:7px 9px;
+}
+.deck-nav a{
+  display:block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--muted);
+  opacity:.45;
+  transition:opacity .2s ease, background .2s ease, transform .2s ease;
+}
+.deck-nav a:hover{ opacity:1; background:var(--brass-light); transform:scale(1.25); }
+.deck-nav a.is-on{ opacity:1; background:var(--brass); }
+
+/* portátil de tela baixa (720–800px): aperta o ritmo pro slide caber inteiro */
+@media (min-width:901px) and (max-height:820px){
+  h2{ font-size:clamp(1.5rem,2.6vw,2.2rem); }
+  .lede{ font-size:.92rem; margin-top:14px; }
+  .point p,.datacell .note{ font-size:.85rem; }
+  .datacell{ padding:20px 22px 18px; }
+  .speclist li{ padding:8px 0; }
+  .pullquote{ font-size:1rem; }
+  .closing p{ font-size:.86rem; }
+}
+
+@media (max-width:900px){
+  .datarow,.points,.points.is-two{ grid-template-columns:1fr; }
+  .datarow{ gap:1px; }
+  .slide{ min-height:auto; padding:32px 24px 40px; }
+  html{ scroll-snap-type:none; }
+  .deck-nav{ display:none; }
+}
+
+
+
+/* ---------- divisor de acto ---------- */
+.act .slide-body{ justify-content:center; }
+.act-num{
+  display:block;
+  font-family:var(--ff-mono);
+  font-size:clamp(3.2rem,9vw,7rem);
+  line-height:1;
+  color:var(--brass);
+  letter-spacing:-0.04em;
+  font-variant-numeric:tabular-nums;
+}
+.is-sand .act-num,.is-light .act-num{ color:var(--muted-dark); }
+.act-title{
+  font-size:clamp(2.6rem,6.4vw,5.2rem);
+  max-width:14ch;
+  margin-top:8px;
+}
+.act .lede{ max-width:48ch; margin-top:22px; }
+
+/* ---------- capturas de pantalla ---------- */
+.shots{
+  margin-top:clamp(18px,3vh,38px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(150px,240px);
+  gap:clamp(18px,2.4vw,34px);
+  align-items:end;
+}
+.shots-three{ grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
+.shots-three .shot img{ max-height:34vh; }
+.shot{ margin:0; min-width:0; }
+.shot img{
+  display:block;
+  width:100%;
+  /* a captura nunca pode empurrar o slide alem da tela: corta por baixo,
+     que e onde ela e menos informativa */
+  max-height:42vh;
+  object-fit:cover;
+  object-position:top center;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 18px 44px rgba(0,0,0,.42);
+}
+/* a captura do movel e estreita: cortar a lateral dela esconde justamente
+   o que prova que e a mesma pagina — entra inteira */
+.shot-phone img{ object-fit:contain; object-position:top center; }
+.is-light .shot img,.is-sand .shot img{
+  border-color:var(--line-dark);
+  box-shadow:0 14px 34px rgba(36,28,21,.18);
+}
+.shot figcaption{
+  margin-top:10px;
+  font-size:.78rem;
+  line-height:1.45;
+  color:var(--muted);
+}
+.is-light .shot figcaption,.is-sand .shot figcaption{ color:var(--muted-dark); }
+.shot figcaption strong{ color:var(--cream); font-weight:600; }
+.is-light .shot figcaption strong,.is-sand .shot figcaption strong{ color:var(--espresso); }
+/* a captura é la prova: nesses slides ela manda, o título encolhe */
+.is-showcase h2{ font-size:clamp(1.5rem,2.6vw,2.3rem); }
+
+/* os pontinhos de navegacao ficam sobre o canto direito do rodape:
+   reserva a faixa pra eles em vez de deixar o texto por baixo */
+@media (min-width:901px){
+  .slide-foot{ padding-right:clamp(92px,10vw,150px); }
+}
+
+/* ---------- comparativo do sector (3 colunas na mesma régua) ---------- */
+.speclist.compare li{ display:grid; grid-template-columns:1fr auto auto; gap:18px; align-items:baseline; }
+.speclist.compare .what{ font-family:var(--ff-body); font-size:.92rem; white-space:normal; }
+.speclist.compare .them{ color:var(--muted-dark); font-size:.78rem; text-align:right; }
+.is-dark .speclist.compare .them{ color:var(--muted); }
+.speclist.compare .us{ min-width:9ch; text-align:right; font-size:.82rem; }
+
+@media (min-width:901px) and (max-height:820px){
+  .act-title{ font-size:clamp(2.2rem,5vw,4rem); }
+  /* portatil de tela baixa: a captura cede altura antes do texto */
+  .shot img{ max-height:34vh; }
+  .shots-three .shot img{ max-height:26vh; }
+  .shot figcaption{ font-size:.72rem; margin-top:7px; }
+  .speclist.compare li{ padding:7px 0; }
+}
+@media (max-width:900px){
+  .shots,.shots-three{ grid-template-columns:1fr; }
+  .shot-phone{ max-width:260px; }
+  .speclist.compare li{ grid-template-columns:1fr auto; }
+  .speclist.compare .them{ grid-column:1 / -1; text-align:left; }
+}
+@media print{
+  /* sem isto o PDF sai em retrato, o slide vira layout de movel e as
+     colunas colapsam — a impressao tem que ser paisagem */
+  @page{ size:A4 landscape; margin:0; }
+  html{ scroll-snap-type:none; }
+  .deck-nav{ display:none; }
+  .slide{
+    min-height:0;
+    height:100vh;
+    padding:26px 34px 30px;
+    page-break-after:always;
+    break-after:page;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .slide:last-child{ page-break-after:auto; break-after:auto; }
+  .slide-foot{ padding-right:0; }
+  /* a pagina impressa e estreita em px, o que dispararia o layout de movel:
+     as grades voltam a ser de varias colunas na marra */
+  .datarow,.points{ grid-template-columns:repeat(3,1fr); }
+  .points.is-two{ grid-template-columns:repeat(2,1fr); }
+  .shots{ grid-template-columns:minmax(0,1fr) minmax(130px,200px); }
+  .shots-three{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .speclist.compare li{ grid-template-columns:1fr auto auto; padding:7px 0; }
+  .speclist.compare .them{ grid-column:auto; text-align:right; }
+  h1{ font-size:2.4rem; }
+  h2{ font-size:1.8rem; }
+  .act-title{ font-size:3rem; }
+  .act-num{ font-size:4rem; }
+  .lede{ font-size:.9rem; margin-top:12px; }
+  .point p,.datacell .note,.shot figcaption{ font-size:.78rem; }
+  .pullquote{ font-size:.95rem; }
+  .shot img{ max-height:30vh; }
+  .shots-three .shot img{ max-height:24vh; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · PORTADA ============ -->
+<section class="slide is-dark" id="slide-1">
+  <img class="cover-bg" src="../assets/real/hero-display.jpg" alt="">
+  <div class="cover-scrim"></div>
+
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">01</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="cover-mark" role="img" aria-label="La Norma"></span>
+    <span class="eyebrow">Propuesta interna · Septiembre 2026</span>
+    <h1>Tres cosas que puedo hacer por La Norma desde dentro.</h1>
+    <p class="lede">La web es la primera y la más visible. Las otras dos las veo cada día en el taller. Es una primera lectura, no un diagnóstico de toda la empresa: hay mucho de La Norma que todavía no conozco.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div class="author">
+      <strong>Diogo Torres</strong>
+      Montaje en taller &amp; desarrollo web
+    </div>
+    <div class="foot-note">Palma de Gandia, Valencia</div>
+  </div>
+</section>
+
+<!-- ============ ACTO 1 ============ -->
+<section class="slide is-dark act" id="slide-2">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 1</span>
+  </div>
+  <div class="slide-body">
+    <span class="act-num">01</span>
+    <h2 class="act-title">La web</h2>
+    <p class="lede">Lo que un cliente encuentra hoy cuando busca La Norma en el móvil — y lo que puede encontrar en su lugar.</p>
+  </div>
+  <div class="slide-foot">
+    <div>Diagnóstico medido, no opinión.</div>
+    <div class="foot-note">PageSpeed Insights · Google Maps</div>
+  </div>
+</section>
+
+<!-- ============ 03 · DIAGNÓSTICO ============ -->
+<section class="slide is-light" id="slide-3">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 1 · Diagnóstico</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Dato medido</span>
+    <h2>La máquina es excelente en la barra. La web frena en el móvil.</h2>
+    <p class="lede">Comprobado con las herramientas oficiales de auditoría. La mayoría de hosteleros y distribuidores entra desde el teléfono.</p>
+
+    <div class="datarow">
+      <div class="datacell">
+        <span class="value is-bad">35<span class="unit">/100</span></span>
+        <span class="label">PageSpeed en móvil</span>
+        <span class="note">64 sobre 100 en ordenador. El catálogo tarda demasiado en mostrar fotos y vídeos sin comprimir.</span>
+      </div>
+      <div class="datacell">
+        <span class="value">0</span>
+        <span class="label">Formularios de contacto</span>
+        <span class="note">Quien quiere cotizar tiene que buscar el teléfono o abrir su propio correo por su cuenta.</span>
+      </div>
+      <div class="datacell">
+        <span class="value is-bad">4,1<span class="unit">/5</span></span>
+        <span class="label">Google Business · 8 reseñas</span>
+        <span class="note">La más reciente es de 1 estrella: quien la escribió dice que pidió información y no tuvo respuesta clara.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <div>La máquina no está en cuestión. <strong>Lo que yo veo aquí es fricción en la puerta de entrada.</strong></div>
+    <div class="foot-note">Fuente: PageSpeed Insights y Google Maps · sept. 2026</div>
+  </div>
+</section>
+
+<!-- ============ 04 · PRUEBA TÉCNICA ============ -->
+<section class="slide is-dark" id="slide-4">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 1 · Prueba</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Prueba comprobable</span>
+    <h2>De 35 a 99 sobre 100. Sé exactamente cómo se hace.</h2>
+    <p class="lede">No es teoría: son dos sitios que ya existen y se pueden abrir en directo, ahora mismo, en este portátil.</p>
+
+    <div class="points is-two">
+      <div class="point">
+        <span class="step">HOY</span>
+        <h3>lanorma.es — WordPress con sobrecarga</h3>
+        <ul class="speclist">
+          <li>Rendimiento móvil <span class="bad">35 / 100</span></li>
+          <li>Rendimiento ordenador <span class="bad">64 / 100</span></li>
+          <li>Carga del catálogo <span class="bad">lenta</span></li>
+        </ul>
+      </div>
+      <div class="point">
+        <span class="step">HECHO POR MÍ</span>
+        <h3>oliveirafotos.es y el prototipo Ln 200</h3>
+        <ul class="speclist">
+          <li>Rendimiento móvil <span class="good">99 / 100</span></li>
+          <li>Rendimiento ordenador <span class="good">100 / 100</span></li>
+          <li>Carga en teléfono <span class="good">&lt; 0,6 s</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="pullquote">No he pedido presupuesto a nadie, así que no voy a inventarme lo que cobraría una agencia. Lo que sí sé es que a mí no hay que explicarme qué lleva dentro una Ln1.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Prueba en vivo: <strong>podemos abrir la comparativa en el navegador cuando quieras.</strong></div>
+    <div class="foot-note">Google Lighthouse · Core Web Vitals</div>
+  </div>
+</section>
+
+<!-- ============ 05 · LA IDENTIDAD (impacto visual) ============ -->
+<section class="slide is-dark is-showcase" id="slide-5">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 1 · Identidad</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Ya construido</span>
+    <h2>Esto ya está hecho. Se abre ahora mismo.</h2>
+
+    <div class="shots">
+      <figure class="shot shot-wide">
+        <img src="assets/capturas/home-desktop.jpg" alt="Portada del sitio nuevo en ordenador">
+        <figcaption>Portada · ordenador</figcaption>
+      </figure>
+      <figure class="shot shot-phone">
+        <img src="assets/capturas/home-mobile.jpg" alt="Portada del sitio nuevo en móvil">
+        <figcaption>El mismo sitio · móvil</figcaption>
+      </figure>
+    </div>
+
+    <p class="pullquote">Cuatro páginas completas, con las fotos y las fichas técnicas reales de la Ln1 — no textos de relleno.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Fotografía real de la máquina, tipografía propia y <strong>un solo color de acento</strong>: es una identidad, no una plantilla.</div>
+    <div class="foot-note">Inicio · Nosotros · Catálogo · Formación</div>
+  </div>
+</section>
+
+<!-- ============ ACTO 2 ============ -->
+<section class="slide is-sand act" id="slide-6">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 2</span>
+  </div>
+  <div class="slide-body">
+    <span class="act-num">02</span>
+    <h2 class="act-title">La marca</h2>
+    <p class="lede">Una identidad no es una web bonita. Es lo mismo funcionando en todo lo demás, sin volver a diseñar nada desde cero.</p>
+  </div>
+  <div class="slide-foot">
+    <div>Lo que viene a continuación ya está construido y se puede enseñar hoy.</div>
+    <div class="foot-note">Blog · Instagram · Newsletter · Referencias de fuera</div>
+  </div>
+</section>
+
+<!-- ============ 07 · LA MARCA APLICADA ============ -->
+<section class="slide is-light is-showcase" id="slide-7">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 2 · Aplicación</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Ejemplo construido</span>
+    <h2>La misma identidad, funcionando en el blog, en Instagram y en el correo.</h2>
+
+    <div class="shots shots-three">
+      <figure class="shot">
+        <img src="assets/capturas/blog.jpg" alt="Prototipo del blog Diario del taller">
+        <figcaption><strong>Diario del taller</strong> · el conocimiento del taller, escrito</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/capturas/instagram.jpg" alt="Kit de publicaciones de Instagram">
+        <figcaption><strong>Instagram</strong> · seis formatos listos para publicar</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/capturas/email.jpg" alt="Plantilla de newsletter">
+        <figcaption><strong>Newsletter</strong> · contacto directo, sin depender de redes</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <div>Todo sale del mismo sistema: cambiar un color <strong>cambia las tres cosas a la vez</strong>.</div>
+    <div class="foot-note">Prototipos reales · contenido de ejemplo marcado como tal</div>
+  </div>
+</section>
+
+<!-- ============ 08 · LA REGLA DEL SECTOR ============ -->
+<section class="slide is-sand" id="slide-8">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 2 · El sector</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Referencia de fuera</span>
+    <h2>Miré qué tienen otros fabricantes en su web, por si algo encaja aquí.</h2>
+    <p class="lede">Mirado el 28 de septiembre en Iberital, Ascaso y La Marzocco — empresas bastante más grandes que nosotros. No es un ranking ni una lista de deberes: es lo que se repite.</p>
+
+    <ul class="speclist compare">
+      <li><span class="what">Portal de recambios</span> <span class="them">Iberital · La Marzocco</span> <span class="us">todavía no</span></li>
+      <li><span class="what">Documentación técnica descargable</span> <span class="them">Ibdocs (Iberital)</span> <span class="us">todavía no</span></li>
+      <li><span class="what">Servicio técnico en el menú</span> <span class="them">SAT (Ascaso)</span> <span class="us">todavía no</span></li>
+      <li><span class="what">Puerta para el distribuidor</span> <span class="them">Ascaso · La Marzocco</span> <span class="us">todavía no</span></li>
+      <li><span class="what">Idiomas</span> <span class="them">3 y 4</span> <span class="us">1</span></li>
+      <li><span class="what">Contenido publicado</span> <span class="them">Stories · News</span> <span class="us">prototipo</span></li>
+      <li><span class="what">WhatsApp y redes visibles</span> <span class="them">Iberital</span> <span class="us good">ya lo tenemos</span></li>
+    </ul>
+  </div>
+
+  <div class="slide-foot">
+    <div>Nada de esto es urgente. <strong>Lo traigo como repertorio: si alguna pieza tiene sentido aquí, ya sabemos por dónde se empieza.</strong></div>
+    <div class="foot-note">iberital.com · ascaso.com · lamarzocco.com · 28 sept. 2026</div>
+  </div>
+</section>
+
+<!-- ============ ACTO 3 ============ -->
+<section class="slide is-dark act" id="slide-9">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 3</span>
+  </div>
+  <div class="slide-body">
+    <span class="act-num">03</span>
+    <h2 class="act-title">El taller</h2>
+    <p class="lede">Esta parte no la saqué de internet. La veo cada día, desde dentro, con las manos en la máquina.</p>
+  </div>
+  <div class="slide-foot">
+    <div>Observación de quien está en el montaje — no una auditoría externa.</div>
+    <div class="foot-note">Etiquetas · Albarán · DHL · Premontaje</div>
+  </div>
+</section>
+
+<!-- ============ 10 · EL TIEMPO QUE SE VA ============ -->
+<section class="slide is-dark" id="slide-10">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 3 · Lo que veo</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Lo que veo desde dentro</span>
+    <h2>No es que se trabaje mal. Es que hay cosas que hacemos a mano y quizá ya no haga falta.</h2>
+
+    <div class="points">
+      <div class="point">
+        <span class="step">01</span>
+        <h3>Las etiquetas</h3>
+        <p>Cada máquina vendida lleva sus pegatinas. Hoy alguien se sienta y las va sacando una a una en el ordenador — en temporada alta, eso se come casi el día.</p>
+      </div>
+      <div class="point">
+        <span class="step">02</span>
+        <h3>El albarán y la etiqueta de DHL</h3>
+        <p>Los dos dependen siempre de una persona parada delante de la pantalla, repitiendo datos que ya existen en el pedido.</p>
+      </div>
+      <div class="point">
+        <span class="step">03</span>
+        <h3>El premontaje</h3>
+        <p>Llevamos tiempo intentando ordenarlo y no acaba de salir. No es falta de ganas: falta una forma controlada de hacerlo y de saber si se está siguiendo.</p>
+      </div>
+    </div>
+
+    <p class="pullquote">Lo que a mí me parece que tienen en común: atan a alguien con oficio a una tarea repetitiva. Si se pueden quitar de en medio o no, habría que mirarlo caso por caso.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>La Zebra ZD421 entiende ZPL: <strong>una etiqueta es texto, y el texto se genera en lote.</strong></div>
+    <div class="foot-note">Documentación de Zebra · API de MyDHL</div>
+  </div>
+</section>
+
+<!-- ============ 11 · POR DÓNDE EMPEZARÍA ============ -->
+<section class="slide is-light" id="slide-11">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Acto 3 · Propuesta</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Propuesta · y dos preguntas</span>
+    <h2>Si te parece, empezaría por las etiquetas: se ve el mismo día y no toca nada más.</h2>
+
+    <div class="points">
+      <div class="point">
+        <span class="step">LA PRUEBA</span>
+        <h3>Todas las del día, de una vez</h3>
+        <p>La lista de pedidos entra, las etiquetas salen. Se diseña la plantilla una sola vez. Si no sirve, se vuelve a lo de antes sin haber cambiado nada.</p>
+      </div>
+      <div class="point">
+        <span class="step">DESPUÉS</span>
+        <h3>El albarán y la DHL, detrás</h3>
+        <p>Los dos son documentos que salen del pedido. DHL ofrece API para la etiqueta, la recogida y el seguimiento.</p>
+      </div>
+      <div class="point">
+        <span class="step">ANTES DE NADA</span>
+        <h3>Dos preguntas</h3>
+        <p><em>¿Dónde se registra hoy el pedido?</em> y <em>¿con qué programa se hacen ahora las etiquetas?</em> Sin saber eso, cualquier plazo que te diera sería inventado.</p>
+      </div>
+    </div>
+
+    <p class="pullquote">No te traigo un número de horas ahorradas, porque no lo he medido. Te traigo lo que veo y una forma barata de comprobarlo.</p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Nada de esto entra en el precio de la web. <strong>Es otra conversación, cuando quieras tenerla.</strong></div>
+    <div class="foot-note">Prueba reversible · sin parar la producción</div>
+  </div>
+</section>
+
+<!-- ============ 12 · SIGUIENTE PASO ============ -->
+<section class="slide is-dark" id="slide-12">
+  <div class="slide-head">
+    <span class="mark" role="img" aria-label="La Norma"></span>
+    <span class="slide-num">Cierre</span>
+  </div>
+
+  <div class="slide-body">
+    <span class="eyebrow">Siguiente paso</span>
+    <h2>Primero la web. Después, lo que La Norma vaya necesitando.</h2>
+    <p class="lede">No hace falta comprometer todo a la vez. Cuando el sitio esté funcionando, se abren los demás frentes poco a poco.</p>
+
+    <div class="points">
+      <div class="point">
+        <span class="step">PASO 1 · AHORA</span>
+        <h3>La web y el catálogo</h3>
+        <p>Resolver la velocidad en móvil, publicar la ficha de la Ln 200 y abrir el canal de contacto para cotizaciones directas.</p>
+      </div>
+      <div class="point">
+        <span class="step">PASO 2</span>
+        <h3>La marca, viva</h3>
+        <p>El taller real contado en LinkedIn, Instagram y correo: la ingeniería y el montaje que aquí sí se pueden enseñar.</p>
+      </div>
+      <div class="point">
+        <span class="step">PASO 3</span>
+        <h3>El taller, sin trabajo repetido</h3>
+        <p>Empezando por las etiquetas, con una prueba pequeña y reversible. Y detrás, el albarán y la expedición.</p>
+      </div>
+    </div>
+
+    <div class="closing">
+      <div>
+        <h3>Hablamos 10 minutos cuando te venga bien.</h3>
+        <p>Te enseño todo esto en el móvil o en el portátil, en un descanso del taller. Sin compromiso alguno.</p>
+      </div>
+      <div class="contact-chip">Diogo Torres · Taller de Valencia</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <div>Propuesta interna: <strong>hecha para sumar a La Norma.</strong></div>
+    <div class="foot-note">La Norma Coffee Machine Manufacturer S.L.</div>
+  </div>
+</section>
+
+
+<nav class="deck-nav" aria-label="Navegación del deck"></nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const nav = document.querySelector('.deck-nav');
+
+  // os pontinhos saem da quantidade real de slides, nao de uma lista fixa
+  slides.forEach((s, i) => {
+    const a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.setAttribute('aria-label', 'Slide ' + (i + 1));
+    nav.appendChild(a);
+  });
+  const dots = Array.from(nav.children);
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const i = slides.indexOf(e.target);
+      dots.forEach((d, n) => d.classList.toggle('is-on', n === i));
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => io.observe(s));
+
+  function current(){
+    const mid = window.scrollY + window.innerHeight / 2;
+    return slides.findIndex(s => s.offsetTop <= mid && s.offsetTop + s.offsetHeight > mid);
+  }
+  document.addEventListener('keydown', (e) => {
+    const next = ['ArrowRight','ArrowDown','PageDown',' '].includes(e.key);
+    const prev = ['ArrowLeft','ArrowUp','PageUp'].includes(e.key);
+    if (!next && !prev) return;
+    e.preventDefault();
+    const i = current();
+    const target = slides[Math.min(slides.length - 1, Math.max(0, i + (next ? 1 : -1)))];
+    if (target) target.scrollIntoView({ behavior:'smooth' });
+  });
+</script>
+</body>
+</html>
