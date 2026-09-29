@@ -41,3 +41,34 @@ Só entra aqui o que já tem evidência no projeto. Não classificar skill por e
 ---
 
 Regra de continuidade: se uma ferramenta/skill/processo produzir resultado claramente útil, registrar aqui antes de seguir para outra etapa (ver `PROJECT_BRAIN.md` seção 11).
+
+---
+
+### Ferramentas verificadas na Rodada 8 (28/09/2026)
+
+Levantamento por execução, não por documentação. Detalhe completo em
+`pesquisa/sistema-de-producao.md`.
+
+- ⚪ **`agent-reach`** — instalado, mas **degradado nesta máquina**: Twitter, Reddit e GitHub
+  dependem da extensão OpenCLI, que não está conectada (o `opencli` 1.8.7 está instalado
+  globalmente, falta ligar a extensão no navegador). Só YouTube responde. Pesquisa web nesta
+  rodada foi feita com `WebSearch`/`WebFetch` + browser embutido.
+- ⭐ **Chrome headless como ferramenta de captura** — `chrome.exe --headless=new --screenshot`
+  e `--print-to-pdf` funcionam e dão resolução cheia, coisa que o painel do browser não dá.
+  **Pegadinha:** o Chrome **não consegue escrever dentro da pasta do projeto** ("Acesso
+  negado") — tem que salvar no diretório temporário da sessão e copiar depois.
+- ⭐ **`pypdfium2`** (instalado nesta rodada) — renderiza PDF em PNG. Foi assim que os 12
+  slides do deck novo foram conferidos de verdade. Não há poppler nem PyMuPDF nesta máquina.
+- ⭐ **`materiais/check-deck-pptx.py`** (escrito nesta rodada) — desenha os slides do `.pptx`
+  a partir das posições reais e acusa colisão e elemento fora dos limites. Achou uma colisão
+  real no slide 1. **Cuidado:** a escala de fonte é `pt × 12700 × escala_EMU`; errar isso faz
+  todo o texto cair no mínimo de 8px e a checagem passa dando "tudo certo" falsamente.
+- ❌ **MCP do GitHub** — falha ("Authorization header is badly formatted"). E **o `gh` CLI não
+  está instalado**. Resultado: hoje não há como ver se o deploy do Pages passou nem se a trava
+  anti-vazamento disparou. É a lacuna mais grave do sistema de produção.
+- ⚠️ **`convert` não é o ImageMagick.** O que está no PATH é o `convert.exe` do Windows, que
+  converte sistema de arquivos. ImageMagick não existe aqui — redimensionamento de imagem se
+  faz com Pillow.
+- ⚠️ **Sem PowerPoint e sem LibreOffice.** Renderização fiel de `.pptx` só subindo no Google
+  Drive (o Slides converte) — o upload por MCP não serve, exigiria emitir ~190 mil caracteres
+  de base64 num único parâmetro.

@@ -1,6 +1,6 @@
 # materiais/ — peças construídas com a identidade do site
 
-Cinco exemplos de coisas que dá pra fazer com o sistema visual já aprovado no 4174.
+Peças construídas com o sistema visual já aprovado no 4174.
 Servem pra duas coisas: apresentar pro Daniel e mostrar que existe serviço agregado
 pra vender depois do site.
 
@@ -46,10 +46,15 @@ mostrar o deck: rede local, ou o `.pptx` no próprio celular.
 
 | Arquivo | O que é | Pra que serve na reunião |
 |---|---|---|
-| `index.html` | Hub que lista as 5 peças | Abre essa primeiro. É o fio condutor. |
-| `deck.html` | Proposta em 5 slides, tela cheia | Substitui o `contexto/propuesta-daniel-5slides.html` antigo. Mesmo conteúdo, identidade nova. |
+| `index.html` | Hub que lista as peças | Abre essa primeiro. |
+| `deck-reuniao-daniel.html` | **Deck de 12 slides em três atos** — a web, a marca, o taller | **É o fio condutor da reunião.** O Ato 3 fala de processos internos da fábrica: **nunca vai pro Pages.** |
+| `deck-reuniao-daniel.pdf` | O mesmo deck, 12 páginas A4 landscape | Recurso, se não houver servidor. Gerado do HTML, não mantido à mão. |
+| `la-norma-web-impressa.pdf` | As 4 páginas do site em papel digital, 19 páginas | Mostra o catálogo sem depender do PC. **Não substitui o site** — não tem as transições nem o FAQ aberto. |
+| `plan-de-contenido.md` | Pauta de 8 artigos, calendário de Instagram com os seis textos e uma edição de newsletter escrita | Tira o conteúdo do estado de maquete. |
+| `deck.html` | Proposta em 5 slides, tela cheia | Versão curta, se a conversa for rápida. Substitui o `contexto/propuesta-daniel-5slides.html` antigo. |
 | `La-Norma-Propuesta-2026.pptx` | O mesmo deck, editável | Se ele pedir o arquivo pra editar ou repassar. |
-| `blog.html` + `blog-articulo.html` | Protótipo da seção "Diario del taller" | O serviço agregado mais fácil de vender: conteúdo que também ajuda a vender máquina. |
+| `blog.html` + `blog-articulo.html` + `blog-reparables.html` | Seção "Diario del taller" com **dois artigos escritos por inteiro** | O serviço agregado mais fácil de vender: conteúdo que também ajuda a vender máquina. |
+| `assets/capturas/` | Capturas reais do site e das peças, em alta | Alimentam os slides do deck. Não são publicadas. |
 | `instagram.html` | 6 formatos de post quadrado | Mostra que a identidade escala pra redes sem redesenhar nada. |
 | `email.html` | Template de newsletter | Prova que dá pra manter contato com cliente sem depender de rede social. |
 
@@ -64,6 +69,21 @@ mostrar o deck: rede local, ou o `.pptx` no próprio celular.
 
 Os 5 slides cabem exatos em 720px de altura — testado. Em tela mais baixa que isso
 a tipografia aperta sozinha via media query.
+
+## Como regerar os dois PDFs
+
+Os PDFs são derivados — **não se editam à mão**. Com o servidor local de pé:
+
+```bash
+python -m http.server 4174
+chrome --headless=new --no-pdf-header-footer --print-to-pdf=deck.pdf http://localhost:4174/materiais/deck-reuniao-daniel.html
+```
+
+O do site sai igual, uma página de cada vez (`index`, `nosotros`, `productos`, `formacion`),
+e depois junta-se. O bloco `@media print` que faz isto funcionar está no **fim** de
+`css/style.css`: declarado antes, perdia por ordem de origem para o `@media (max-width:900px)`
+— a folha impressa tem ~720px de largura em CSS, e sem isso o site sairia todo em coluna
+única, como sai no telemóvel.
 
 ---
 
@@ -112,18 +132,48 @@ técnica, e isso é verdade.
 
 ---
 
-## O que ainda não foi verificado
+## Verificação do `.pptx` (28/09/2026)
 
-**O `.pptx` não foi aberto no PowerPoint.** Não há PowerPoint nem LibreOffice nesta
-máquina, então não deu pra renderizar e conferir visualmente. O que foi validado por
-código: são 5 slides em 16:9, nenhum elemento fora dos limites do slide, e todos os
-textos estão presentes. **Abrir e conferir antes de mandar pro Daniel.** Se algo estiver
-torto, é só ajustar o gerador e rodar de novo, da raiz do projeto:
+Não há PowerPoint nem LibreOffice nesta máquina, então o arquivo foi conferido por três
+caminhos objetivos, e **dois defeitos reais apareceram e foram corrigidos**:
+
+1. **Contraste.** Todos os 84 trechos de texto foram medidos contra a cor de fundo do slide
+   pela fórmula de contraste do WCAG. Os números `01/02/03` do slide 4 estavam em brass
+   (`#B8843C`) sobre areia (`#E7D9BE`) — **2,35:1**, muito abaixo do mínimo de 4,5:1 para
+   texto pequeno. Num slide projetado numa sala, isso simplesmente não se lê. Corrigido: sobre
+   fundo claro o passo agora usa `BRASS_DARK` `#7C5623` (4,69:1 sobre areia, 5,56:1 sobre
+   creme), e sobre fundo escuro o brass continua igual (5,77:1). Nova medição: **0 trechos
+   abaixo do mínimo.**
+2. **Colisão no slide 1.** O título ocupa 4 linhas a 30pt, cerca de 2,1 pol, numa caixa de
+   1,9 pol — a última linha encostava no parágrafo abaixo. Corrigido: caixa do título passou a
+   2,2 pol e o parágrafo desceu de 5,35 para 5,6 pol.
+
+Também verificado e **correto**: 5 slides em 16:9 (13,33 × 7,5 pol), nenhum elemento fora dos
+limites, fundo de cada slide na cor certa (escuro / creme / escuro / areia / escuro, igual ao
+`deck.html`), e **só três fontes em uso — Arial, Georgia e Courier New**, que existem em
+qualquer Windows. Nenhuma referência a Fraunces/Archivo/IBM Plex sobrou no arquivo.
+
+**O que isso ainda não garante.** A conferência foi feita com um renderizador aproximado
+escrito aqui (posições e textos reais do XML, métrica de fonte do Windows) — não é o que o
+PowerPoint desenha. Ele pega colisão, estouro e contraste; não pega diferença fina de
+espaçamento nem de quebra de linha. **Para o veredito final:** sobe o `.pptx` no Google Drive
+(arrastar e soltar), que o Google Slides converte — com o arquivo lá, dá para exportar o PDF
+e conferir slide a slide num renderizador de verdade.
+
+Se algo estiver torto, **ajusta-se o gerador e roda de novo** — nunca o `.pptx` na mão, senão
+o gerador e o arquivo divergem:
 
 ```bash
 pip install python-pptx pillow
 python materiais/build-deck-pptx.py    # regera o .pptx
 python materiais/recolor-logo.py       # regera os logos tingidos
+```
+
+A conferência é repetível — `materiais/check-deck-pptx.py` desenha os 5 slides em PNG a partir
+das posições reais e aponta colisão e elemento fora dos limites:
+
+```bash
+python materiais/check-deck-pptx.py materiais/La-Norma-Propuesta-2026.pptx /tmp/deck-render
 ```
 
 A versão HTML (`deck.html`) essa sim foi testada nos 5 slides, em 1280×720 e em mobile.

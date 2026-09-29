@@ -279,3 +279,135 @@ Depois de editar o CSS, o navegador continuou servindo a versão antiga por cach
 **O que não repetir:** editar CSS/HTML e testar sem subir o cache-bust — quase levou a diagnosticar errado uma mudança que na verdade tinha funcionado.
 
 **Próxima hipótese:** os itens novos que o Diogo trouxe no fim desta rodada (paleta de cor questionada — o brass não existe nas máquinas reais; possível redesenho do material de apresentação/slides pra vender junto; e uma menção não confirmada sobre "curso no cabeçalho") ficam registrados como abertos, não decididos — precisam de uma rodada de grilling própria antes de qualquer implementação, porque cada um sozinho já é uma mudança grande.
+
+
+---
+
+## Rodada 8 — 28/09, tudo o que não é o site
+
+**Ordem do Diogo: não tocar no site.** "Há coisas lá que eu gostei." Nenhum arquivo de
+`index/nosotros/productos/formacion` ou `css/style.css` foi alterado nesta rodada.
+
+**O que mudou o peso da rodada:** o Diogo descreveu, pela primeira vez por escrito, os buracos
+operacionais que ele vê de dentro da fábrica — a etiqueta de cada máquina feita uma a uma na
+Zebra ZD421 (em alta temporada consome quase o dia do supervisor), o albarán e a etiqueta da
+DHL sempre dependentes de uma pessoa parada, e a pré-montagem que há tempos não sai do papel.
+Isso deixou de ser "proposta de site" e virou **três atos**: a web, a marca e o taller.
+
+**Decisões tomadas com ele, em rodada de opções clicáveis:**
+- Posição no Ato 3: **funcionário que enxerga e propõe**, demonstrando capacidade. Sem preço
+  colado na automação; o preço continua sendo só o da web (800 €). Nada no deck menciona sair
+  da empresa.
+- Sistema de gestão: **misturado entre setores, e ele não sabe com precisão**. O deck não
+  afirma sistema nenhum — vira a primeira pergunta do diagnóstico.
+- Pesquisa externa mirando dois alvos: o que fabricantes de porte têm além do site, e como PME
+  industrial automatiza chão de fábrica.
+
+**Entregue:**
+- `pesquisa/sistema-de-producao.md` — auditoria do próprio jeito de trabalhar (ferramentas,
+  modelo de execução, documentação, formato de Design Spec, sete trilhas de QA).
+- `pesquisa/benchmark-fabricantes.md` e `pesquisa/automacao-pme-industrial.md` — com fonte e
+  data em cada afirmação.
+- `materiais/deck-reuniao-daniel.html` — 12 slides em três atos, com capturas reais do site.
+- `materiais/plan-de-contenido.md` + segundo artigo escrito por inteiro
+  (`materiais/blog-reparables.html`).
+- `.pptx` conferido pela primeira vez, com dois defeitos reais corrigidos.
+
+**Bugs achados durante a verificação** (todos em `materiais/`, nenhum no site):
+1. **Contraste reprovado no `.pptx`:** brass `#b8843c` sobre areia dá 2,35:1 — texto pequeno
+   ilegível em projeção. Corrigido com `BRASS_DARK #7c5623` (4,69:1). Os 84 trechos de texto
+   foram medidos; agora zero abaixo do mínimo.
+2. **Colisão no slide 1 do `.pptx`:** título de 4 linhas a 30pt em caixa de 1,9 pol encostava
+   no parágrafo. Caixa foi pra 2,2 pol.
+3. **Ícones sociais gigantes no protótipo do blog:** `blog.html` e `blog-articulo.html` usavam
+   a classe `header-social`, **que não existe em lugar nenhum do CSS** — a Rodada 7 moveu as
+   redes pro topbar e renomeou a classe, e o blog quebrou em silêncio porque compartilha o
+   mesmo `style.css`. Trocado pra `topbar-social`.
+4. **Slide 5 do deck novo estourando a tela** (1061px num viewport de 900) por causa do
+   tamanho das capturas. Resolvido limitando a altura da imagem em `vh`.
+5. **Impressão saindo em retrato**, o que dispara o layout de móvel e colapsa as colunas de
+   três em uma. Resolvido com `@page{size:A4 landscape}` **e movendo o bloco `@media print`
+   pro fim da folha de estilo** — antes ele perdia para o breakpoint de 900px por ordem.
+
+**Aprendizado que vale além desta rodada:** o item 3 é a prova de que peça compartilhando
+`css/style.css` com o site é **vantagem e risco ao mesmo tempo** — acompanha a paleta sozinha,
+mas quebra sozinha também. Toda rodada que renomear classe no site precisa passar os olhos em
+`materiais/`.
+
+**O que não foi feito de propósito:** nada de Ln 200 (aguarda especificações), nenhuma foto
+nova (variante negra e fábrica continuam fora do acervo), nenhuma mudança de paleta (item 3 do
+backlog, precisa de rodada própria).
+
+---
+
+# Rodada 9 — 29/09/2026: revisão editorial, e um espelho que não deu
+
+Rodada curta e cirúrgica, pedida para a reunião do dia seguinte. **Sem redesign:** o sistema
+visual estava aprovado e não se lhe tocou.
+
+## O que mudou no discurso
+
+O material estava escrito com voz de agência externa a apontar falhas a uma empresa. O Diogo é
+funcionário e apresenta de dentro, e o material cobre uma fração pequena do que a La Norma é.
+Passou a declarar o estado de cada informação — **facto · observação do Diogo · referência ·
+exemplo · hipótese · pergunta** — usando o `eyebrow` que já existia em cada slide. Zero CSS
+novo, zero componente novo.
+
+O pior caso era o slide do sector: cinco `no existe` a **vermelho** (`.us.bad` → `#a8392f`) sob
+o título «*os fabricantes com marca própria têm cinco coisas. Nós temos uma*». Virou repertório:
+«*Miré qué tienen otros fabricantes en su web, por si algo encaja aquí*», sem cor de falha, com
+a ressalva de que são empresas bastante maiores já na entrada e não no rodapé.
+
+Saíram também: o veredito «*La Norma tiene un problema de fricción*» (virou «*lo que yo veo*»),
+«*lo que hoy se hace en PowerPoint*» (lia como crítica ao trabalho dos colegas), e **os
+2.500–4.000 € da agência com os «dos meses»** — era o único número sem fonte em todo o material,
+herdado do deck de 5 slides. Foi substituído por dizer que não pediu orçamento a ninguém.
+
+## O espelho das máquinas: tentado, verificado, revertido
+
+O Diogo pediu que a Compacta e a de 3 grupos olhassem para dentro da página. Levantamento dos
+**234 ficheiros de imagem** do repositório: **não existe um único render virado para a direita**
+— nem nos 6 de `FUNDO CINZA/`, nem em `MAQUINA FUNDO BRANCO/`, nem em `VASO ALTO/`, e os 3 GIF
+turntable têm só **3 poses únicas**, todas do mesmo lado. Logo, a única via era espelhar.
+
+Espelhar inverte todo o texto da fotografia. A pegatina "Lanorma Ln1" da bandeja e o display
+foram recolados na leitura certa, e à primeira vista resultou — mas **o Diogo apanhou à vista
+o que a ampliação confirmou**: o espelho troca o sentido do declive do painel, e a pegatina
+recolada fica encavalitada na aresta em vez de centrada, com um fantasma do texto antigo por
+baixo. Tentou-se ainda repor marca a marca o logótipo das ~30 chávenas (ficou inconsistente,
+que é pior do que uniformemente errado) e limpá-las (apagou os ícones dos botões do painel).
+
+**Revertido.** As duas imagens voltaram byte a byte aos originais e o layout não mudou. Fica
+registado no `PROJECT_BRAIN.md` que espelhar está descartado, e quais são as duas saídas reais:
+mudar a composição para todas as fichas terem a máquina à direita, ou pedir renders do outro
+lado a quem fez os originais.
+
+**Aprendizado:** uma fotografia de produto não é simétrica só porque a máquina parece sê-lo.
+Antes de espelhar, contar o texto que existe na imagem — aqui eram a pegatina, o display e
+trinta chávenas com logótipo.
+
+## O que ficou, e é bom
+
+- **Vãos das grelhas na de 2 grupos:** eram recorte incompleto — os três vãos fechados pelas
+  barras do porta-chávenas tinham ficado brancos opacos e liam-se como blocos brancos sobre o
+  creme. Abertos por enchente a partir de dentro, com borda graduada. Esta imagem **nunca foi
+  espelhada**, e a correção fica.
+- **Secção de vaso alto** em `productos.html`, com o único ativo limpo e inequívoco que existe
+  (2 grupos, recortado de `VASO ALTO/`). Não se fabricaram três cards: os outros dois não têm
+  material. Máquina à direita, texto à esquerda, via `.machine.is-flipped`.
+- **`.feature-item` tinha CSS escrito para `h4` com markup em `h3`** — os títulos de "Pensada
+  al detalle" nunca tiveram o uppercase nem o letter-spacing pretendidos, desde sempre. É o
+  mesmo tipo de bug silencioso que a Rodada 8 encontrou no `header-social`.
+- **Fallback em papel:** `@media print` novo, **no fim** de `css/style.css`. Declarado antes,
+  perdia por ordem de origem para o `@media (max-width:900px)` — a folha impressa tem ~720px de
+  largura em CSS, e o site saía todo em coluna única, como no telemóvel. É a segunda vez que a
+  ordem do bloco `print` morde neste projeto (a primeira foi no deck, na Rodada 8).
+- **Guia de 30 segundos** no primeiro ecrã do `apresentacao-daniel/README.md`: ordem, objetivo
+  de cada bloco, o que é real e o que é exemplo, onde parar para conversar.
+
+## O que não foi feito, de propósito
+
+Variante negra: o recorte da Compacta negra está feito e guardado, mas espelhá-la deixa uma
+cunha onde a aresta brilhante da bandeja atravessa o wordmark — mesmo problema. Falta material
+de 2 e 3 grupos negras na mesma pose. Ln 200 continua fora (sem especificações) e a paleta
+continua por rever (item 3 do backlog).

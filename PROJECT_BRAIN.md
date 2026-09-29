@@ -10,6 +10,17 @@ Site institucional para a Lanorma Coffee Machine Manufacturer S.L. (Palma de Gan
 
 ## 2. Estado atual
 
+**29/09 — Rodada 9: revisão editorial e o site reaberto em pontos nomeados.** O sistema visual
+está aprovado e não se mexeu. Mudaram duas coisas: **o tom** (o material estava escrito com voz
+de agência externa a apontar falhas; passou a ser primeira leitura, referência e observação,
+com o estado de cada informação declarado) e **as imagens do catálogo** (orientação e recorte).
+Ver seção 13, item 11.
+
+**28/09 — Rodada 8: o projeto deixou de ser só "o site".** Com o site congelado a pedido do
+Diogo, a rodada fechou o material de apresentação (deck em três atos), o conteúdo de marketing
+(pauta real, não maquete) e uma auditoria do próprio sistema de produção (`pesquisa/`). Ver
+seção 13, item 10.
+
 **Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Publicada como preview remoto no GitHub Pages em 19–20/09 (`https://diogotorresweb.github.io/la-norma-preview-teste-/`).
 
 **20/09 — Rodada 5, hero e intro fechadas via grilling.** Hero virou full-bleed com uma foto nova fornecida pelo Diogo (macro do display da máquina, sem pessoa, com "Lanorma" aceso na tela) — descartadas duas tentativas com fotos de pessoas por cobrirem rosto com texto. Intro perdeu a linha de assinatura (nenhuma das 4 fontes testadas convenceu) e a wordmark passou a ser brass em vez de branca. Ver `EVOLUTION_LOG.md` Rodada 5 para o processo completo e os itens em aberto (paleta de cor, material de apresentação, menção não confirmada de "curso no cabeçalho").
@@ -144,11 +155,108 @@ Rodadas 4 e 5 fecharam P0 inteiro, a maior parte do P1, e a hero/intro (`EVOLUTI
 
    **Fora desta rodada, ainda pendente do `/professor`:** trazer o formulário do Oliveira, e a variante de cor negra das máquinas (o Diogo disse que tem as fotos no computador — **conferir se são mesmo as mesmas máquinas em negro antes de mexer**, e a ideia é segunda opção de cor arrastando pro lado, não trocar o que existe). **A seção das máquinas (Compacta / 2 grupos / 3 grupos) não foi tocada — ordem expressa do Diogo, ela só se mexe com ele junto.**
 
+10. **Rodada 8 (28/09) — tudo o que não é o site.** Ordem expressa do Diogo: **não tocar no
+    site**. A rodada tratou material de apresentação, conteúdo e o próprio jeito de trabalhar.
+
+    **O fato novo que mudou o projeto:** o Diogo descreveu os buracos operacionais que vê de
+    dentro da fábrica — etiqueta de cada máquina feita uma a uma na Zebra ZD421 (em alta
+    temporada consome quase o dia do supervisor), albarán e etiqueta da DHL sempre presos a uma
+    pessoa, e a pré-montagem que há tempos não sai do papel. Isso virou o **Ato 3** do deck.
+
+    **Decisões fechadas com ele (não reabrir):** no Ato 3 ele se apresenta como **funcionário
+    que enxerga e propõe**, demonstrando capacidade — **sem preço colado na automação**; o preço
+    segue sendo só o da web, 800 €. O deck **não afirma qual sistema de gestão a empresa usa**
+    (é misturado entre setores e ele não sabe com precisão): isso vira a primeira pergunta do
+    diagnóstico. Nada no material menciona sair da empresa.
+
+    **Entregue:** `materiais/deck-reuniao-daniel.html` (12 slides, três atos, com capturas reais
+    do site em `materiais/assets/capturas/`); `pesquisa/` com três documentos
+    (`sistema-de-producao.md`, `benchmark-fabricantes.md`, `automacao-pme-industrial.md`);
+    `materiais/plan-de-contenido.md` com pauta de 8 artigos, calendário e textos de Instagram e
+    newsletter prontos; segundo artigo escrito por inteiro (`materiais/blog-reparables.html`);
+    `apresentacao-daniel/README.md` reescrito; e o **`.pptx` conferido pela primeira vez**, com
+    dois defeitos reais corrigidos (contraste reprovado e colisão de título — ver
+    `materiais/README.md`).
+
+    **Piloto recomendado para o Ato 3: a etiqueta.** A ZD421 entende ZPL, então gerar em lote a
+    partir da lista de pedidos é o caminho mais isolado, mais visível e reversível. **Antes de
+    prometer qualquer coisa, confirmar com o Diogo como a etiqueta é feita hoje** (que programa,
+    que modelo) e de onde sai a lista do dia.
+
+    **Cuidado descoberto nesta rodada:** `materiais/` compartilha o `css/style.css` do site — o
+    que é vantagem (acompanha a paleta) e risco (quebra em silêncio). A Rodada 7 renomeou a
+    classe das redes sociais e os protótipos do blog ficaram com ícones gigantes por semanas sem
+    ninguém ver. **Toda rodada que renomear classe no site precisa olhar `materiais/`.**
+
+11. **Rodada 9 (29/09) — revisão editorial e imagens do catálogo.** O sistema visual está
+    aprovado; nada de redesign. Mudou o **tom** e mudaram **três imagens**.
+
+    **Regra de estado da informação (nova, vale para todo o material):** facto · observação do
+    Diogo · referência · exemplo · hipótese · pergunta. Não se misturam, e cada slide declara
+    o seu no `eyebrow`. Motivo: o material cobre uma fração pequena da empresa e estava escrito
+    como se fosse um diagnóstico dela.
+
+    **O que saiu do deck:** os cinco `no existe` a vermelho do slide do sector (viraram
+    "todavía no", sem cor de falha, sob o título "miré qué tienen otros fabricantes… por si
+    algo encaja aquí"); o veredito "La Norma tiene un problema de fricción"; "lo que hoy se
+    hace en PowerPoint"; e **os 2.500–4.000 € da agência mais os "dos meses"**, que eram o
+    único número sem fonte do material — substituídos por dizer que não pediu orçamento.
+
+    **Imagens: o espelho foi tentado e revertido.** A ideia era pôr a Compacta e a de 3 grupos
+    a olhar para dentro da página. **Não existe nenhum render virado para a direita em todo o
+    repositório** — verificado nos 234 ficheiros, incluindo os 3 GIF turntable, que só têm 3
+    poses únicas — por isso a única via era espelhar. **Não resulta, e está fechado:** o
+    espelho troca o sentido do declive do painel da bandeja, e a pegatina "Lanorma Ln1"
+    recolada fica encavalitada na aresta em vez de centrada, com fantasma do texto antigo por
+    baixo. O Diogo apanhou isso à vista. Testado também: repor marca a marca o logótipo das
+    chávenas (inconsistente) e limpá-las (apagou os ícones dos botões). **As duas imagens
+    voltaram aos originais e o layout não mudou** — Compacta e 3 grupos continuam a olhar para
+    fora da página, consequência aceite. A de 2 grupos nunca foi espelhada.
+
+    Também: os vãos brancos fechados pelas barras do porta-chávenas na de 2 grupos eram recorte
+    incompleto e foram abertos; **secção nova de vaso alto** em `productos.html`, com o único
+    ativo limpo que existe (2 grupos, recortado de `VASO ALTO/`); e `.feature-item` tinha CSS
+    escrito para `h4` com markup em `h3` — os títulos de "Pensada al detalle" nunca tiveram o
+    uppercase pretendido, desde sempre.
+
+    **Fallback em papel:** `@media print` novo **no fim** de `css/style.css` (antes perdia para
+    o breakpoint de 900px, e a folha impressa tem ~720px) e dois PDFs derivados em `materiais/`.
+
+    **Fica para depois:** variante negra. O recorte da Compacta negra está feito e guardado em
+    `assets/_originais/compacta-negra-recorte-sem-espelho.webp`, mas espelhá-la deixa uma cunha
+    onde a aresta brilhante da bandeja atravessa o wordmark. Falta material de 2 e 3 grupos
+    negras na mesma pose, e de Compacta vaso alto (só existe em frame de GIF, com dithering).
+
+    **Orientação das máquinas — em aberto, com as opções já pesadas.** Hoje a Compacta e a de
+    3 grupos olham para fora da página. As três saídas possíveis, para não se voltar a discutir
+    do zero: (a) passar as três fichas para texto-à-esquerda/máquina-à-direita — resolve sem
+    espelho nenhum, mas acaba com o zigue-zague, e o Diogo preferiu não mudar a composição
+    agora; (b) pedir renders do outro lado a quem fez os originais — é a única forma de ter
+    isto sem remendo; (c) deixar como está. **Espelhar está descartado**, pelo motivo acima.
+
 **Pendências já registradas em rodadas anteriores, ainda de pé:** personalização de frontal inox (detalhe técnico com o Daniel), medida da Compacta (530 mm parece estreita pra 2 porta-filtros — o Diogo confirmou que é 2 porta-filtros mesmo), padronizar ordem palavra/span dos `.principle` entre index/nosotros, conteúdo/notícias (P3, sem estratégia de manutenção confirmada).
 
 ## 14. Regra de colaboração registrada nesta sessão
 
 O Diogo confirmou explicitamente que o formato de pergunta em rodadas, com opções clicáveis (via `AskUserQuestion`, no estilo do skill `grill-with-docs`), funcionou muito melhor do que pedir pra ele descrever em texto o que quer — "isso tem que tornar regra global". A única fricção foi quando uma pergunta não tinha a opção certa e ele precisou escrever manualmente — ou seja, **capprichar nas opções pra cobrir a resposta provável, mas sempre permitir resposta livre como saída**. Usar isso como padrão em qualquer rodada de decisão de design deste projeto (e, por extensão, outros projetos do Diogo). **4174 continua sendo a única base; 4176 continua definitivamente fora de cena** (seção 3).
+
+## 15. Precedência entre arquivos (fixada na Rodada 8)
+
+Existia contradição entre arquivos e nenhuma regra dizendo qual mandava. Agora manda esta:
+
+1. **Estilo** → `DESIGN_SYSTEM.md`.
+2. **Estado, decisão e próximo passo** → `PROJECT_BRAIN.md` (este arquivo).
+3. **Por que foi decidido assim** → `EVOLUTION_LOG.md`.
+4. **Ferramenta** → `TOOLS.md`.
+5. **Fonte externa, com link e data** → `pesquisa/`.
+
+Qualquer outro arquivo que contradiga os cinco acima **está desatualizado por definição** —
+corrige-se, não se obedece. `contexto/` e `apresentacao-daniel/` são material de reunião, não
+fonte de verdade sobre o estado do projeto.
+
+Decisão registrada junto: **não criar `TASKS.md` nem `CURRENT_STATUS.md`.** O backlog vive na
+seção 13 e funciona; um arquivo a mais seria uma segunda verdade sobre o mesmo assunto.
+Diagnóstico da documentação inteira em `pesquisa/sistema-de-producao.md`, seção 5.
 
 ---
 

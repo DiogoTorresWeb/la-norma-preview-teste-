@@ -14,9 +14,12 @@ Front-end estático (HTML/CSS puro, sem backend) inspirado na estrutura real de 
 - `assets/real/especificaciones.jpg` é o diagrama técnico real de fábrica (modelo "Lanorma Ln1") — usado na página de Catálogo como ficha técnica visual.
 
 ## O que ainda é placeholder
-- Os 3 cards de produto (Compacta / 2 grupos / 3 grupos) continuam com silhueta ilustrada em CSS — não temos foto individual de cada modelo, só uma foto geral da linha.
-- `hero-ln200-test.html` é uma peça à parte, teste de Hero para um produto novo (LN200) ainda sem specs/fotos confirmadas — ver seção própria abaixo.
+- Não existe no acervo nenhuma foto real de fábrica ou linha de montagem — só macro de extração e uma foto de mostrador. Qualquer seção sobre processo de fabricação depende de foto nova.
+- A **Ln 200** (máquina real, já vendida) **não aparece no site de propósito**: vai ganhar campanha própria e as especificações ainda não foram fornecidas. O protótipo dela vive em `ln200-site/`, com identidade visual própria que nunca foi decidida se aproveita.
+
+> `hero-ln200-test.html` não existe mais — foi substituído por `ln200-site/`. Referência corrigida em 28/09/2026.
 
 ## Pendências
-- Agent Reach: instalado pelo usuário, mas o adaptador de Instagram (`opencli instagram user`) está quebrado atualmente (recebe HTML em vez de JSON — bug do adaptador, não é falta de login). Por isso as fotos do Instagram vieram do cache público do próprio WordPress, não do scraper.
+- Agent Reach: instalado, mas **degradado** — Twitter, Reddit e GitHub dependem da extensão OpenCLI, que não está conectada; só YouTube responde (verificado em 28/09/2026). As fotos do Instagram vieram do cache público do próprio WordPress, não do scraper.
+- `gh` CLI não instalado e MCP do GitHub falhando: hoje não dá para ver se o deploy do Pages passou. Ver `pesquisa/sistema-de-producao.md`.
 - Details.so MCP: registrado, mas precisa de autenticação OAuth (não pode ser concluída numa sessão não-interativa) — o usuário precisa autorizar via `claude mcp` ou `/mcp` numa sessão interativa.
