@@ -234,6 +234,40 @@ Rodadas 4 e 5 fecharam P0 inteiro, a maior parte do P1, e a hero/intro (`EVOLUTI
     agora; (b) pedir renders do outro lado a quem fez os originais — é a única forma de ter
     isto sem remendo; (c) deixar como está. **Espelhar está descartado**, pelo motivo acima.
 
+12. **Rodada 10 (29/09) — a hero em branco, e o protótipo enviado ao Daniel.**
+
+    **O bug.** O Diogo abriu o link do Pages e a hero estava vazia; só o F5 a trazia. Não era
+    especificidade nem ordem de regras: o conteúdo, a foto e a seta começam em `opacity:0` e
+    dependiam de uma transição/animação correr até ao fim, e **a linha do tempo do browser está
+    parada enquanto o separador está oculto** — que é o que acontece ao abrir um link do
+    WhatsApp. Medido no ar: `.hero` tinha `is-revealed`, o seletor casava e tinha mais
+    especificidade, e o `opacity` computado era `0`; em `getAnimations()` a transição estava
+    `running` com `currentTime: 0` e `fill: backwards`, a segurar o valor inicial.
+
+    **Regra que fica:** *nada que precise de estar visível pode depender de uma animação correr.*
+    É a irmã da regra de fail-open que já existia (o `html.js` cobria o caso "sem JS", mas não
+    o caso "JS corre e a animação não"). A classe `is-settled` dá o estado final por declaração
+    estática e chega por três caminhos: agendada a seguir à cascata, à entrada quando a página
+    carrega já oculta (aí salta-se a intro, que ninguém está a ver), e num `visibilitychange`.
+    Verificado com o separador oculto e a timeline a zero — a condição que partia.
+
+    **Ramos reconciliados.** Estavam divergidos (8 commits locais, `17ca234` no origin). Merge
+    limpo; os ficheiros do site eram idênticos dos dois lados, a divergência era só material
+    interno. `?v=15` → `?v=16`.
+
+    **Descoberta com peso, para lá do site:** a biblioteca de media do WordPress antigo tem
+    **123 ficheiros (52 MB)** e o site publica **33**. Lá dentro há produto que não está
+    publicado (`VASO ALTO`, `MOEDOR`, `LEITERA`, `ESPECIFICACIONES`, GIFs turntable). Ou seja,
+    material por lançar acessível a quem souber onde procurar. Vai dito ao Daniel como aviso,
+    sem nomear mecanismo — o Diogo sabe que as descarregou, não afirma como é que a falha se
+    chama.
+
+    **A apresentação mudou de forma:** o Daniel não apareceu esta semana, por isso em vez da
+    reunião com o deck de três atos vai uma mensagem de WhatsApp em duas etapas — primeiro o
+    site com o aviso das fotos, o hub de materiais só depois. **O preço fica de fora**: os 800 €
+    vivem colados ao diagnóstico, que é material de sala. A reunião continua em cima da mesa se
+    ele a quiser. Mensagens redigidas em `~/.claude/plans/quirky-sniffing-barto.md`.
+
 **Pendências já registradas em rodadas anteriores, ainda de pé:** personalização de frontal inox (detalhe técnico com o Daniel), medida da Compacta (530 mm parece estreita pra 2 porta-filtros — o Diogo confirmou que é 2 porta-filtros mesmo), padronizar ordem palavra/span dos `.principle` entre index/nosotros, conteúdo/notícias (P3, sem estratégia de manutenção confirmada).
 
 ## 14. Regra de colaboração registrada nesta sessão
