@@ -1,0 +1,11 @@
+# PDF derivado do site: 17 MB, regenerado num comando a partir do HTML
+# (ver materiais/README.md, "Como regerar os dois PDFs"). Nao entra no
+# historico porque cada regeracao acrescentaria outros 17 MB para sempre.
+materiais/la-norma-web-impressa.pdf
+
+# nunca versionado
+node_modules/
+.env
+.env.*
+!.env.example
+_site/
