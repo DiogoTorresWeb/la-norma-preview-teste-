@@ -605,8 +605,10 @@ section{padding:112px 0;}
   align-items:center;
   scroll-margin-top:120px;
 }
-.machine:nth-child(even){ grid-template-columns:.82fr 1.18fr; }
-.machine:nth-child(even) .machine-art{ order:2; }
+.machine:nth-child(even),
+.machine.is-flipped{ grid-template-columns:.82fr 1.18fr; }
+.machine:nth-child(even) .machine-art,
+.machine.is-flipped .machine-art{ order:2; }
 .machine-art{
   position:relative;
   display:flex;
@@ -674,7 +676,7 @@ section{padding:112px 0;}
   color:var(--ink-dark);
   padding:34px 28px;
 }
-.feature-item h4{ color:var(--ink-dark); }
+.feature-item h3{ color:var(--ink-dark); }
 .feature-item .icon{
   width:42px;height:42px;
   border-radius:50%;
@@ -686,7 +688,10 @@ section{padding:112px 0;}
   font-weight:500;
   margin-bottom:18px;
 }
-.feature-item h4{
+/* O markup usa h3; estas regras estavam escritas para h4 e nunca chegaram a
+   aplicar-se — os titulos caiam no h3 global (Fraunces, sem caixa alta). */
+.feature-item h3{
+  font-family:var(--ff-body);
   font-size:.92rem;
   letter-spacing:.03em;
   text-transform:uppercase;
@@ -1179,8 +1184,10 @@ html.intro-active{ overflow:hidden; height:100%; }
 @media (max-width:900px){
   .footer-grid{grid-template-columns:1fr;}
   .machine,
-  .machine:nth-child(even){grid-template-columns:1fr; gap:24px;}
-  .machine:nth-child(even) .machine-art{order:initial;}
+  .machine:nth-child(even),
+  .machine.is-flipped{grid-template-columns:1fr; gap:24px;}
+  .machine:nth-child(even) .machine-art,
+  .machine.is-flipped .machine-art{order:initial;}
   .machine-list{gap:72px;}
   .feature-grid{grid-template-columns:repeat(2,1fr);}
   .about-strip{grid-template-columns:repeat(3,1fr);}
@@ -1260,4 +1267,60 @@ html.intro-active{ overflow:hidden; height:100%; }
   width:30px;
   height:30px;
   fill:#fff;
+}
+
+/* ---------- impressao / PDF ----------
+   O site e feito para ecra; isto existe so para o PDF de recurso, quando nao ha
+   servidor a correr. Nao toca em nada do que se ve no browser.
+   Fica no FIM da folha de proposito: declarado antes, perdia para os @media de
+   largura por ordem de origem (a pagina impressa e estreita em px e dispararia
+   o layout de movel). */
+@media print{
+  @page{ size:A4; margin:12mm 10mm; }
+
+  html,body{ background:#fff; }
+  *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  /* tudo o que so faz sentido com rato: sai */
+  .intro-gate,.whatsapp-fab,.hero-scroll,.nav-toggle,.topbar{ display:none !important; }
+  html.intro-active{ overflow:visible; height:auto; }
+
+  /* o cabecalho e position:fixed — em papel passa a correr com o texto,
+     senao repete-se por cima de todas as paginas */
+  .header-stack,.header{ position:static !important; height:auto; }
+
+  /* a hero comeca em opacity:0 e so o JS a revela; em papel aparece sempre */
+  html.js .hero-content > *{ opacity:1 !important; transform:none !important; }
+
+  section{ padding:26px 0; }
+  .container{ padding:0 4px; }
+  .hero{ min-height:228mm; page-break-after:always; }
+
+  /* A folha impressa tem ~720px de largura em CSS, o que dispara o layout de
+     movel e deixa tudo em coluna unica com meia pagina em branco. Aqui as
+     grades voltam a ser de varias colunas na marra. */
+  .stat-strip .container{ grid-template-columns:repeat(4,1fr) !important; }
+  .stat-item:nth-child(n+3){ border-top:none !important; }
+  .stat-item:nth-child(2n+1){ border-left:1px solid var(--line-dark) !important; }
+  .stat-item:first-child{ border-left:none !important; }
+  .machine{ grid-template-columns:1.18fr .82fr !important; gap:34px !important; }
+  .machine:nth-child(even),
+  .machine.is-flipped{ grid-template-columns:.82fr 1.18fr !important; }
+  .machine:nth-child(even) .machine-art,
+  .machine.is-flipped .machine-art{ order:2 !important; }
+  .zigzag-item{ grid-template-columns:1fr 1fr !important; }
+  .zigzag-item:nth-child(even) .art{ order:2 !important; }
+  .feature-grid{ grid-template-columns:repeat(4,1fr) !important; }
+  .principles,.workshop-block,.footer-grid{ grid-template-columns:repeat(2,1fr) !important; }
+  .about-strip{ grid-template-columns:repeat(4,1fr) !important; }
+  .audience-list{ grid-template-columns:repeat(2,1fr) !important; }
+
+  /* nada de cortar uma maquina ou um bloco a meio da folha */
+  .machine,.zigzag-item,.feature-item,.principle,.workshop-block,
+  .stat-item,.shop-note,.article-cover{ page-break-inside:avoid; break-inside:avoid; }
+  .machine-list,.product-zigzag{ gap:34px; }
+  h2,h3{ page-break-after:avoid; break-after:avoid; }
+
+  /* o URL a seguir a cada link so serve para sujar a folha */
+  a[href]::after{ content:none !important; }
 }
