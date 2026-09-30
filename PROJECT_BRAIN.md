@@ -1,6 +1,15 @@
 # PROJECT_BRAIN.md — La Norma
 
+> Tipo: **estado** — a seção 2 é **reescrita**, não empilha parágrafos datados.
+> Histórico por rodada é o `EVOLUTION_LOG.md`.
+> Atualizado: 30/09/2026 · Revisar até: 31/10/2026 · Dono: Diogo
+
 Memória oficial e enxuta do projeto. Ler antes de qualquer sessão de implementação. Decisão que não está aqui não existe.
+
+Este arquivo acumula quatro papéis de propósito (estado, decisão fechada, backlog
+e próximo passo) — foi decidido na Rodada 8 e está na seção 15. A regra geral da
+base está em `../../SISTEMA.md`; a exceção daqui é deliberada, para não criar uma
+segunda verdade sobre o mesmo assunto.
 
 ---
 
@@ -21,13 +30,22 @@ Diogo, a rodada fechou o material de apresentação (deck em três atos), o cont
 (pauta real, não maquete) e uma auditoria do próprio sistema de produção (`pesquisa/`). Ver
 seção 13, item 10.
 
-**Primeira versão de identidade visual completa implementada em 18/09** (mesma madrugada, segunda rodada): não é só estrutura mais — cor, tipografia e a hero foram redesenhadas nas 3 páginas. Publicada como preview remoto no GitHub Pages em 19–20/09 (`https://diogotorresweb.github.io/la-norma-preview-teste-/`).
+**Onde isso deixa o projeto:** sistema visual aprovado e congelado; site de 3
+páginas no ar como preview no GitHub Pages
+(`https://diogotorresweb.github.io/la-norma-preview-teste-/`); material de
+apresentação ao Daniel pronto. **O próximo passo não é código — é a
+apresentação.** Confirmar com o Diogo quando e como ela acontece.
 
-**20/09 — Rodada 5, hero e intro fechadas via grilling.** Hero virou full-bleed com uma foto nova fornecida pelo Diogo (macro do display da máquina, sem pessoa, com "Lanorma" aceso na tela) — descartadas duas tentativas com fotos de pessoas por cobrirem rosto com texto. Intro perdeu a linha de assinatura (nenhuma das 4 fontes testadas convenceu) e a wordmark passou a ser brass em vez de branca. Ver `EVOLUTION_LOG.md` Rodada 5 para o processo completo e os itens em aberto (paleta de cor, material de apresentação, menção não confirmada de "curso no cabeçalho").
+Como chegamos aqui (identidade visual de 18/09, auditoria e memória de processo,
+acabamento, hero full-bleed e intro): **rodadas 1 a 5 no `EVOLUTION_LOG.md`**, em
+detalhe. Ficava repetido aqui em parágrafos datados que iam se empilhando — a
+mesma doença que fez o status do site do Paulo chegar a 1065 linhas. Removida a
+duplicata em 30/09; nada foi perdido.
 
-**20/09 — Rodada 4, acabamento executado.** Intro-gate refeita como abertura de marca (sem clique, ~2,1s, wordmark migra pro header), fotos de produto trocadas por recortes em alta dos renders reais, card eliminado do catálogo, topbar e ícones sociais corrigidos. Detalhe importante: a intro antiga travava o site inteiro em contexto onde `sessionStorage` lança — corrigido. Ver `EVOLUTION_LOG.md`, Rodada 4.
-
-**20/09 — auditoria completa sem redesign.** Antes de abrir a próxima rodada visual, o projeto ganhou memória de processo dedicada: `EVOLUTION_LOG.md` (histórico de decisão + aprendizado por rodada) e `DESIGN_SYSTEM.md` (o que já está aprovado, em forma prática). Essa rodada auditou header, intro-gate, ícones, produtos (inventário real de modelos/fotos) e fotografia, e fechou uma fila de priorização P0–P3. Nenhuma linha de design foi alterada nela.
+**Buraco conhecido no histórico:** o `EVOLUTION_LOG.md` tem as rodadas 1, 2, 2.5,
+3, 4, 5 e 8. **Faltam as rodadas 6, 7 e 9** — a 9 (revisão editorial de 29/09)
+existe só no parágrafo acima. Quem tocar no projeto: registre-as antes de abrir
+rodada nova.
 
 ## 3. Decisão já fechada
 

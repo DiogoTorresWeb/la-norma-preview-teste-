@@ -1,5 +1,9 @@
 # EVOLUTION_LOG.md — La Norma
 
+> Tipo: **histórico** — append-only. Rodada nova vai no fim; nada aqui se reescreve.
+> Estado atual e decisões fechadas: `PROJECT_BRAIN.md`.
+> **Faltam as rodadas 6, 7 e 9** — registrar antes de abrir rodada nova.
+
 Registro de evolução visual e estratégica do projeto. Objetivo: uma sessão futura entender como chegamos até aqui sem depender do histórico do chat. Cada rodada importante entra aqui — problema, hipótese, referência, decisão, implementação, resultado, aprendizado, o que não repetir, próxima hipótese.
 
 Ver também `DESIGN_SYSTEM.md` (o que ficou aprovado, em forma prática) e `PROJECT_BRAIN.md` (estado e decisões fechadas).
