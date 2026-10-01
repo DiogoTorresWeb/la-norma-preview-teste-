@@ -286,6 +286,29 @@ Rodadas 4 e 5 fecharam P0 inteiro, a maior parte do P1, e a hero/intro (`EVOLUTI
     vivem colados ao diagnóstico, que é material de sala. A reunião continua em cima da mesa se
     ele a quiser. Mensagens redigidas em `~/.claude/plans/quirky-sniffing-barto.md`.
 
+13. **Rodada 11 (01/10) — o aviso do `materiais/` cumpriu-se, e fui eu que o ignorei.**
+
+    O Diogo abriu `blog-articulo.html` no telemóvel e o menu estava aberto por cima do
+    artigo, com os seis itens derramados sobre o texto. Causa: a Rodada 7 trocou `.main-nav`
+    por `.nav-panel` no site e **as regras do painel deslizante foram com a classe nova**. Os
+    três protótipos do blog ficaram com o markup antigo e carregam o **mesmo** `css/style.css`,
+    portanto o menu deixou de ter onde se esconder e renderizou inline.
+
+    **Isto estava escrito na rodada 10, palavra por palavra** — *"toda rodada que renomear
+    classe no site precisa olhar `materiais/`"* — e mesmo assim a Rodada 7 não olhou, e as
+    rodadas seguintes também não. O aviso existir não chega; só é apanhado quem o lê **antes**
+    de renomear, não depois. É a segunda vez que esta pasta quebra em silêncio (a primeira
+    foram os ícones gigantes, por semanas).
+
+    Corrigido: os três ficheiros do blog passam a ter o header split igual ao do site, com a
+    nav partida 3/3 (Inicio·Nosotros·Catálogo | Diario·Formación·Contacto), as redes sociais
+    descidas do header para o topbar, e `?v=14` → `?v=16`, que também estava para trás.
+    Verificado a 375px (painel fora do ecrã, abre e fecha pelo botão, sem scroll horizontal) e
+    a 1280px (`display:contents`, hambúrguer escondido, logo ao centro).
+
+    **Os decks, o `email.html`, o `instagram.html` e o `materiais/index.html` não usam o header
+    do site** — foram verificados e não foram tocados.
+
 **Pendências já registradas em rodadas anteriores, ainda de pé:** personalização de frontal inox (detalhe técnico com o Daniel), medida da Compacta (530 mm parece estreita pra 2 porta-filtros — o Diogo confirmou que é 2 porta-filtros mesmo), padronizar ordem palavra/span dos `.principle` entre index/nosotros, conteúdo/notícias (P3, sem estratégia de manutenção confirmada).
 
 ## 14. Regra de colaboração registrada nesta sessão
