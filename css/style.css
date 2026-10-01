@@ -312,6 +312,84 @@ html.js .hero-bg{
     linear-gradient(180deg, rgba(23,15,10,.55) 0%, rgba(23,15,10,.15) 30%, rgba(23,15,10,.6) 100%);
 }
 
+/* ---- C: máquina recortada, vazio construído ----
+   Em vez de procurar uma foto com espaço negativo (não existe no acervo),
+   constrói-se o espaço: o recorte com alfa vai para a direita e o texto ocupa
+   o vazio à esquerda. É a estrutura da La Marzocco, feita em CSS — continua
+   responsiva, em vez de uma imagem achatada.
+
+   As três máquinas têm proporções diferentes (compacta 928x796, 2 grupos
+   1185x736, 3 grupos 1236x777). Por isso a figura manda na ALTURA e a imagem
+   faz contain: assim a Compacta não entra com outro tamanho ao rodar. */
+.hero-object{ min-height:82vh; display:flex; align-items:center; position:relative; }
+/* static de propósito: a figura é absolute e tem de ancorar na SECÇÃO, não
+   aqui. Com o inner relative, o bottom:0 caía no fundo do inner (452px) em vez
+   do fundo da hero (812px) e a máquina aterrava a meio, por cima do texto.
+   O z-index da coluna de texto vive no .hero-content, que já é relative. */
+.hero-object .hero-inner{ display:block; position:static; }
+.hero-object .hero-content{ max-width:540px; }
+.hero-object .hero-figure{
+  position:absolute;
+  right:clamp(-40px, -2vw, 0px);
+  bottom:0;
+  width:min(58%, 820px);
+  height:min(66vh, 560px);
+  aspect-ratio:auto;
+  z-index:0;
+  pointer-events:none;
+}
+.hero-object .hero-bg{
+  position:static;
+  width:100%; height:100%;
+  object-fit:contain;
+  object-position:right bottom;
+  filter:none;
+  /* assenta no escuro em vez de flutuar */
+  -webkit-mask-image:linear-gradient(180deg, #000 88%, transparent 100%);
+          mask-image:linear-gradient(180deg, #000 88%, transparent 100%);
+}
+@keyframes hero-object-settle{ to{ transform:none; opacity:1; } }
+html.js .hero-object .hero-bg{
+  filter:none;
+  transform:translateY(18px); opacity:0;
+  animation:hero-object-settle 1s cubic-bezier(.22,.61,.36,1) 120ms forwards;
+}
+.hero-object.is-settled .hero-bg{ opacity:1; transform:none; animation:none; }
+
+/* ---- telemóvel: outra estratégia, não a mesma encolhida ----
+   Antes era empilhar tudo e a máquina caía para fora do ecrã: via-se uma
+   parede de texto e nenhum produto. Agora a máquina é ancorada em baixo e
+   sangra pela direita, e a tipografia aperta para os dois caberem no mesmo
+   ecrã — que é o que faz a versão de computador funcionar. */
+@media (max-width:900px){
+  .hero-object{
+    min-height:100svh;
+    display:flex;
+    align-items:flex-start;
+    padding-block:124px 0;
+    overflow:hidden;
+  }
+  .hero-object .hero-content{ max-width:none; }
+  .hero-object .hero-kicker{ margin-bottom:14px; font-size:.68rem; letter-spacing:.16em; }
+  .hero-object h1{ font-size:clamp(2.1rem, 9.2vw, 3rem); line-height:1.04; margin-bottom:16px; }
+  .hero-object p.lede{ font-size:1rem; line-height:1.5; max-width:30ch; }
+  .hero-object .hero-cta{ margin-top:26px; gap:10px; flex-wrap:nowrap; }
+  .hero-object .hero-cta .btn{ padding:14px 20px; font-size:.78rem; flex:0 1 auto; }
+
+  .hero-object .hero-figure{
+    position:absolute;
+    right:-16%;
+    bottom:0;
+    width:124%;
+    height:34svh;
+    margin:0;
+  }
+  .hero-object .hero-bg{
+    -webkit-mask-image:linear-gradient(180deg, #000 92%, transparent 100%);
+            mask-image:linear-gradient(180deg, #000 92%, transparent 100%);
+  }
+}
+
 /* funde na cor exata da secção seguinte, para não haver linha de corte */
 .hero::before{
   content:"";

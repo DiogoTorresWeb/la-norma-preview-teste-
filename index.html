@@ -89,7 +89,7 @@
   </div>
 </div>
 
-<section class="hero hero-split" id="hero">
+<section class="hero hero-object" id="hero">
   <div class="hero-inner">
   <div class="hero-content">
     <span class="eyebrow hero-kicker">Fabricante de máquinas de café · Valencia</span>
@@ -104,8 +104,31 @@
     </div>
   </div>
   <figure class="hero-figure">
-    <img class="hero-bg" src="assets/real/hero-maquina.jpg" alt="Máquina de café La Norma Ln1 de dos grupos, con tazas de colores sobre el calientatazas">
+    <img class="hero-bg" id="heroMaquina" src="assets/real/maquina-compacta.webp" width="928" height="796"
+         alt="Máquina de café La Norma Compacta, de un grupo" fetchpriority="high" decoding="async">
   </figure>
+  <script>
+  /* Roda a máquina a cada F5, por ordem fixa: compacta, 2 grupos, 3 grupos.
+     O site do Paulo sorteia; aqui é contador, porque o Diogo quer a sequência.
+     O src no HTML é a primeira da lista, por isso sem JS vê-se sempre uma
+     máquina — nunca um buraco. localStorage pode falhar (aba privada), e aí
+     fica a Compacta: é degradação, não erro. */
+  (function(){
+    var pool = [
+      {src:'assets/real/maquina-compacta.webp',  w:928,  h:796, alt:'Máquina de café La Norma Compacta, de un grupo'},
+      {src:'assets/real/maquina-2-grupos.webp',  w:1185, h:736, alt:'Máquina de café La Norma Ln1 de dos grupos'},
+      {src:'assets/real/maquina-3-grupos.webp',  w:1236, h:777, alt:'Máquina de café La Norma Ln1 de tres grupos'}
+    ];
+    var i = 0;
+    try {
+      i = (parseInt(localStorage.getItem('ln_hero_i'), 10) || 0) % pool.length;
+      localStorage.setItem('ln_hero_i', (i + 1) % pool.length);
+    } catch (e) {}
+    var m = pool[i];
+    var img = document.getElementById('heroMaquina');
+    if (img && i !== 0) { img.src = m.src; img.width = m.w; img.height = m.h; img.alt = m.alt; }
+  })();
+  </script>
   </div>
   <button class="hero-scroll" id="heroScroll" type="button" aria-label="Ver las especificaciones">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
