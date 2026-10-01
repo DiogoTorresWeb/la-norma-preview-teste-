@@ -309,6 +309,47 @@ Rodadas 4 e 5 fecharam P0 inteiro, a maior parte do P1, e a hero/intro (`EVOLUTI
     **Os decks, o `email.html`, o `instagram.html` e o `materiais/index.html` não usam o header
     do site** — foram verificados e não foram tocados.
 
+14. **Rodada 12 (01/10) — a hero encaixada, e uma regra que passa a valer sempre.**
+
+    **A regra, porque foi ignorada duas vezes no mesmo dia:** *visibilidade nunca pode
+    depender de movimento.* Qualquer elemento que arranque escondido e seja revelado por
+    transição ou animação precisa de um **estado terminal estático** (`transition:none` mais
+    o valor final) aplicado por `setTimeout`, mais `visibilitychange`, mais um failsafe
+    global. Motivo: com o separador oculto a linha do tempo do browser está parada, a
+    transição nasce em `currentTime 0` com `fill:backwards` e segura o valor inicial para
+    sempre. Partiu a hero (`is-settled`), e horas depois repeti o mesmo erro na entrada ao
+    rolar (`reveal-done`). O `html.js` cobre "sem JS"; isto cobre "o JS corre e a animação
+    não". **Não se escreve mais nenhuma revelação neste projeto sem as duas redes.**
+
+    **A hero.** Diagnóstico: a escuridão não era o problema — a secção seguinte também é
+    escura e funciona, e as heroes internas são todas escuras. O problema era a hero ser a
+    única parte do site com texto por cima de foto a sangrar, e o véu estar invertido (`.14`
+    de opacidade no centro, justamente onde o título assenta).
+
+    **A razão de fundo, que vale para o futuro:** a composição do Paulo não transporta. As
+    fotos dele são ambientes com espaço negativo; a La Marzocco faz igual (máquina à direita,
+    texto no vazio à esquerda). **As da La Norma são retratos de produto centrados, sem
+    espaço nenhum** — verificado nas 33 fotos profissionais da biblioteca do WordPress, que
+    o site nunca tinha usado. Qualquer véu forte o suficiente para dar legibilidade apagaria
+    a máquina.
+
+    **A saída foi do Diogo:** em vez de procurar uma foto com espaço negativo, construir o
+    espaço. Recorte com alfa à direita, texto no vazio à esquerda, tudo em CSS — por isso
+    recompõe-se em vez de achatar. Roda a cada F5 por ordem fixa (compacta, 2, 3 grupos);
+    a figura manda na altura e a imagem faz `contain`, senão a Compacta entrava com outro
+    tamanho. **O telemóvel tem estratégia própria, não a mesma encolhida**: antes via-se uma
+    parede de texto e a máquina caía fora do ecrã; agora ancora em baixo e sangra pela
+    direita, com a tipografia apertada, para texto e produto caberem no mesmo ecrã.
+
+    **Bug de ancoragem apanhado a medir:** `.hero-inner` era `position:relative`, por isso o
+    `bottom:0` da figura caía no fundo dele (452px) em vez do fundo da hero (812px) e a
+    máquina aterrava a meio, por cima do texto.
+
+    **Em aberto:** a foto da Ln 200 (`ln200-site/assets/ln200.jpg`) é a única do acervo com
+    espaço negativo verdadeiro — estúdio claro, máquina ao centro. Não foi usada porque o
+    `apresentacao-daniel/README.md` regista que a Ln 200 não tem campanha nem identidade
+    decidida, e pôr um produto por lançar como cara do site é decisão do Daniel.
+
 **Pendências já registradas em rodadas anteriores, ainda de pé:** personalização de frontal inox (detalhe técnico com o Daniel), medida da Compacta (530 mm parece estreita pra 2 porta-filtros — o Diogo confirmou que é 2 porta-filtros mesmo), padronizar ordem palavra/span dos `.principle` entre index/nosotros, conteúdo/notícias (P3, sem estratégia de manutenção confirmada).
 
 ## 14. Regra de colaboração registrada nesta sessão

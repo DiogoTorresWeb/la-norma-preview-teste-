@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css?v=17">
+<link rel="stylesheet" href="css/style.css?v=18">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -137,19 +137,19 @@
 
 <section class="stat-strip" id="stat-strip">
   <div class="container">
-    <div class="stat-item">
+    <div class="stat-item" data-reveal>
       <span class="value">3</span>
       <span class="label">Modelos Ln1</span>
     </div>
-    <div class="stat-item">
+    <div class="stat-item" data-reveal>
       <span class="value">8 – 20,5 L</span>
       <span class="label">Caldera</span>
     </div>
-    <div class="stat-item">
+    <div class="stat-item" data-reveal>
       <span class="value">2200 – 6200 W</span>
       <span class="label">Potencia</span>
     </div>
-    <div class="stat-item">
+    <div class="stat-item" data-reveal>
       <span class="value">100%</span>
       <span class="label">Ensamblado a mano en Valencia</span>
     </div>
@@ -491,6 +491,39 @@
     });
     swup.hooks.on('content:replace', initPage);
   }).catch(() => { /* offline ou CDN inacessível: navegação normal por link continua funcionando */ });
+</script>
+
+<script>
+/* Entrada ao rolar. Regra dura: se isto falhar, nada pode ficar invisível.
+   Por isso o estado escondido só existe sob html.js, há um failsafe por timeout,
+   e revela-se tudo de uma vez se o browser não suportar IntersectionObserver. */
+(function(){
+  var alvos = document.querySelectorAll('[data-reveal]');
+  if (!alvos.length) return;
+  function revelarTudo(){
+    for (var i=0;i<alvos.length;i++) { alvos[i].classList.add('is-in'); alvos[i].classList.add('reveal-done'); }
+  }
+  if (!('IntersectionObserver' in window)) { revelarTudo(); return; }
+  try {
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if (e.isIntersecting) {
+          var alvo = e.target;
+          alvo.classList.add('is-in');
+          /* fixa o destino sem depender da transicao chegar la */
+          setTimeout(function(){ alvo.classList.add('reveal-done'); }, 1300);
+          obs.unobserve(alvo);
+        }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+    for (var i=0;i<alvos.length;i++) obs.observe(alvos[i]);
+    /* aconteça o que acontecer, ao fim de 6s está tudo visível */
+    setTimeout(revelarTudo, 6000);
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'visible') setTimeout(revelarTudo, 1500);
+    });
+  } catch (e) { revelarTudo(); }
+})();
 </script>
 </body>
 </html>
