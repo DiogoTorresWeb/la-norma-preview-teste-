@@ -238,30 +238,41 @@ html.is-animating .transition-swup{
 }
 
 /* ---------- hero ---------- */
+/* HERO — duas variantes em teste (01/10).
+   hero-split : texto numa coluna sólida, foto num painel ao lado. É a língua do
+                resto do site (foto numa caixa, texto numa coluna) e a única que
+                funciona com fotografia de retrato de produto, que é a que existe.
+   hero-bleed : foto a sangrar com véu direcional. Mantém a composição do Paulo.
+   O véu antigo era radial com .14 no centro — quase transparente exatamente onde
+   o título assenta. Era esse o bug, não a falta de contraste. */
 .hero{
   position:relative;
-  min-height:100vh;
-  min-height:100svh;
-  min-height:100dvh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  background:var(--espresso-deep);
   color:var(--cream);
   overflow:hidden;
-  /* o header é fixo: sem isso o conteúdo centralizado nasce alto demais */
-  padding:calc(34px + 68px) 0 0;
   box-sizing:border-box;
+  /* o header é fixo: sem isto o conteúdo nasce por baixo dele */
+  padding:calc(34px + 68px) 0 0;
 }
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:min(1180px, 100% - 64px);
+  margin-inline:auto;
+}
+.hero-content{ position:relative; z-index:2; text-align:left; }
+.hero-kicker{ display:block; margin-bottom:20px; }
+.hero h1{ margin:0 0 22px; }
+.hero p.lede{ max-width:52ch; }
+
+.hero-figure{ position:relative; margin:0; overflow:hidden; }
 .hero-bg{
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit:cover;
-  object-position:48% 48%;
   filter:saturate(0.9) sepia(0.08) hue-rotate(-6deg) contrast(1.05);
 }
-/* a foto chega desfocada e assenta — é a "entrada" do site, no lugar de um
-   corte seco pra imagem já parada */
+/* a foto chega desfocada e assenta — é a "entrada" do site */
 html.js .hero-bg{
   filter:saturate(0.9) sepia(0.08) hue-rotate(-6deg) contrast(1.05) blur(14px);
   transform:scale(1.06);
@@ -275,37 +286,52 @@ html.js .hero-bg{
     opacity:1;
   }
 }
-.hero::after{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse at 50% 46%, rgba(23,15,10,.14) 0%, rgba(23,15,10,.5) 62%, rgba(23,15,10,.86) 100%),
-    linear-gradient(180deg, rgba(23,15,10,.5) 0%, rgba(23,15,10,.1) 26%, rgba(23,15,10,.42) 68%, rgba(23,15,10,.95) 100%);
+
+/* ---- A: duas colunas ---- */
+.hero-split{ min-height:78vh; display:flex; align-items:center; padding-block:calc(34px + 68px) 72px; }
+.hero-split .hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  align-items:center;
+  gap:clamp(32px, 5vw, 72px);
 }
-/* funde a hero na cor exata da seção seguinte, pra não haver linha de corte */
+.hero-split .hero-figure{ aspect-ratio:4/3; border-radius:var(--radius); }
+
+/* ---- B: foto a sangrar, véu direcional ---- */
+.hero-bleed{ min-height:78vh; display:flex; align-items:center; }
+.hero-bleed .hero-figure{ position:absolute; inset:0; z-index:0; aspect-ratio:auto; }
+.hero-bleed .hero-inner{ display:block; }
+.hero-bleed .hero-content{ max-width:620px; }
+/* denso do lado do texto, aberto do lado da máquina — ao contrário do antigo,
+   que era mais claro justamente onde o título assenta */
+.hero-bleed::after{
+  content:"";
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(90deg, rgba(23,15,10,.94) 0%, rgba(23,15,10,.82) 38%, rgba(23,15,10,.35) 70%, rgba(23,15,10,.25) 100%),
+    linear-gradient(180deg, rgba(23,15,10,.55) 0%, rgba(23,15,10,.15) 30%, rgba(23,15,10,.6) 100%);
+}
+
+/* funde na cor exata da secção seguinte, para não haver linha de corte */
 .hero::before{
   content:"";
   position:absolute;
   inset-inline:0;
   bottom:0;
   z-index:1;
-  height:min(26vh,240px);
-  background:linear-gradient(180deg, transparent 0%, var(--espresso-deep) 92%);
+  height:min(22vh,200px);
+  background:linear-gradient(180deg, transparent 0%, var(--espresso-deep) 94%);
   pointer-events:none;
 }
-.hero-content{
-  position:relative;
-  z-index:2;
-  padding:0 32px;
-  max-width:820px;
-  margin-inline:auto;
+
+@media (max-width:900px){
+  .hero-split .hero-inner{ grid-template-columns:1fr; gap:32px; }
+  .hero-split .hero-figure{ aspect-ratio:16/10; order:2; }
+  .hero-split .hero-content{ order:1; }
+  .hero-split, .hero-bleed{ min-height:auto; padding-block:140px 56px; }
+  .hero-bleed{ min-height:76vh; }
+  .hero-bleed .hero-content{ max-width:none; }
 }
-.hero-kicker{
-  display:block;
-  margin-bottom:20px;
-}
-.hero p.lede,
-.hero-cta{ margin-inline:auto; }
 
 /* Cascata de entrada. Começa escondida só quando há JS (html.js): sem script a
    hero aparece inteira e parada, nunca presa em opacity:0. */
@@ -380,7 +406,9 @@ html.js .hero.is-revealed .hero-scroll{ opacity:1; }
   margin-top:36px;
   display:flex;
   align-items:center;
-  justify-content:center;
+  /* alinha com o texto da coluna; era center e ganhava à regra da hero por vir
+     depois no ficheiro, o que deixava os botões descolados do título */
+  justify-content:flex-start;
   gap:16px;
   flex-wrap:wrap;
 }
